@@ -1,4 +1,6 @@
 package fr.eni.clinique.dao.jdbc;
 
-public class CliniqueDaoJdbcImpl {
+import fr.eni.clinique.dao.CliniqueDAO;
+
+public class CliniqueDaoJdbcImpl implements CliniqueDAO {
 }
