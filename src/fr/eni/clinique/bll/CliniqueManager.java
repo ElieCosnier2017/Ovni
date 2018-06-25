@@ -10,12 +10,5 @@ public class CliniqueManager {
     private CliniqueManager(){
         //Instancier le Data Access Object
         daoClinique =DAOfactory.getCliniqueDao();
-
-        //Charger le catalogue
-        try {
-            catalogue = daoArticles.selectAll();
-        } catch (DALException e) {
-            throw new BLLException("Echec du chargement du catalogue - ", e);
-        }
     }
 }
