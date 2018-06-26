@@ -14,6 +14,7 @@ public class CliniqueDaoJdbcImpl implements CliniqueDAO {
     private static final String sqlInsert = "insert into Clients(NomClient,PrenomClient,Adresse1,Adresse2, CodePostal, Ville, NumTel, Assurance, Email, Remarque, Archive) values(?,?,?,?,?,?,?,?,?,?,?)";
     @Override
     public void insert(Client client) throws SQLException {
+        //insert client
         Connection cnx = null;
         PreparedStatement rqt = null;
         try {
