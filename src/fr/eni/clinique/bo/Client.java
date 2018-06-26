@@ -15,8 +15,7 @@ public class Client {
     private String remarque;
     private boolean archive;
 
-    public Client(int codeClient, String nomClient, String prenomClient, String adresse1, String adresse2, String codePostal, String ville, String numTel, String assurance, String email, String remarque, boolean archive) {
-        this.codeClient = codeClient;
+    public Client(String nomClient, String prenomClient, String adresse1, String adresse2, String codePostal, String ville, String numTel, String assurance, String email, String remarque, boolean archive) {
         this.nomClient = nomClient;
         this.prenomClient = prenomClient;
         this.adresse1 = adresse1;
@@ -29,6 +28,7 @@ public class Client {
         this.remarque = remarque;
         this.archive = archive;
     }
+
 
     public int getCodeClient() {
         return codeClient;
