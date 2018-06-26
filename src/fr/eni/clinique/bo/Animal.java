@@ -120,4 +120,21 @@ public class Animal {
     public void setAntecedents(String antecedents) {
         this.antecedents = antecedents;
     }
+
+    @Override
+    public String toString() {
+        return "Animal{" +
+                "race='" + race + '\'' +
+                ", espece='" + espece + '\'' +
+                ", client=" + client +
+                ", codeAnimal=" + codeAnimal +
+                ", nomAnimal='" + nomAnimal + '\'' +
+                ", sexe=" + sexe +
+                ", archive=" + archive +
+                ", couleur='" + couleur + '\'' +
+                ", codeClient=" + codeClient +
+                ", tatouage='" + tatouage + '\'' +
+                ", antecedents='" + antecedents + '\'' +
+                '}';
+    }
 }
