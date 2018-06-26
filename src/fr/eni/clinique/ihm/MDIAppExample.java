@@ -95,7 +95,7 @@ public class MDIAppExample extends JFrame implements ActionListener {
 			break;
 
 		case "ecran":
-			System.out.println("coucou");
+			System.out.println("ecran");
 			getFrm1().setVisible(true);
 			break;
 
