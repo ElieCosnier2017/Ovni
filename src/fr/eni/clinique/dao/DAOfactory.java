@@ -7,4 +7,8 @@ public class DAOfactory {
     public static CliniqueDAO getCliniqueDao() {
         return new CliniqueDaoJdbcImpl();
     }
+
+    public static ConnexionDAO getConnexionDao() {
+        return new CliniqueDaoJdbcImpl();
+    }
 }

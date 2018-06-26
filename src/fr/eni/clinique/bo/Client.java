@@ -2,7 +2,7 @@ package fr.eni.clinique.bo;
 
 public class Client {
 
-    private int codeClient;
+    private Integer codeClient;
     private String nomClient;
     private String prenomClient;
     private String adresse1;
@@ -30,14 +30,9 @@ public class Client {
     }
 
 
-    public int getCodeClient() {
+    public Integer getCodeClient() {
         return codeClient;
     }
-
-    public void setCodeClient(int codeClient) {
-        this.codeClient = codeClient;
-    }
-
     public String getNomClient() {
         return nomClient;
     }

@@ -5,5 +5,5 @@ import fr.eni.clinique.bo.Client;
 import java.sql.SQLException;
 
 public interface CliniqueDAO {
-    void insert(Client c1) throws SQLException;
+    void insert(Client c1) throws DALException;
 }
