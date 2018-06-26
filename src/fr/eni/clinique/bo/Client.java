@@ -125,5 +125,23 @@ public class Client {
     public void setArchive(boolean archive) {
         this.archive = archive;
     }
+
+    @Override
+    public String toString() {
+        return "Client{" +
+                "codeClient=" + codeClient +
+                ", nomClient='" + nomClient + '\'' +
+                ", prenomClient='" + prenomClient + '\'' +
+                ", adresse1='" + adresse1 + '\'' +
+                ", adresse2='" + adresse2 + '\'' +
+                ", codePostal='" + codePostal + '\'' +
+                ", ville='" + ville + '\'' +
+                ", numTel='" + numTel + '\'' +
+                ", assurance='" + assurance + '\'' +
+                ", email='" + email + '\'' +
+                ", remarque='" + remarque + '\'' +
+                ", archive=" + archive +
+                '}';
+    }
 }
 

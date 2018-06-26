@@ -55,5 +55,16 @@ public class Personnel {
     public void setArchive(boolean archive) {
         this.archive = archive;
     }
+
+    @Override
+    public String toString() {
+        return "Personnel{" +
+                "id=" + id +
+                ", nom='" + nom + '\'' +
+                ", mdp='" + mdp + '\'' +
+                ", role='" + role + '\'' +
+                ", archive=" + archive +
+                '}';
+    }
 }
 
