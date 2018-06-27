@@ -1,5 +1,8 @@
 package fr.eni.clinique.ihm;
 
+import fr.eni.clinique.bll.BLLException;
+import fr.eni.clinique.bll.LoginMger;
+
 import javax.swing.*;
 import javax.swing.border.TitledBorder;
 import java.awt.*;
@@ -77,6 +80,16 @@ public class ConnexionFrame extends JFrame {
 
     private void initListeners() {
         valider.addActionListener((e)-> {
+            try {
+                LoginMger mger = LoginMger.getInstance();
+                System.out.println(getUsernameField().getText());
+                System.out.println(getPasswordField().getText());
+
+                mger.verifyUser(getUsernameField().getText(), getPasswordField().getText());
+            } catch (BLLException e1) {
+                e1.printStackTrace();
+            }
+
 //            ConnexionController.get().logUser();
         });
     }
