@@ -13,9 +13,9 @@ public class Application {
             e1.printStackTrace();;
         }
 
-        CliniqueManager cliniqueMger = null;
+        ClientManager cliniqueMger = null;
         try {
-            cliniqueMger = CliniqueManager.getInstance();
+            cliniqueMger = ClientManager.getInstance();
         } catch (BLLException e1) {
             e1.printStackTrace();
         }

@@ -1,14 +1,14 @@
 package fr.eni.clinique.dao;
 
-import fr.eni.clinique.dao.jdbc.CliniqueDaoJdbcImpl;
+import fr.eni.clinique.dao.jdbc.ClientDaoJdbcImpl;
+import fr.eni.clinique.dao.jdbc.ConnexionDAOJdbcImpl;
+import fr.eni.clinique.dao.jdbc.PersonnelDaoJdbcImpl;
 
 public class DAOfactory {
 
-    public static CliniqueDAO getCliniqueDao() {
-        return new CliniqueDaoJdbcImpl();
-    }
+    public static ClientDAO getClientDao() { return new ClientDaoJdbcImpl(); }
 
-    public static ConnexionDAO getConnexionDao() {
-        return new CliniqueDaoJdbcImpl();
-    }
+    public static ConnexionDAO getConnexionDao() { return new ConnexionDAOJdbcImpl(); }
+
+    public static PersonnelDAO getPersonnelDao() { return new PersonnelDaoJdbcImpl();}
 }
