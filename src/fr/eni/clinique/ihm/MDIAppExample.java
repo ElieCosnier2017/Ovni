@@ -23,6 +23,7 @@ public class MDIAppExample extends JFrame implements ActionListener {
 	private InternalFrame1 frm1;
 
 
+
 	public MDIAppExample() {
 
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -38,8 +39,8 @@ public class MDIAppExample extends JFrame implements ActionListener {
 
 		// Barre de menus
 		setJMenuBar(getMenuBarre());
-		
-		//Frame interne exemple		
+
+		//Frame interne exemple
 		desktopPane.add(getFrm1());
 
 	}
