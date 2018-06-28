@@ -1,123 +1,183 @@
 package fr.eni.clinique.ihm;
 
-import java.awt.BorderLayout;
-import java.awt.Dimension;
-import java.awt.EventQueue;
-import java.awt.Toolkit;
+import java.awt.GridBagConstraints;
+import java.awt.GridBagLayout;
+import java.awt.Insets;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+import javax.swing.BorderFactory;
 import javax.swing.JDesktopPane;
 import javax.swing.JFrame;
 import javax.swing.JMenu;
+import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
 import javax.swing.JPanel;
-import javax.swing.border.EmptyBorder;
-import javax.swing.JMenuBar;
+import javax.swing.SwingUtilities;
+import javax.swing.border.TitledBorder;
+import javax.swing.JLabel;
+import java.awt.FlowLayout;
+import java.awt.Font;
+import javax.swing.JList;
+import javax.swing.JComboBox;
+import javax.swing.JTable;
 
-public class GeneralFrame extends JFrame {
+import com.toedter.calendar.JDateChooser;
 
-	private JPanel contentPane;
-	private static GeneralFrame frame;
 
-	/**
-	 * Launch the application.
-	 */
-	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					frame = new GeneralFrame();
-					frame.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}
+
+public class GeneralFrame extends JFrame implements ActionListener{
+
+	private static final long serialVersionUID = 1L;
+	
+	private JDesktopPane desktopPane;
+	private JMenuBar menuBar;
+	private AgendaFrame agenda;
+	private JPanel containerLogin;
+	private JTable table;
+
 
 	public GeneralFrame() {
+
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
 		setBounds(0, 0, 1200, 720);
+
+		// initialiser l'ecran MDI
+		desktopPane = new JDesktopPane();
+
+		// Associer le JDesktopPane à la JFrame
+		setContentPane(desktopPane);
+
+		// Barre de menus
+		setJMenuBar(getMenuBarre());
+
+		//Frame interne exemple
+//		desktopPane.add(getAgenda());
+		this.panelAgenda();
 		
-		JMenuBar menuBar = new JMenuBar();
-		setJMenuBar(menuBar);
+	}
+
+	// Lancement de l'application
+	public static void main(String[] args) {
+		SwingUtilities.invokeLater(new Runnable() {
+
+			@Override
+			public void run() {
+				GeneralFrame ecran = new GeneralFrame();
+				ecran.setVisible(true);
+			}
+		});
+
+	}
+
+	public void panelAgenda() {
+		JPanel panel = new JPanel();
+		panel.setBounds(43, 11, 1081, 105);
+	
+		TitledBorder title;
+		title = BorderFactory.createTitledBorder(" De ");
+		panel.setBorder(title);
 		
+		desktopPane.add(panel);
+		panel.setLayout(null);
+		
+		JLabel lblNewLabel = new JLabel("V\u00E9t\u00E9rinaire :");
+		lblNewLabel.setFont(new Font("Calibri", Font.BOLD, 14));
+		lblNewLabel.setBounds(183, 43, 79, 14);
+		panel.add(lblNewLabel);
+		
+		JComboBox comboBox = new JComboBox();
+		comboBox.setBounds(291, 35, 199, 30);
+		panel.add(comboBox);
+		
+		JLabel lblNewLabel_1 = new JLabel("Date :");
+		lblNewLabel_1.setFont(new Font("Calibri", Font.BOLD, 14));
+		lblNewLabel_1.setBounds(635, 43, 46, 14);
+		panel.add(lblNewLabel_1);
+		
+		JDateChooser date = new JDateChooser();
+		date.setBounds(691, 35, 234, 28);
+		panel.add(date);
+
+		table = new JTable();
+		table.setBounds(1118, 140, -1074, 494);
+		desktopPane.add(table);
+	}
+	
+	public void createMenuBar() {
+
+		// Sous menu Déconnexion
 		JMenu menuFichier = new JMenu("Fichier");
 		menuBar.add(menuFichier);
 		
 		JMenuItem mntmDconnexion = new JMenuItem("D\u00E9connexion");
 		mntmDconnexion.setActionCommand("deconnexion");
-		mntmDconnexion.addActionListener(new actionApp());
+		mntmDconnexion.addActionListener(this);
 		menuFichier.add(mntmDconnexion);
 		
 		JMenuItem mntmFermer = new JMenuItem("Fermer");
 		mntmFermer.setActionCommand("fermer");
-		mntmFermer.addActionListener(new actionApp());
+		mntmFermer.addActionListener(this);
 		menuFichier.add(mntmFermer);
 		
 		JMenu mnNewMenu = new JMenu("Gestion des rendez-vous");
 		menuBar.add(mnNewMenu);
 		
 		JMenuItem mntmPriseDeRendez = new JMenuItem("Prise de rendez vous");
-		mntmPriseDeRendez.setActionCommand("getrdv");
-//		mntmPriseDeRendez.addActionListener((ActionListener) this);
+		mntmPriseDeRendez.setActionCommand("setrdv");
+		mntmPriseDeRendez.addActionListener(this);
 		mnNewMenu.add(mntmPriseDeRendez);
 		
 		JMenuItem mntmGestionDesClients = new JMenuItem("Gestion des clients");
 		mntmGestionDesClients.setActionCommand("setclient");
 //		mntmGestionDesClients.addActionListener((ActionListener) this);
 		mnNewMenu.add(mntmGestionDesClients);
-		
-		JMenu mnAgenda = new JMenu("Agenda");
-		mnAgenda.setActionCommand("agenda");
-//		mnAgenda.addActionListener((ActionListener) this);
-		menuBar.add(mnAgenda);
-		
-		JMenu mnGestionDuPersonnel = new JMenu("Gestion du personnel");
-		mnGestionDuPersonnel.setActionCommand("setpersonnel");
-//		mnGestionDuPersonnel.addActionListener((ActionListener) this);
-		menuBar.add(mnGestionDuPersonnel);
-		
-		contentPane = new JPanel();
-		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
-		contentPane.setLayout(new BorderLayout(0, 0));
-		setContentPane(contentPane);
-		
-		JDesktopPane desktopPane = new JDesktopPane();
-		contentPane.add(desktopPane, BorderLayout.NORTH);
-	}
 	
-    static class actionApp implements ActionListener {
-		public void actionPerformed(ActionEvent e) {
-			switch (e.getActionCommand()) {
-			case "deconnexion":
-				System.out.println("Deconnexion");
-				frame.dispose();
-		      	ConnexionFrame cnx = new ConnexionFrame();
-				cnx.setVisible(true);    
-				break;
-			case "fermer":
-				System.exit(0);
-				break;
-	
-			case "ecran":
-				System.out.println("ecran");
-	//			getFrm1().setVisible(true);
-				break;
-	
-			default:
-				System.out.println("Probleme e=" + e);
-			}
-	
-		}
-    }
 
-//	public InternalFrame1 getFrm1() {
-//		IF(FRM1== NULL){
-//			FRM1 = NEW INTERNALFRAME1();
-//		}
-//		RETURN FRM1;
-//	}
+	}
+
+	// Réagir aux clicks sur les menus
+	@Override
+	public void actionPerformed(ActionEvent e) {
+		switch (e.getActionCommand()) {
+		case "deconnexion":
+			System.out.println("Deconnexion");
+			this.dispose();
+	      	ConnexionFrame cnx = new ConnexionFrame();
+			cnx.setVisible(true);    
+			break;
+		case "fermer":
+			System.exit(0);
+			break;
+
+		case "setrdv":
+			System.out.println("setrdv");
+			getAgenda().setVisible(true);
+//			System.exit(0);
+			break;
+
+		default:
+			System.out.println("Probleme e=" + e);
+		}
+	}
+
+	public JDesktopPane getDesktopPane() {
+		return desktopPane;
+	}
+
+	public JMenuBar getMenuBarre() {
+		if (menuBar == null) {
+			menuBar = new JMenuBar();
+
+			createMenuBar();
+		}
+		return menuBar;
+	}
+
+	public AgendaFrame getAgenda() {
+		if(agenda == null){
+			agenda = new AgendaFrame();
+		}
+		return agenda;
+	}
 }
