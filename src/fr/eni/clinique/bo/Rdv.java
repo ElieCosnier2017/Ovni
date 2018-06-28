@@ -4,57 +4,46 @@ import java.util.Date;
 
 public class Rdv {
 
-    private Client client;
-    private Personnel pers;
-    private Date date;
-    private Animal animal;
+    private Integer CodeVeto;
+    private Date DateRdv;
+    private Integer CodeAnimal;
 
-    public Rdv(Client client, Personnel pers, Date date, Animal animal) {
-        this.client = client;
-        this.pers = pers;
-        this.date = date;
-        this.animal = animal;
+    public Rdv(Integer codeVeto, Date dateRdv, Integer codeAnimal) {
+        CodeVeto = codeVeto;
+        DateRdv = dateRdv;
+        CodeAnimal = codeAnimal;
     }
 
-    public Client getClient() {
-        return client;
+    public Integer getCodeVeto() {
+        return CodeVeto;
     }
 
-    public void setClient(Client client) {
-        this.client = client;
+    public void setCodeVeto(Integer codeVeto) {
+        CodeVeto = codeVeto;
     }
 
-    public Personnel getPers() {
-        return pers;
+    public Date getDateRdv() {
+        return DateRdv;
     }
 
-    public void setPers(Personnel pers) {
-        this.pers = pers;
+    public void setDateRdv(Date dateRdv) {
+        DateRdv = dateRdv;
     }
 
-    public Date getDate() {
-        return date;
+    public Integer getCodeAnimal() {
+        return CodeAnimal;
     }
 
-    public void setDate(Date date) {
-        this.date = date;
-    }
-
-    public Animal getAnimal() {
-        return animal;
-    }
-
-    public void setAnimal(Animal animal) {
-        this.animal = animal;
+    public void setCodeAnimal(Integer codeAnimal) {
+        CodeAnimal = codeAnimal;
     }
 
     @Override
     public String toString() {
         return "Rdv{" +
-                "client=" + client +
-                ", pers=" + pers +
-                ", date=" + date +
-                ", animal=" + animal +
+                "CodeVeto=" + CodeVeto +
+                ", DateRdv=" + DateRdv +
+                ", CodeAnimal=" + CodeAnimal +
                 '}';
     }
 }

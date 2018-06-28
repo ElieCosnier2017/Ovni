@@ -28,6 +28,10 @@ public class Application {
         try {
             cliniqueMger.insertClient(c1);
             personnelManager.insertPers(p1);
+
+            System.out.println("suppresion veterinaire");
+            personnelManager.deletePers(p1);
+            System.out.println("fin suppression pers");
         } catch (BLLException e) {
             e.printStackTrace();
         }

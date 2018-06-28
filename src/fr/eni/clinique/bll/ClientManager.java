@@ -5,6 +5,9 @@ import fr.eni.clinique.dao.ClientDAO;
 import fr.eni.clinique.dao.DALException;
 import fr.eni.clinique.dao.DAOfactory;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class ClientManager {
 
     private ClientDAO daoClient;
@@ -30,6 +33,41 @@ public class ClientManager {
             daoClient.insert(c1);
         }catch (DALException e){
             throw new BLLException("Echec insertion client - ",e);
+        }
+    }
+
+    public void updateClient(Client c1) throws BLLException{
+        try{
+            daoClient.update(c1);
+        }catch (DALException e){
+            throw new BLLException("Echec mise à jour client - ",e);
+        }
+    }
+
+    public void deleteClient(Client c1) throws BLLException{
+        try{
+            daoClient.delete(c1);
+        }catch (DALException e){
+            throw new BLLException("Echec supression client - ",e);
+        }
+    }
+
+    public Client findClientByName(String nomClient) throws BLLException{
+        try{
+            Client client = daoClient.selectOneByName(nomClient);
+            return client;
+        }catch (DALException e){
+            throw new BLLException("Echec récupération client - ",e);
+        }
+    }
+
+    public List<Client> getAllClients() throws BLLException{
+        try{
+            List<Client> clientList = new ArrayList<>();
+            clientList = daoClient.selectAll();
+            return clientList;
+        }catch (DALException e){
+            throw new BLLException("Echec récupération tous les clients - ",e);
         }
     }
 }

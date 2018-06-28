@@ -2,7 +2,11 @@ package fr.eni.clinique.dao;
 
 import fr.eni.clinique.bo.Client;
 import fr.eni.clinique.bo.Personnel;
+import fr.eni.clinique.bo.Rdv;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 
 public class AppliTestDAL {
@@ -11,6 +15,7 @@ public class AppliTestDAL {
     public static void main(String[] args) throws DALException {
         ClientDAO clientDAO = DAOfactory.getClientDao();
         PersonnelDAO personnelDAO = DAOfactory.getPersonnelDao();
+        RdvDAO rdvDAO = DAOfactory.getRdvDao();
 
         Client c1 = new Client("Gonzales", "Pedro","10 rue de la banane", "11 rue de la frite", "35000",
                 "Paris", "0123456789", "Oui","jean@lafritte.com","Trop Cute", true );
@@ -20,6 +25,15 @@ public class AppliTestDAL {
         Personnel p1 = new Personnel("Juan","tacos","vet",true);
         Personnel p2 = new Personnel("Cornichon", "bonsoir", "adm", false);
         Personnel p3 = new Personnel("RedBull", "monster", "sec", false);
+        String date1 = "22/06/2006";
+        Date date = null;
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd/MM/yyyy");
+        try {
+            date = simpleDateFormat.parse(date1);
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        Rdv rdv = new Rdv(1,date,2);
 
         try {
 
@@ -96,6 +110,8 @@ public class AppliTestDAL {
                 System.out.println(personnel1.getId() + " " + personnel1.toString());
             }
             System.out.println("Fin Selection de tous le personnel  suite a suppression: ");
+
+            //RDV ---------------------
 
         } catch (DALException e){
             throw new DALException("Erreur DAL", e);

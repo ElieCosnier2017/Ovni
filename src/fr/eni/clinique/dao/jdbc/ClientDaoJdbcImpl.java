@@ -14,9 +14,10 @@ public class ClientDaoJdbcImpl implements ClientDAO {
     private static final String sqlInsertCli = "INSERT INTO Clients(NomClient,PrenomClient,Adresse1,Adresse2, CodePostal, Ville, NumTel, Assurance, Email, Remarque, Archive) values(?,?,?,?,?,?,?,?,?,?,?)";
     private static final String sqlUpdateCli = "UPDATE Clients SET NomClient=?,PrenomClient=?,Adresse1=?,Adresse2=?, CodePostal=?, Ville=?, NumTel=?, Assurance=?," +
             " Email=?, Remarque=?, Archive=? WHERE CodeClient=?";
-    private static final String sqlDeleteCli = "DELETE FROM Clients WHERE CodeClient=?";
-    private static final String sqlSelectAll = "SELECT * FROM Clients ORDER BY NomClient";
+    private static final String sqlDeleteCli = "UPDATE Clients SET Archive=1 WHERE CodeClient=?";
+    private static final String sqlSelectAll = "SELECT * FROM Clients WHERE Archive=0 ORDER BY NomClient";
     private static final String sqlSelectOne = "SELECT CodeClient,NomClient,PrenomClient,Adresse1,Adresse2, CodePostal, Ville, NumTel, Assurance, Email, Remarque, Archive FROM Clients Where CodeClient=?";
+    private static final String sqlSelectOneByName = "SELECT CodeClient,NomClient,PrenomClient,Adresse1,Adresse2, CodePostal, Ville, NumTel, Assurance, Email, Remarque, Archive FROM Clients Where NomClient=?";
 
 
     @Override
@@ -37,7 +38,7 @@ public class ClientDaoJdbcImpl implements ClientDAO {
             rqt.setString(8, client.getAssurance());
             rqt.setString(9, client.getEmail());
             rqt.setString(10, client.getRemarque());
-            rqt.setBoolean(11, client.isArchive());
+            rqt.setBoolean(11, false);
             rqt.execute();
 
             ResultSet rs = rqt.getGeneratedKeys();
@@ -189,6 +190,50 @@ public class ClientDaoJdbcImpl implements ClientDAO {
             }
         }catch (SQLException e){
             throw new DALException("La récupération du client " + codeClient + " a échoué.", e);
+        } finally {
+            try {
+                if (rqt != null) {
+                    rqt.close();
+                }
+                if (cnx != null) {
+                    cnx.close();
+                }
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }
+        return client;
+    }
+
+    @Override
+    public Client selectOneByName(String nomClient) throws DALException {
+        Connection cnx = null;
+        PreparedStatement rqt = null;
+        ResultSet rs = null;
+        Client client = null;
+        try {
+            cnx = JdbcTools.getConnection();
+            rqt = cnx.prepareStatement(sqlSelectOneByName);
+            rqt.setString(1, nomClient);
+            rs = rqt.executeQuery();
+            if (rs.next()) {
+                client = new Client(
+                        rs.getInt("CodeClient"),
+                        rs.getString("NomClient"),
+                        rs.getString("PrenomClient"),
+                        rs.getString("Adresse1"),
+                        rs.getString("Adresse2"),
+                        rs.getString("CodePostal"),
+                        rs.getString("Ville"),
+                        rs.getString("NumTel"),
+                        rs.getString("Assurance"),
+                        rs.getString("Email"),
+                        rs.getString("Remarque"),
+                        rs.getBoolean("Archive")
+                );
+            }
+        }catch (SQLException e){
+            throw new DALException("La récupération du client " + nomClient + " a échoué.", e);
         } finally {
             try {
                 if (rqt != null) {
