@@ -28,8 +28,9 @@ public class ConnexionDAOJdbcImpl implements ConnexionDAO {
             rs = rqt.executeQuery();
             if (rs.next()){
                 personnel = new Personnel(rs.getInt("CodePers"),
-                        rs.getString("Nom"), null,
-                        rs.getString("Role"), rs.getBoolean("Archive"));
+                        rs.getString("Nom"),
+                        rs.getString("Role"),
+                        rs.getBoolean("Archive"));
 
             }
         }catch (SQLException e)

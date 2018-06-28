@@ -5,10 +5,7 @@ import fr.eni.clinique.dao.DALException;
 import fr.eni.clinique.dao.JdbcTools;
 import fr.eni.clinique.dao.PersonnelDAO;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -103,12 +100,18 @@ public class PersonnelDaoJdbcImpl implements PersonnelDAO {
         PreparedStatement rqt = null;
         try {
             cnx = JdbcTools.getConnection();
-            rqt = cnx.prepareStatement(sqlInsertPers);
+            rqt = cnx.prepareStatement(sqlInsertPers, Statement.RETURN_GENERATED_KEYS);
             rqt.setString(1, pers.getNom());
             rqt.setString(2, pers.getMdp());
             rqt.setString(3, pers.getRole());
             rqt.setBoolean(4, pers.isArchive());
             rqt.execute();
+
+            ResultSet rs = rqt.getGeneratedKeys();
+            if(rs.next())
+            {
+                pers.setId(rs.getInt(1));
+            }
         } catch (SQLException e){
             throw new DALException("insertion personnel erreur", e);
         } finally {

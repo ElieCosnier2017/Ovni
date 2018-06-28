@@ -2,17 +2,11 @@ package fr.eni.clinique.bo;
 
 public class Personnel {
 
-    private int id;
+    private Integer id;
     private String nom;
     private String mdp;
     private String role;
     private boolean archive;
-
-
-
-    public Personnel() {
-
-    }
 
     public Personnel(int id, String nom, String role, boolean archive) {
         this.id = id;
@@ -21,15 +15,14 @@ public class Personnel {
         this.archive = archive;
     }
 
-    public Personnel(int id, String nom, String mdp, String role, boolean archive) {
-        this.id = id;
+    public Personnel(String nom, String mdp, String role, boolean archive) {
         this.nom = nom;
         this.mdp = mdp;
         this.role = role;
         this.archive = archive;
     }
 
-    public int getId() {
+    public Integer getId() {
         return id;
     }
 

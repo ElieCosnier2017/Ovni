@@ -15,7 +15,7 @@ public class ClientManager {
         daoClient =DAOfactory.getClientDao();
     }
 
-    public static synchronized ClientManager getInstance() throws BLLException{
+    public static synchronized ClientManager getInstance(){
         if (instance == null){
             instance = new ClientManager();
         }
