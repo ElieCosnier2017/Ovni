@@ -47,7 +47,30 @@ public class GeneralFrame extends JFrame implements ActionListener{
 
 		// Associer le JDesktopPane à la JFrame
 		setContentPane(desktopPane);
+
+		// Barre de menus
+		setJMenuBar(getMenuBarre());
+
+		//Frame interne exemple
+//		desktopPane.add(getAgenda());
+		this.panelAgenda();
 		
+	}
+
+	// Lancement de l'application
+	public static void main(String[] args) {
+		SwingUtilities.invokeLater(new Runnable() {
+
+			@Override
+			public void run() {
+				GeneralFrame ecran = new GeneralFrame();
+				ecran.setVisible(true);
+			}
+		});
+
+	}
+
+	public void panelAgenda() {
 		JPanel panel = new JPanel();
 		panel.setBounds(43, 11, 1081, 105);
 	
@@ -79,38 +102,6 @@ public class GeneralFrame extends JFrame implements ActionListener{
 		table = new JTable();
 		table.setBounds(1118, 140, -1074, 494);
 		desktopPane.add(table);
-
-		// Barre de menus
-		setJMenuBar(getMenuBarre());
-
-		//Frame interne exemple
-//		desktopPane.add(getAgenda());
-		this.panelAgenda();
-		
-	}
-
-	// Lancement de l'application
-	public static void main(String[] args) {
-		SwingUtilities.invokeLater(new Runnable() {
-
-			@Override
-			public void run() {
-				GeneralFrame ecran = new GeneralFrame();
-				ecran.setVisible(true);
-			}
-		});
-
-	}
-
-	public void panelAgenda() {
-		containerLogin = new JPanel();
-		containerLogin.setLayout(new GridBagLayout());
-		
-		TitledBorder title;
-		title = BorderFactory.createTitledBorder(" De ");
-		containerLogin.setBorder(title);
-		
-//		setContentPane(containerLogin);
 	}
 	
 	public void createMenuBar() {
