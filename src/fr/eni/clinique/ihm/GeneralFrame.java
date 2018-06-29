@@ -9,7 +9,7 @@ import javax.swing.*;
 import javax.swing.border.TitledBorder;
 
 import com.toedter.calendar.JDateChooser;
-
+import fr.eni.clinique.bo.Personnel;
 
 
 public class GeneralFrame extends JFrame implements ActionListener{
@@ -23,7 +23,7 @@ public class GeneralFrame extends JFrame implements ActionListener{
 	private JTable table;
 
 
-	public GeneralFrame() {
+	public GeneralFrame(Personnel personnel) {
 
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(0, 0, 1200, 720);
@@ -39,7 +39,7 @@ public class GeneralFrame extends JFrame implements ActionListener{
 
 		//Frame interne exemple
 //		desktopPane.add(getAgenda());
-		String role = new String("adm");
+		String role = personnel.getRole();
 
 		if (role.equals("adm")) {
 			System.out.println("administrateur");
@@ -55,18 +55,18 @@ public class GeneralFrame extends JFrame implements ActionListener{
 		
 	}
 
-	// Lancement de l'application
-	public static void main(String[] args) {
-		SwingUtilities.invokeLater(new Runnable() {
-
-			@Override
-			public void run() {
-				GeneralFrame ecran = new GeneralFrame();
-				ecran.setVisible(true);
-			}
-		});
-
-	}
+//	// Lancement de l'application
+////	public static void main(String[] args) {
+////		SwingUtilities.invokeLater(new Runnable() {
+////
+//////			@Override
+//////			public void run() {
+//////				GeneralFrame ecran = new GeneralFrame();
+//////				ecran.setVisible(true);
+//////			}
+////		});
+////
+////	}
 
 	public void panelAgenda() {
 		JPanel panel = new JPanel();

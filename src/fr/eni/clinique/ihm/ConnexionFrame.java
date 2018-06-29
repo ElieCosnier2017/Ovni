@@ -2,6 +2,8 @@ package fr.eni.clinique.ihm;
 
 import fr.eni.clinique.bll.BLLException;
 import fr.eni.clinique.bll.LoginMger;
+import fr.eni.clinique.bll.PersonnelManager;
+import fr.eni.clinique.bo.Personnel;
 
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
@@ -85,12 +87,14 @@ public class ConnexionFrame extends JFrame {
         valider.addActionListener((e)-> {
             try {
                 LoginMger mger = LoginMger.getInstance();
+                PersonnelManager personnelManager = PersonnelManager.getInstance();
                 System.out.println(getUsernameField().getText());
                 System.out.println(getPasswordField().getText());
 
                 mger.verifyUser(getUsernameField().getText(), getPasswordField().getText());
+                Personnel personnel = personnelManager.selectOneByNameAndMotPasse(getUsernameField().getText(), getPasswordField().getText());
                 this.dispose();
-                GeneralFrame cnx = new GeneralFrame();
+                GeneralFrame cnx = new GeneralFrame(personnel);
                 cnx.setVisible(true);
             } catch (BLLException e1) {
                 e1.printStackTrace();

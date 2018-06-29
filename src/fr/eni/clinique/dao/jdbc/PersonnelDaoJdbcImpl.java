@@ -17,7 +17,7 @@ public class PersonnelDaoJdbcImpl implements PersonnelDAO {
     private static final String sqlDeletePers = "UPDATE Personnels SET Archive=1 WHERE CodePers=?";
     private static final String sqlSelectAllPers = "Select CodePers, Nom, Role, Archive from Personnels WHERE Archive=0";
     private static final String sqlSelectPersbyCodePers = "Select CodePers, Nom, Role, Archive from Personnels where CodePers=?";
-    private static final String sqlSelectPersbyNameAndMdp = "Select CodePers, Nom, Role, Archive from Personnels where CodePers=? And MotPasse=?";
+    private static final String sqlSelectPersbyNameAndMdp = "Select CodePers, Nom, Role, Archive from Personnels where Nom=? And MotPasse=?";
 
     @Override
     public Personnel selectOne(int codePers) throws DALException{
