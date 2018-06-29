@@ -1,8 +1,6 @@
 package fr.eni.clinique.ihm;
 
-import java.awt.GridBagConstraints;
-import java.awt.GridBagLayout;
-import java.awt.Insets;
+
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
@@ -16,9 +14,7 @@ import javax.swing.JPanel;
 import javax.swing.SwingUtilities;
 import javax.swing.border.TitledBorder;
 import javax.swing.JLabel;
-import java.awt.FlowLayout;
 import java.awt.Font;
-import javax.swing.JList;
 import javax.swing.JComboBox;
 import javax.swing.JTable;
 
@@ -53,7 +49,19 @@ public class GeneralFrame extends JFrame implements ActionListener{
 
 		//Frame interne exemple
 //		desktopPane.add(getAgenda());
-		this.panelAgenda();
+		String role = new String("adm");
+
+		if (role.equals("adm")) {
+			System.out.println("administrateur");
+			this.panelPersonnel();
+		} else if (role.equals("sec")) {
+			System.out.println("Secretaire");
+			this.panelRdv();
+		} else if (role.equals("vet")) {
+			System.out.println("Veterinaire");
+			this.panelAgenda();
+		}
+
 		
 	}
 
@@ -73,28 +81,28 @@ public class GeneralFrame extends JFrame implements ActionListener{
 	public void panelAgenda() {
 		JPanel panel = new JPanel();
 		panel.setBounds(43, 11, 1081, 105);
-	
+
 		TitledBorder title;
 		title = BorderFactory.createTitledBorder(" De ");
 		panel.setBorder(title);
-		
+
 		desktopPane.add(panel);
 		panel.setLayout(null);
-		
+
 		JLabel lblNewLabel = new JLabel("V\u00E9t\u00E9rinaire :");
 		lblNewLabel.setFont(new Font("Calibri", Font.BOLD, 14));
 		lblNewLabel.setBounds(183, 43, 79, 14);
 		panel.add(lblNewLabel);
-		
+
 		JComboBox comboBox = new JComboBox();
 		comboBox.setBounds(291, 35, 199, 30);
 		panel.add(comboBox);
-		
+
 		JLabel lblNewLabel_1 = new JLabel("Date :");
 		lblNewLabel_1.setFont(new Font("Calibri", Font.BOLD, 14));
 		lblNewLabel_1.setBounds(635, 43, 46, 14);
 		panel.add(lblNewLabel_1);
-		
+
 		JDateChooser date = new JDateChooser();
 		date.setBounds(691, 35, 234, 28);
 		panel.add(date);
@@ -103,7 +111,73 @@ public class GeneralFrame extends JFrame implements ActionListener{
 		table.setBounds(1118, 140, -1074, 494);
 		desktopPane.add(table);
 	}
-	
+
+	public void panelPersonnel() {
+		this.setTitle("Gestion du personnel - Ani' Forme");
+
+		JPanel panel = new JPanel();
+		panel.setBounds(43, 11, 1081, 142);
+		panel.setBorder(BorderFactory.createLineBorder(Color.black, 1));
+
+		desktopPane.add(panel);
+		panel.setLayout(null);
+
+		JButton btnNewButton = new JButton("Ajouter");
+		btnNewButton.setBounds(33, 11, 120, 120);
+		panel.add(btnNewButton);
+
+		JButton btnRinitialiser = new JButton("R\u00E9initialiser");
+		btnRinitialiser.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+			}
+		});
+		btnRinitialiser.setBounds(353, 11, 120, 120);
+		panel.add(btnRinitialiser);
+
+		JButton btnSupprimer = new JButton("Supprimer");
+		btnSupprimer.setBounds(194, 11, 120, 120);
+		panel.add(btnSupprimer);
+
+		table = new JTable();
+		table.setBounds(1118, 140, -1074, 494);
+		desktopPane.add(table);
+	}
+
+	public void panelRdv() {
+		JPanel panel = new JPanel();
+		panel.setBounds(43, 11, 1081, 105);
+
+		TitledBorder title;
+		title = BorderFactory.createTitledBorder(" De ");
+		panel.setBorder(title);
+
+		desktopPane.add(panel);
+		panel.setLayout(null);
+
+		JLabel lblNewLabel = new JLabel("V\u00E9t\u00E9rinaire :");
+		lblNewLabel.setFont(new Font("Calibri", Font.BOLD, 14));
+		lblNewLabel.setBounds(183, 43, 79, 14);
+		panel.add(lblNewLabel);
+
+		JComboBox comboBox = new JComboBox();
+		comboBox.setBounds(291, 35, 199, 30);
+		panel.add(comboBox);
+
+		JLabel lblNewLabel_1 = new JLabel("Date :");
+		lblNewLabel_1.setFont(new Font("Calibri", Font.BOLD, 14));
+		lblNewLabel_1.setBounds(635, 43, 46, 14);
+		panel.add(lblNewLabel_1);
+
+		JDateChooser date = new JDateChooser();
+		date.setBounds(691, 35, 234, 28);
+		panel.add(date);
+
+		table = new JTable();
+		table.setBounds(1118, 140, -1074, 494);
+		desktopPane.add(table);
+	}
+
+
 	public void createMenuBar() {
 
 		// Sous menu Déconnexion
@@ -136,7 +210,6 @@ public class GeneralFrame extends JFrame implements ActionListener{
 
 	}
 
-	// Réagir aux clicks sur les menus
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		switch (e.getActionCommand()) {
