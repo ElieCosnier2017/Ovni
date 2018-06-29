@@ -1,9 +1,6 @@
 package fr.eni.clinique.dao;
 
-import fr.eni.clinique.dao.jdbc.ClientDaoJdbcImpl;
-import fr.eni.clinique.dao.jdbc.ConnexionDAOJdbcImpl;
-import fr.eni.clinique.dao.jdbc.PersonnelDaoJdbcImpl;
-import fr.eni.clinique.dao.jdbc.RdvDaoJdbcImpl;
+import fr.eni.clinique.dao.jdbc.*;
 
 public class DAOfactory {
 
@@ -14,4 +11,6 @@ public class DAOfactory {
     public static PersonnelDAO getPersonnelDao() { return new PersonnelDaoJdbcImpl();}
 
     public static RdvDAO getRdvDao() { return new RdvDaoJdbcImpl();}
+
+    public static AnimalDAO getAnimalDao() { return new AnimalDaoJdbdImpl();}
 }

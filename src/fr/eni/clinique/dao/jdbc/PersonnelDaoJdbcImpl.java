@@ -17,6 +17,7 @@ public class PersonnelDaoJdbcImpl implements PersonnelDAO {
     private static final String sqlDeletePers = "UPDATE Personnels SET Archive=1 WHERE CodePers=?";
     private static final String sqlSelectAllPers = "Select CodePers, Nom, Role, Archive from Personnels WHERE Archive=0";
     private static final String sqlSelectPersbyCodePers = "Select CodePers, Nom, Role, Archive from Personnels where CodePers=?";
+    private static final String sqlSelectPersbyNameAndMdp = "Select CodePers, Nom, Role, Archive from Personnels where CodePers=? And MotPasse=?";
 
     @Override
     public Personnel selectOne(int codePers) throws DALException{
@@ -39,6 +40,43 @@ public class PersonnelDaoJdbcImpl implements PersonnelDAO {
             }
         }catch (SQLException e){
             throw new DALException("Erreur récupération liste du personnel", e);
+        } finally {
+            try {
+                if (rqt != null) {
+                    rqt.close();
+                }
+                if (cnx != null) {
+                    cnx.close();
+                }
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }
+        return personnel;
+    }
+
+    @Override
+    public Personnel selectOneByNameAndMotPasse(String name, String mdp) throws DALException{
+        Connection cnx = null;
+        ResultSet rs = null;
+        PreparedStatement rqt = null;
+        Personnel personnel = null;
+        try {
+            cnx = JdbcTools.getConnection();
+            rqt = cnx.prepareStatement(sqlSelectPersbyNameAndMdp);
+            rqt.setString(1, name);
+            rqt.setString(2, mdp);
+            rs = rqt.executeQuery();
+
+            if(rs.next()){
+                personnel = new Personnel(
+                        rs.getInt("CodePers"),
+                        rs.getString("Nom"),
+                        rs.getString("Role"),
+                        rs.getBoolean("Archive"));
+            }
+        }catch (SQLException e){
+            throw new DALException("Erreur récupération personnel lors de la connection", e);
         } finally {
             try {
                 if (rqt != null) {

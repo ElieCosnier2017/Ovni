@@ -1,5 +1,6 @@
 package fr.eni.clinique.bll;
 
+import fr.eni.clinique.bo.Client;
 import fr.eni.clinique.bo.Personnel;
 import fr.eni.clinique.bo.Rdv;
 import fr.eni.clinique.dao.DALException;
@@ -77,5 +78,19 @@ public class PersonnelManager {
         }catch (DALException e){
             throw new BLLException("Echec insertion pers - ",e);
         }
+    }
+
+    public Personnel selectOneByNameAndMotPasse(String name, String mdp) throws BLLException {
+        Personnel personnel = null;
+        if(name.equals(null)){
+            throw new BLLException("Veuillez spécifier un nom svp.");
+        } else {
+            try {
+                personnel = personnelDAO.selectOneByNameAndMotPasse(name, mdp);
+            } catch (DALException e) {
+                throw new BLLException("Echec recuperation pers - ",e);
+            }
+        }
+        return personnel;
     }
 }

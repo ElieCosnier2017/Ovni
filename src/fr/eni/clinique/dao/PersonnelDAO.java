@@ -11,5 +11,6 @@ public interface PersonnelDAO extends DAO<Personnel>{
     void delete(Personnel p1) throws DALException;
     List<Personnel> selectAll() throws DALException;
     Personnel selectOne(int CodePers) throws DALException;
+    Personnel selectOneByNameAndMotPasse(String name, String mdp) throws DALException;
 
 }
