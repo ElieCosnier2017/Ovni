@@ -118,7 +118,7 @@ public class GeneralFrame extends JFrame implements ActionListener{
         panel.add(btnNewButton);
 
         JButton btnRinitialiser = new JButton("R\u00E9initialiser");
-        btnRinitialiser.setSelectedIcon(new ImageIcon("F:\\ENI\\Projet 1 - Developpement d'une application client  serveur\\Ovni\\src\\fr\\eni\\clinique\\Ressources\\edit.png"));
+        btnRinitialiser.setSelectedIcon(new ImageIcon(this.getClass().getResource("edit.png")));
         btnRinitialiser.setIcon(new ImageIcon(this.getClass().getResource("/fr/eni/clinique/Ressources/edit.png")));
         btnRinitialiser.setBounds(800, 11, 120, 120);
         panel.add(btnRinitialiser);
