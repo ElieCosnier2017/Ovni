@@ -69,6 +69,8 @@ public class GeneralFrame extends JFrame implements ActionListener{
 	}
 
 	public void panelAgenda() {
+		this.setTitle("Agenda - Ani' Forme");
+
 		JPanel panel = new JPanel();
 		panel.setBounds(43, 11, 1081, 105);
 
@@ -128,12 +130,18 @@ public class GeneralFrame extends JFrame implements ActionListener{
         btnSupprimer.setBounds(462, 11, 120, 120);
         panel.add(btnSupprimer);
 
-        table = new JTable();
+		JTable tableau = new JTable(new TablePersonnelModel());
+
+		getContentPane().add(new JScrollPane(tableau), BorderLayout.CENTER);
+
+		pack();
         table.setBounds(1118, 140, -1074, 494);
         desktopPane.add(table);
 	}
 
 	public void panelRdv() {
+		this.setTitle("Gestion des Rendez-vous - Ani' Forme");
+
 		JPanel panel = new JPanel();
 		panel.setBounds(43, 11, 1081, 105);
 

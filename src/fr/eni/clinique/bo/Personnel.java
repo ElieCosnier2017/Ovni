@@ -22,6 +22,12 @@ public class Personnel {
         this.archive = archive;
     }
 
+    public Personnel(String nom, String mdp, String role) {
+        this.nom = nom;
+        this.mdp = mdp;
+        this.role = role;
+    }
+
     public Integer getId() {
         return id;
     }
