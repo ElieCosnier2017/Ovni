@@ -130,13 +130,13 @@ public class GeneralFrame extends JFrame implements ActionListener{
         btnSupprimer.setBounds(462, 11, 120, 120);
         panel.add(btnSupprimer);
 
-		JTable tableau = new JTable(new TablePersonnelModel());
+        table = new JTable(new TablePersonnelModel());
+		table.setBounds(500, 400, -1074, 494);
+		desktopPane.add(table);
+		getContentPane().add(new JScrollPane(table), BorderLayout.CENTER);
 
-		getContentPane().add(new JScrollPane(tableau), BorderLayout.CENTER);
+		table.setVisible(true);
 
-		pack();
-        table.setBounds(1118, 140, -1074, 494);
-        desktopPane.add(table);
 	}
 
 	public void panelRdv() {

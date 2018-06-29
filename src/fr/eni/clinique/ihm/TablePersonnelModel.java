@@ -6,7 +6,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class TablePersonnelModel extends AbstractTableModel {
-    private final List<Personnel> personnel = new ArrayList<Personnel>();
+    private final List<Personnel> personnel = new ArrayList<>();
 
     private final String[] entetes = {"Nom", "Fonction", "Mot de passe"};
 
@@ -36,11 +36,11 @@ public class TablePersonnelModel extends AbstractTableModel {
 
     public Object getValueAt(int rowIndex, int columnIndex) {
         switch (columnIndex) {
-            case 1:
+            case 0:
                 return personnel.get(rowIndex).getNom();
-            case 2:
+            case 1:
                 return personnel.get(rowIndex).getRole();
-            case 3:
+            case 2:
                 return personnel.get(rowIndex).getMdp();
             default:
                 return null; //Ne devrait jamais arriver
@@ -58,5 +58,4 @@ public class TablePersonnelModel extends AbstractTableModel {
 
         fireTableRowsDeleted(rowIndex, rowIndex);
     }
-
 }
