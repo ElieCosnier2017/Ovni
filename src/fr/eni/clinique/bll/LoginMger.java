@@ -21,14 +21,16 @@ public class LoginMger {
         return instance;
     }
 
-    public void verifyUser(String username, String mdp){
+    public Boolean verifyUser(String username, String mdp){
+        Boolean cnxValid = false;
         try {
             Personnel user = connexionDAO.verifyUser(username,mdp);
             if(user != null){
-                System.out.println("User OK");
+                cnxValid = true;
             }
         } catch (DALException e) {
             e.printStackTrace();
         }
+        return cnxValid;
     }
 }

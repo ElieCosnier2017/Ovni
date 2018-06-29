@@ -91,11 +91,19 @@ public class ConnexionFrame extends JFrame {
                 System.out.println(getUsernameField().getText());
                 System.out.println(getPasswordField().getText());
 
-                mger.verifyUser(getUsernameField().getText(), getPasswordField().getText());
-                Personnel personnel = personnelManager.selectOneByNameAndMotPasse(getUsernameField().getText(), getPasswordField().getText());
-                this.dispose();
-                GeneralFrame cnx = new GeneralFrame(personnel);
-                cnx.setVisible(true);
+                Boolean cnxValid = mger.verifyUser(getUsernameField().getText(), getPasswordField().getText());
+                if(!cnxValid){
+                    JLabel lblconnexion = new JLabel("Erreur lors de l'authentification");
+                    lblconnexion.setBounds(135, 195, 200, 40);
+                    lblconnexion.setForeground(Color.MAGENTA);
+                    contentPane.add(lblconnexion);
+                    contentPane.updateUI();
+                }else {
+                    Personnel personnel = personnelManager.selectOneByNameAndMotPasse(getUsernameField().getText(), getPasswordField().getText());
+                    this.dispose();
+                    GeneralFrame cnx = new GeneralFrame(personnel);
+                    cnx.setVisible(true);
+                }
             } catch (BLLException e1) {
                 e1.printStackTrace();
             }
