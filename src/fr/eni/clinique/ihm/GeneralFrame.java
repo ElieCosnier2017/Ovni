@@ -22,7 +22,6 @@ public class GeneralFrame extends JFrame implements ActionListener{
 	private JPanel containerLogin;
 	private JTable table;
 
-
 	public GeneralFrame(Personnel personnel) {
 
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -130,12 +129,21 @@ public class GeneralFrame extends JFrame implements ActionListener{
         btnSupprimer.setBounds(462, 11, 120, 120);
         panel.add(btnSupprimer);
 
-        table = new JTable(new TablePersonnelModel());
-		table.setBounds(500, 400, -1074, 494);
-		desktopPane.add(table);
-		getContentPane().add(new JScrollPane(table), BorderLayout.CENTER);
+		JPanel panel2 = new JPanel();
+		panel2.setBounds(43, 200, 1081, 400);
+		panel2.setBorder(BorderFactory.createLineBorder(Color.black, 1));
 
-		table.setVisible(true);
+
+
+
+//		panel2.add(new JScrollPane(table));
+		JScrollPane scrollPane = new JScrollPane();
+		scrollPane.setBounds(43, 200, 1081, 400);
+		desktopPane.add(panel2);
+
+		table = new JTable(new TablePersonnelModel());
+		table.setBounds(43, 200, 1081, 400);
+		desktopPane.add(table);
 
 	}
 

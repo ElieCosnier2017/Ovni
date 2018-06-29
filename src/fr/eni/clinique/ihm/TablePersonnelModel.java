@@ -14,6 +14,9 @@ public class TablePersonnelModel extends AbstractTableModel {
         super();
 
         personnel.add(new Personnel("Johnathan", "Sykes", "hello"));
+        personnel.add(new Personnel("Johnathan", "Sykes", "hello"));
+        personnel.add(new Personnel("Johnathan", "Sykes", "hello"));
+        personnel.add(new Personnel("Johnathan", "Sykes", "hello"));
 //            amis.add(new Ami("Nicolas", "Van de Kampf", Color.black, true, Sport.FOOTBALL));
 //            amis.add(new Ami("Damien", "Cuthbert", Color.cyan, true, Sport.RIEN));
 //            amis.add(new Ami("Corinne", "Valance", Color.blue, false, Sport.NATATION));
