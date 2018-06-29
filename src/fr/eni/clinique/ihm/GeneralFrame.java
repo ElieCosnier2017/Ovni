@@ -1,22 +1,12 @@
 package fr.eni.clinique.ihm;
 
 
+import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-import javax.swing.BorderFactory;
-import javax.swing.JDesktopPane;
-import javax.swing.JFrame;
-import javax.swing.JMenu;
-import javax.swing.JMenuBar;
-import javax.swing.JMenuItem;
-import javax.swing.JPanel;
-import javax.swing.SwingUtilities;
+import javax.swing.*;
 import javax.swing.border.TitledBorder;
-import javax.swing.JLabel;
-import java.awt.Font;
-import javax.swing.JComboBox;
-import javax.swing.JTable;
 
 import com.toedter.calendar.JDateChooser;
 
@@ -113,34 +103,34 @@ public class GeneralFrame extends JFrame implements ActionListener{
 	}
 
 	public void panelPersonnel() {
-		this.setTitle("Gestion du personnel - Ani' Forme");
+        this.setTitle("Gestion du personnel - Ani' Forme");
 
-		JPanel panel = new JPanel();
-		panel.setBounds(43, 11, 1081, 142);
-		panel.setBorder(BorderFactory.createLineBorder(Color.black, 1));
+        JPanel panel = new JPanel();
+        panel.setBounds(43, 11, 1081, 142);
+        panel.setBorder(BorderFactory.createLineBorder(Color.black, 1));
 
-		desktopPane.add(panel);
-		panel.setLayout(null);
+        desktopPane.add(panel);
+        panel.setLayout(null);
 
-		JButton btnNewButton = new JButton("Ajouter");
-		btnNewButton.setBounds(33, 11, 120, 120);
-		panel.add(btnNewButton);
+        JButton btnNewButton = new JButton("Ajouter");
+        btnNewButton.setIcon(new ImageIcon(this.getClass().getResource("/fr/eni/clinique/Ressources/add.jpg")));
+        btnNewButton.setBounds(114, 11, 120, 120);
+        panel.add(btnNewButton);
 
-		JButton btnRinitialiser = new JButton("R\u00E9initialiser");
-		btnRinitialiser.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-			}
-		});
-		btnRinitialiser.setBounds(353, 11, 120, 120);
-		panel.add(btnRinitialiser);
+        JButton btnRinitialiser = new JButton("R\u00E9initialiser");
+        btnRinitialiser.setSelectedIcon(new ImageIcon(this.getClass().getResource("edit.png")));
+        btnRinitialiser.setIcon(new ImageIcon(this.getClass().getResource("/fr/eni/clinique/Ressources/edit.png")));
+        btnRinitialiser.setBounds(800, 11, 120, 120);
+        panel.add(btnRinitialiser);
 
-		JButton btnSupprimer = new JButton("Supprimer");
-		btnSupprimer.setBounds(194, 11, 120, 120);
-		panel.add(btnSupprimer);
+        JButton btnSupprimer = new JButton("Supprimer");
+        btnSupprimer.setIcon(new ImageIcon(this.getClass().getResource("/fr/eni/clinique/Ressources/del.jpg")));
+        btnSupprimer.setBounds(462, 11, 120, 120);
+        panel.add(btnSupprimer);
 
-		table = new JTable();
-		table.setBounds(1118, 140, -1074, 494);
-		desktopPane.add(table);
+        table = new JTable();
+        table.setBounds(1118, 140, -1074, 494);
+        desktopPane.add(table);
 	}
 
 	public void panelRdv() {
