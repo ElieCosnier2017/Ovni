@@ -168,7 +168,7 @@ public class AppliTestDAL {
 //                System.out.println(personnel1.getId() + " " + personnel1.toString());
 //            }
 //            System.out.println("Fin Selection de tous le personnel  suite a suppression: ");
-            
+
         } catch (DALException e){
             throw new DALException("Erreur DAL", e);
         }
