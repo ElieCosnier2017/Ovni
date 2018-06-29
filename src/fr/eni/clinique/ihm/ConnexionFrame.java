@@ -89,6 +89,9 @@ public class ConnexionFrame extends JFrame {
                 System.out.println(getPasswordField().getText());
 
                 mger.verifyUser(getUsernameField().getText(), getPasswordField().getText());
+                this.dispose();
+                GeneralFrame cnx = new GeneralFrame();
+                cnx.setVisible(true);
             } catch (BLLException e1) {
                 e1.printStackTrace();
             }
