@@ -2,9 +2,11 @@ package fr.eni.clinique.bo;
 
 public class Animal {
 
+    private static final char[] SEXE = {'M', 'F', 'H'};
+
     private Integer codeAnimal;
     private String nomAnimal;
-    private static Character[] sexe = {'M', 'F', 'H'};
+    private Character sexe;
     private String couleur;
     private String race;
     private String espece;
@@ -13,10 +15,22 @@ public class Animal {
     private String antecedents;
     private Boolean archive;
 
-    public Animal(Integer codeAnimal, String nomAnimal, Character[] sexe, String couleur, String race, String espece, Long codeClient, String tatouage, String antecedents, Boolean archive) {
+    public Animal(String nomAnimal, Character sexe, String couleur, String race, String espece, Long codeClient, String tatouage, String antecedents, Boolean archive) {
+        this.nomAnimal = nomAnimal;
+        this.sexe = sexe;
+        this.couleur = couleur;
+        this.race = race;
+        this.espece = espece;
+        this.codeClient = codeClient;
+        this.tatouage = tatouage;
+        this.antecedents = antecedents;
+        this.archive = archive;
+    }
+
+    public Animal(Integer codeAnimal, String nomAnimal, Character sexe, String couleur, String race, String espece, Long codeClient, String tatouage, String antecedents, Boolean archive) {
         this.codeAnimal = codeAnimal;
         this.nomAnimal = nomAnimal;
-        Animal.sexe = sexe;
+        this.sexe = sexe;
         this.couleur = couleur;
         this.race = race;
         this.espece = espece;
@@ -42,13 +56,6 @@ public class Animal {
         this.nomAnimal = nomAnimal;
     }
 
-    public static Character[] getSexe() {
-        return sexe;
-    }
-
-    public static void setSexe(Character[] sexe) {
-        Animal.sexe = sexe;
-    }
 
     public String getCouleur() {
         return couleur;
@@ -98,12 +105,21 @@ public class Animal {
         this.antecedents = antecedents;
     }
 
+    public Character getSexe() {
+        return sexe;
+    }
+
     public Boolean getArchive() {
         return archive;
+
     }
 
     public void setArchive(Boolean archive) {
         this.archive = archive;
+    }
+
+    public void setSexe(Character sexe) {
+        this.sexe = sexe;
     }
 
     @Override

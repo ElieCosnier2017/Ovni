@@ -1,5 +1,6 @@
 package fr.eni.clinique.dao;
 
+import fr.eni.clinique.bo.Animal;
 import fr.eni.clinique.bo.Client;
 import fr.eni.clinique.bo.Personnel;
 import fr.eni.clinique.bo.Rdv;
@@ -16,6 +17,7 @@ public class AppliTestDAL {
         ClientDAO clientDAO = DAOfactory.getClientDao();
         PersonnelDAO personnelDAO = DAOfactory.getPersonnelDao();
         RdvDAO rdvDAO = DAOfactory.getRdvDao();
+        AnimalDAO animalDAO = DAOfactory.getAnimalDao();
 
         Client c1 = new Client("Gonzales", "Pedro","10 rue de la banane", "11 rue de la frite", "35000",
                 "Paris", "0123456789", "Oui","jean@lafritte.com","Trop Cute", true );
@@ -34,6 +36,8 @@ public class AppliTestDAL {
             e.printStackTrace();
         }
         Rdv rdv = new Rdv(1,date,2);
+
+        Animal a1 = new Animal("YEAHBOIIIIIIIIIIIIIIIIII", 'M', "Bleu","juif", "Chien", c1.getCodeClient().longValue(),"112145455","aucun", true);
 
         try {
 
@@ -84,8 +88,8 @@ public class AppliTestDAL {
             System.out.println("Fin Ajout personnel : ----");
 
             System.out.println("Update de clients : ----");
-            c1.setRemarque("Aime les chats");
-            clientDAO.update(c1);
+            p1.setNom("XXXTentacion");
+            personnelDAO.update(p1);
             System.out.println("Fin update");
 
             System.out.println("Selection de tous le personnel : ");
@@ -112,7 +116,59 @@ public class AppliTestDAL {
             System.out.println("Fin Selection de tous le personnel  suite a suppression: ");
 
             //RDV ---------------------
+            System.out.println("Ajout de Rendez-Vous : ----");
+            rdvDAO.insert(rdv);
+            System.out.println(rdv.toString());
 
+            System.out.println("Fin Ajout Rendez-Vous : ----");
+
+            System.out.println("Update de Rendez-Vous : ----");
+            rdv.setCodeVeto(1);
+            rdvDAO.update(rdv);
+            System.out.println("Fin update");
+
+            System.out.println("Selection de tous le  Rendez-Vous d'un vet : ");
+            List<Rdv> rdvList = rdvDAO.getListRdvByVet(p1.getId());
+            System.out.println(rdvList.toString());
+            System.out.println("Nombre de  Rendez-Vous : " + rdvList.size());
+
+            System.out.println("Fin Selection de tous le  Rendez-Vous : ");
+
+
+            //Animal
+            System.out.println("Ajout de Animal : ----");
+            animalDAO.insert(a1);
+            System.out.println(a1.toString());
+            System.out.println("Fin Ajout Animal : ----");
+
+            System.out.println("Update de Animal : ----");
+            a1.setNomAnimal("XXXTentacion");
+            animalDAO.update(a1);
+            System.out.println("Fin update");
+
+//            System.out.println("Selection de tous le Animal : ");
+//            List<Animal> animalList = AnimalDAO.selectAll();
+//            System.out.println(personnelList.toString());
+//            System.out.println("Nombre de Animal : " + personnelList.size());
+//
+//            System.out.println("Fin Selection de tous le Animal : ");
+//
+//            System.out.println("Selection de un Animal : ");
+//            Personnel personnel = personnelDAO.selectOne(p1.getId());
+//            System.out.println(personnel.toString());
+//            System.out.println("Fin Selection de un Animal.");
+//
+//            System.out.println("Suppression de un Animal : ");
+//            personnelDAO.delete(p1);
+//            System.out.println("Fin supression de un Animal : ");
+//
+//            System.out.println("Selection de tous les clients suite a suppression : ");
+//            List<Personnel> personnelListSupr = personnelDAO.selectAll();
+//            for(Personnel personnel1 : personnelListSupr){
+//                System.out.println(personnel1.getId() + " " + personnel1.toString());
+//            }
+//            System.out.println("Fin Selection de tous le personnel  suite a suppression: ");
+            
         } catch (DALException e){
             throw new DALException("Erreur DAL", e);
         }
