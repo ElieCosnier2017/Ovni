@@ -11,8 +11,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 
 public class ConnexionDAOJdbcImpl implements ConnexionDAO {
-    private static final String sqlGetUser = "Select CodePers, Nom, Role, Archive from Personnels where Nom=? and MotPasse=?";
-
+    private static final String sqlGetUser = "Select CodePers, Nom, Role, Archive from Personnels where Nom=? and MotPasse=? and Archive=0";
     @Override
     public Personnel verifyUser(String username, String mdp) throws DALException {
         Connection cnx = null;
