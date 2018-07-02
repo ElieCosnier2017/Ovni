@@ -1,5 +1,7 @@
 package fr.eni.clinique.ihm;
 
+import fr.eni.clinique.bll.BLLException;
+import fr.eni.clinique.bll.PersonnelManager;
 import fr.eni.clinique.bo.Personnel;
 import javax.swing.table.AbstractTableModel;
 import java.util.ArrayList;
@@ -10,19 +12,16 @@ public class TablePersonnelModel extends AbstractTableModel {
 
     private final String[] entetes = {"Nom", "Fonction", "Mot de passe"};
 
-    public TablePersonnelModel() {
+    public TablePersonnelModel() throws BLLException {
         super();
 
-        personnel.add(new Personnel("Johnathan", "Sykes", "hello"));
-        personnel.add(new Personnel("Johnathan", "Sykes", "hello"));
-        personnel.add(new Personnel("Johnathan", "Sykes", "hello"));
-        personnel.add(new Personnel("Johnathan", "Sykes", "hello"));
-//            amis.add(new Ami("Nicolas", "Van de Kampf", Color.black, true, Sport.FOOTBALL));
-//            amis.add(new Ami("Damien", "Cuthbert", Color.cyan, true, Sport.RIEN));
-//            amis.add(new Ami("Corinne", "Valance", Color.blue, false, Sport.NATATION));
-//            amis.add(new Ami("Emilie", "Schrödinger", Color.magenta, false, Sport.FOOTBALL));
-//            amis.add(new Ami("Delphine", "Duke", Color.yellow, false, Sport.TENNIS));
-//            amis.add(new Ami("Eric", "Trump", Color.pink, true, Sport.FOOTBALL));
+        PersonnelManager personnelManager;
+        personnelManager = PersonnelManager.getInstance();
+        List<Personnel> personnelList = personnelManager.selectAllPers();
+        for(Personnel pers : personnelList){
+            pers.setMdp("********");
+            personnel.add(pers);
+        }
     }
 
     public int getRowCount() {

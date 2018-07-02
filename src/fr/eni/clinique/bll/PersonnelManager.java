@@ -8,6 +8,7 @@ import fr.eni.clinique.dao.DAOfactory;
 import fr.eni.clinique.dao.PersonnelDAO;
 import fr.eni.clinique.dao.RdvDAO;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -69,15 +70,15 @@ public class PersonnelManager {
         }
     }
 
-    public void selectAllPers(Personnel p1) throws BLLException {
-        if(p1.getId() != null){
-            throw new BLLException("Personnel deja existant.");
-        }
+    public List<Personnel> selectAllPers() throws BLLException {
+        List<Personnel> personnelList = new ArrayList<>();
         try{
-            personnelDAO.insert(p1);
+
+            personnelList = personnelDAO.selectAll();
         }catch (DALException e){
-            throw new BLLException("Echec insertion pers - ",e);
+            throw new BLLException("Echec recupération pers - ",e);
         }
+        return personnelList;
     }
 
     public Personnel selectOneByNameAndMotPasse(String name, String mdp) throws BLLException {

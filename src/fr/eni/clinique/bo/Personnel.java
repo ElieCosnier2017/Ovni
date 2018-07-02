@@ -8,6 +8,10 @@ public class Personnel {
     private String role;
     private boolean archive;
 
+    public Personnel(){
+
+    }
+
     public Personnel(int id, String nom, String role, boolean archive) {
         this.id = id;
         this.nom = nom;

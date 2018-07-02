@@ -37,8 +37,6 @@ public class AppliTestDAL {
         }
         Rdv rdv = new Rdv(1,date,2);
 
-        Animal a1 = new Animal("YEAHBOIIIIIIIIIIIIIIIIII", 'M', "Bleu","juif", "Chien", c1.getCodeClient().longValue(),"112145455","aucun", true);
-
         try {
 
             //CLIENTS -------------------
@@ -136,6 +134,8 @@ public class AppliTestDAL {
 
 
             //Animal
+            Animal a1 = new Animal("YEAHBOIIIIIIIIIIIIIIIIII", 'M', "Bleu","juif", "Chien", c1.getCodeClient().longValue(),"112145455","aucun", true);
+
             System.out.println("Ajout de Animal : ----");
             animalDAO.insert(a1);
             System.out.println(a1.toString());

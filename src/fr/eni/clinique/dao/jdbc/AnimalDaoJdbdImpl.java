@@ -6,6 +6,7 @@ import fr.eni.clinique.dao.DALException;
 import fr.eni.clinique.dao.JdbcTools;
 
 import java.sql.*;
+import java.util.List;
 
 public class AnimalDaoJdbdImpl implements AnimalDAO {
 
@@ -13,6 +14,11 @@ public class AnimalDaoJdbdImpl implements AnimalDAO {
     private static final String sqlUpdateAni = "UPDATE Animal SET NomAnimal=?,Sexe=?,Couleur=?,Race=?, Espece=?, CodeClient=?, Tatouage=?, Antecedents=?, Archive=? WHERE CodeAnimal=?";
     private static final String sqlDeleteAni = "UPDATE Clients SET Archive=1 WHERE CodeAnimal=?";
 
+
+    @Override
+    public List<Animal> selectAll() throws DALException {
+        return null;
+    }
 
     @Override
     public void insert(Animal a1) throws DALException {

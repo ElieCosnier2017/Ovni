@@ -15,7 +15,7 @@ public class PersonnelDaoJdbcImpl implements PersonnelDAO {
     private static final String sqlUpdatePers = "UPDATE Personnels set Nom=?, MotPasse=?, Role=?, Archive=? WHERE CodePers=?";
     private static final String sqlUpdateMotPasse = "UPDATE Personnels set MotPasse=? Where CodePers=?";
     private static final String sqlDeletePers = "UPDATE Personnels SET Archive=1 WHERE CodePers=?";
-    private static final String sqlSelectAllPers = "Select CodePers, Nom, Role, Archive from Personnels WHERE Archive=0";
+    private static final String sqlSelectAllPers = "Select CodePers, Nom, MotPasse, Role, Archive from Personnels WHERE Archive=0";
     private static final String sqlSelectPersbyCodePers = "Select CodePers, Nom, Role, Archive from Personnels where CodePers=?";
     private static final String sqlSelectPersbyNameAndMdp = "Select CodePers, Nom, Role, Archive from Personnels where Nom=? And MotPasse=?";
 

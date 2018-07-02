@@ -9,6 +9,7 @@ import javax.swing.*;
 import javax.swing.border.TitledBorder;
 
 import com.toedter.calendar.JDateChooser;
+import fr.eni.clinique.bll.BLLException;
 import fr.eni.clinique.bo.Personnel;
 
 
@@ -22,8 +23,7 @@ public class GeneralFrame extends JFrame implements ActionListener{
 	private JPanel containerLogin;
 	private JTable table;
 
-//	public GeneralFrame(Personnel personnel) {
-	public GeneralFrame() {
+	public GeneralFrame(Personnel personnel) throws BLLException {
 
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(0, 0, 1200, 720);
@@ -39,9 +39,8 @@ public class GeneralFrame extends JFrame implements ActionListener{
 
 		//Frame interne exemple
 //		desktopPane.add(getAgenda());
-//		String role = personnel.getRole();
+		String role = personnel.getRole();
 
-		String role = "sec";
 		if (role.equals("adm")) {
 			System.out.println("administrateur");
 			this.panelPersonnel();
@@ -106,7 +105,7 @@ public class GeneralFrame extends JFrame implements ActionListener{
 		desktopPane.add(table);
 	}
 
-	public void panelPersonnel() {
+	public void panelPersonnel() throws BLLException {
         this.setTitle("Gestion du personnel - Ani' Forme");
 
         JPanel panel = new JPanel();
@@ -412,20 +411,4 @@ public class GeneralFrame extends JFrame implements ActionListener{
 		}
 		return agenda;
 	}
-
-
-
-	// Lancement de l'application
-	public static void main(String[] args) {
-		SwingUtilities.invokeLater(new Runnable() {
-
-			@Override
-			public void run() {
-				GeneralFrame ecran = new GeneralFrame();
-				ecran.setVisible(true);
-
-
-			}
-		});
-	}
-	}
+}
