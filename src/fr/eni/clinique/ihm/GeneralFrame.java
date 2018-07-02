@@ -383,7 +383,6 @@ public class GeneralFrame extends JFrame implements ActionListener{
 			break;
 
 		case "addpersonnel":
-			System.out.println("addclient");
 			setPersonnel().setVisible(true);
 			break;
 
