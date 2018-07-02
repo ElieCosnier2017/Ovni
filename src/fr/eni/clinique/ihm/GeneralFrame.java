@@ -22,7 +22,8 @@ public class GeneralFrame extends JFrame implements ActionListener{
 	private JPanel containerLogin;
 	private JTable table;
 
-	public GeneralFrame(Personnel personnel) {
+//	public GeneralFrame(Personnel personnel) {
+	public GeneralFrame() {
 
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(0, 0, 1200, 720);
@@ -38,14 +39,16 @@ public class GeneralFrame extends JFrame implements ActionListener{
 
 		//Frame interne exemple
 //		desktopPane.add(getAgenda());
-		String role = personnel.getRole();
+//		String role = personnel.getRole();
 
+		String role = "sec";
 		if (role.equals("adm")) {
 			System.out.println("administrateur");
 			this.panelPersonnel();
 		} else if (role.equals("sec")) {
 			System.out.println("Secretaire");
-			this.panelRdv();
+//			this.panelRdv();
+			this.panelClient();
 		} else if (role.equals("vet")) {
 			System.out.println("Veterinaire");
 			this.panelAgenda();
@@ -129,21 +132,25 @@ public class GeneralFrame extends JFrame implements ActionListener{
         btnSupprimer.setBounds(462, 11, 120, 120);
         panel.add(btnSupprimer);
 
+
+		JLabel lblListPersonnel = new JLabel("Liste du personnel");
+		lblListPersonnel.setFont(new Font("Calibri", Font.BOLD, 14));
+		lblListPersonnel.setBounds(43, 170, 200, 20);
+		desktopPane.add(lblListPersonnel);
+
 		JPanel panel2 = new JPanel();
 		panel2.setBounds(43, 200, 1081, 400);
 		panel2.setBorder(BorderFactory.createLineBorder(Color.black, 1));
 
-
-
-
-//		panel2.add(new JScrollPane(table));
-		JScrollPane scrollPane = new JScrollPane();
-		scrollPane.setBounds(43, 200, 1081, 400);
-		desktopPane.add(panel2);
-
 		table = new JTable(new TablePersonnelModel());
+		table.setShowGrid(false);
 		table.setBounds(43, 200, 1081, 400);
-		desktopPane.add(table);
+
+		JScrollPane scrollPane2 = new JScrollPane(table);
+		scrollPane2.setAutoscrolls(true);
+
+		scrollPane2.setBounds(43, 200, 1081, 400);
+		desktopPane.add(scrollPane2);
 
 	}
 
@@ -181,6 +188,152 @@ public class GeneralFrame extends JFrame implements ActionListener{
 		table = new JTable();
 		table.setBounds(1118, 140, -1074, 494);
 		desktopPane.add(table);
+	}
+
+
+	public void panelClient() {
+
+		JTable table;
+		JTextField textField;
+		JTextField textField_1;
+		JTextField textField_2;
+		JTextField textField_3;
+		JTextField textField_4;
+		JTextField textField_5;
+		JTextField textField_6;
+
+		this.setTitle("Gestion des Clients - Ani' Forme");
+
+		JPanel panel = new JPanel();
+		panel.setBounds(43, 11, 1081, 142);
+		panel.setBorder(BorderFactory.createLineBorder(Color.black, 1));
+
+		desktopPane.add(panel);
+		panel.setLayout(null);
+
+		JButton btnNewButton = new JButton("Ajouter");
+		btnNewButton.setIcon(new ImageIcon(this.getClass().getResource("/fr/eni/clinique/Ressources/add.jpg")));
+		btnNewButton.setBounds(425, 11, 120, 120);
+		panel.add(btnNewButton);
+
+		JButton btnRinitialiser = new JButton("Valider");
+		btnRinitialiser.setSelectedIcon(null);
+		btnRinitialiser.setIcon(new ImageIcon(this.getClass().getResource("/fr/eni/clinique/Ressources/edit.png")));
+		btnRinitialiser.setBounds(800, 11, 120, 120);
+		panel.add(btnRinitialiser);
+
+		JButton btnSupprimer = new JButton("Supprimer");
+		btnSupprimer.setIcon(new ImageIcon(this.getClass().getResource("/fr/eni/clinique/Ressources/del.jpg")));
+		btnSupprimer.setBounds(569, 11, 120, 120);
+		panel.add(btnSupprimer);
+
+		JButton btnAnnuler = new JButton("Annuler");
+		btnAnnuler.setBounds(934, 11, 120, 120);
+		panel.add(btnAnnuler);
+
+		JButton btnRechercher = new JButton("Rechercher");
+		btnRechercher.setBounds(25, 11, 120, 120);
+		panel.add(btnRechercher);
+
+
+		String[] entetes = {"Prénom", "Nom", "Couleur favorite", "Homme"};
+
+		Object[][] donnees = {
+				{"Johnathan", "Sykes", Color.red, true},
+				{"Nicolas", "Van de Kampf", Color.black, true},
+				{"Damien", "Cuthbert", Color.cyan, true},
+				{"Corinne", "Valance", Color.blue, false},
+				{"Emilie", "Schrödinger", Color.magenta, false},
+				{"Delphine", "Duke", Color.yellow, false},
+				{"Eric", "Trump", Color.pink, true}
+		};
+
+
+
+		JPanel panel2 = new JPanel();
+		panel2.setBounds(43, 200, 1081, 400);
+		panel2.setBorder(BorderFactory.createLineBorder(Color.black, 1));
+
+		table = new JTable(donnees,entetes);
+		table.setShowGrid(false);
+		table.setBounds(43, 200, 1081, 400);
+
+		JScrollPane scrollPane2 = new JScrollPane(table);
+		scrollPane2.setAutoscrolls(true);
+
+		scrollPane2.setBounds(485, 203, 639, 177);
+		desktopPane.add(scrollPane2);
+
+		JLabel lblCode = new JLabel("Code");
+		lblCode.setBounds(47, 210, 46, 14);
+		desktopPane.add(lblCode);
+
+		textField = new JTextField();
+		textField.setBounds(137, 207, 203, 20);
+		desktopPane.add(textField);
+		textField.setColumns(10);
+
+		textField_1 = new JTextField();
+		textField_1.setColumns(10);
+		textField_1.setBounds(137, 254, 203, 20);
+		desktopPane.add(textField_1);
+
+		JLabel lblNom = new JLabel("Nom");
+		lblNom.setBounds(47, 257, 46, 14);
+		desktopPane.add(lblNom);
+
+		JLabel lblPrnom = new JLabel("Pr\u00E9nom");
+		lblPrnom.setBounds(43, 302, 46, 14);
+		desktopPane.add(lblPrnom);
+
+		JLabel lblAdresse = new JLabel("Adresse");
+		lblAdresse.setBounds(43, 351, 46, 14);
+		desktopPane.add(lblAdresse);
+
+		JLabel lblCodePostal = new JLabel("Code Postal");
+		lblCodePostal.setBounds(43, 445, 46, 14);
+		desktopPane.add(lblCodePostal);
+
+		JLabel lblVille = new JLabel("Ville");
+		lblVille.setBounds(43, 492, 46, 14);
+		desktopPane.add(lblVille);
+
+		textField_2 = new JTextField();
+		textField_2.setColumns(10);
+		textField_2.setBounds(137, 348, 203, 20);
+		desktopPane.add(textField_2);
+
+		textField_3 = new JTextField();
+		textField_3.setColumns(10);
+		textField_3.setBounds(137, 299, 203, 20);
+		desktopPane.add(textField_3);
+
+		textField_4 = new JTextField();
+		textField_4.setColumns(10);
+		textField_4.setBounds(137, 442, 203, 20);
+		desktopPane.add(textField_4);
+
+		textField_5 = new JTextField();
+		textField_5.setColumns(10);
+		textField_5.setBounds(137, 489, 203, 20);
+		desktopPane.add(textField_5);
+
+		textField_6 = new JTextField();
+		textField_6.setColumns(10);
+		textField_6.setBounds(137, 395, 203, 20);
+		desktopPane.add(textField_6);
+
+		JButton btnNewButton_1 = new JButton("New button");
+		btnNewButton_1.setBounds(814, 395, 71, 64);
+		desktopPane.add(btnNewButton_1);
+
+		JButton button = new JButton("New button");
+		button.setBounds(921, 395, 71, 64);
+		desktopPane.add(button);
+
+		JButton button_1 = new JButton("New button");
+		button_1.setBounds(1025, 395, 71, 64);
+		desktopPane.add(button_1);
 	}
 
 
@@ -259,4 +412,20 @@ public class GeneralFrame extends JFrame implements ActionListener{
 		}
 		return agenda;
 	}
-}
+
+
+
+	// Lancement de l'application
+	public static void main(String[] args) {
+		SwingUtilities.invokeLater(new Runnable() {
+
+			@Override
+			public void run() {
+				GeneralFrame ecran = new GeneralFrame();
+				ecran.setVisible(true);
+
+
+			}
+		});
+	}
+	}

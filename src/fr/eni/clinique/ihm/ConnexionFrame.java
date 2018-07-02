@@ -101,8 +101,8 @@ public class ConnexionFrame extends JFrame {
                 }else {
                     Personnel personnel = personnelManager.selectOneByNameAndMotPasse(getUsernameField().getText(), getPasswordField().getText());
                     this.dispose();
-                    GeneralFrame cnx = new GeneralFrame(personnel);
-                    cnx.setVisible(true);
+//                    GeneralFrame cnx = new GeneralFrame(personnel);
+//                    cnx.setVisible(true);
                 }
             } catch (BLLException e1) {
                 e1.printStackTrace();
