@@ -194,7 +194,6 @@ public class GeneralFrame extends JFrame implements ActionListener{
 
 
 	public void panelClient() {
-
 		this.setTitle("Gestion des Clients - Ani' Forme");
 
 		JPanel panel = new JPanel();
@@ -228,24 +227,11 @@ public class GeneralFrame extends JFrame implements ActionListener{
 		btnRechercher.setBounds(25, 11, 120, 120);
 		panel.add(btnRechercher);
 
-
-		String[] entetes = {"Prénom", "Nom", "Couleur favorite", "Homme"};
-
-		Object[][] donnees = {
-				{"Johnathan", "Sykes", Color.red, true},
-				{"Nicolas", "Van de Kampf", Color.black, true},
-				{"Damien", "Cuthbert", Color.cyan, true},
-				{"Corinne", "Valance", Color.blue, false},
-				{"Emilie", "Schrödinger", Color.magenta, false},
-				{"Delphine", "Duke", Color.yellow, false},
-				{"Eric", "Trump", Color.pink, true}
-		};
-
 		JPanel panel2 = new JPanel();
 		panel2.setBounds(43, 200, 1081, 400);
 		panel2.setBorder(BorderFactory.createLineBorder(Color.black, 1));
 
-		table = new JTable(donnees,entetes);
+		table = new JTable(new TableClientModel());
 		table.setShowGrid(false);
 		table.setBounds(43, 200, 1081, 400);
 
@@ -256,62 +242,62 @@ public class GeneralFrame extends JFrame implements ActionListener{
 		desktopPane.add(scrollPane2);
 
 		JLabel lblCode = new JLabel("Code");
-		lblCode.setBounds(47, 210, 46, 14);
+		lblCode.setBounds(74, 210, 89, 14);
 		desktopPane.add(lblCode);
 
 		JTextField textField = new JTextField();
-		textField.setBounds(137, 207, 203, 20);
+		textField.setBounds(191, 207, 203, 20);
 		desktopPane.add(textField);
 		textField.setColumns(10);
 
 		JTextField textField_1 = new JTextField();
 		textField_1.setColumns(10);
-		textField_1.setBounds(137, 254, 203, 20);
+		textField_1.setBounds(191, 254, 203, 20);
 		desktopPane.add(textField_1);
 
 		JLabel lblNom = new JLabel("Nom");
-		lblNom.setBounds(47, 257, 46, 14);
+		lblNom.setBounds(74, 257, 89, 14);
 		desktopPane.add(lblNom);
 
 		JLabel lblPrnom = new JLabel("Pr\u00E9nom");
-		lblPrnom.setBounds(43, 302, 46, 14);
+		lblPrnom.setBounds(74, 302, 89, 14);
 		desktopPane.add(lblPrnom);
 
 		JLabel lblAdresse = new JLabel("Adresse");
-		lblAdresse.setBounds(43, 351, 46, 14);
+		lblAdresse.setBounds(74, 351, 89, 14);
 		desktopPane.add(lblAdresse);
 
 		JLabel lblCodePostal = new JLabel("Code Postal");
-		lblCodePostal.setBounds(43, 445, 46, 14);
+		lblCodePostal.setBounds(74, 445, 89, 14);
 		desktopPane.add(lblCodePostal);
 
 		JLabel lblVille = new JLabel("Ville");
-		lblVille.setBounds(43, 492, 46, 14);
+		lblVille.setBounds(74, 492, 89, 14);
 		desktopPane.add(lblVille);
 
 		JTextField textField_2 = new JTextField();
 		textField_2.setColumns(10);
-		textField_2.setBounds(137, 348, 203, 20);
+		textField_2.setBounds(191, 348, 203, 20);
 		desktopPane.add(textField_2);
 
 		JTextField textField_3 = new JTextField();
 		textField_3.setColumns(10);
-		textField_3.setBounds(137, 299, 203, 20);
+		textField_3.setBounds(191, 299, 203, 20);
 		desktopPane.add(textField_3);
 
 		JTextField textField_4 = new JTextField();
 		textField_4.setColumns(10);
-		textField_4.setBounds(137, 442, 203, 20);
+		textField_4.setBounds(191, 442, 203, 20);
 		desktopPane.add(textField_4);
 
 		JTextField textField_5 = new JTextField();
 		textField_5.setColumns(10);
-		textField_5.setBounds(137, 489, 203, 20);
+		textField_5.setBounds(191, 489, 203, 20);
 		desktopPane.add(textField_5);
 
 		JTextField textField_6 = new JTextField();
 		textField_6.setColumns(10);
-		textField_6.setBounds(137, 395, 203, 20);
+		textField_6.setBounds(191, 395, 203, 20);
 		desktopPane.add(textField_6);
 
 		JButton btnNewButton_1 = new JButton("New button");
@@ -325,6 +311,8 @@ public class GeneralFrame extends JFrame implements ActionListener{
 		JButton button_1 = new JButton("New button");
 		button_1.setBounds(1025, 395, 71, 64);
 		desktopPane.add(button_1);
+
+
 	}
 
 
