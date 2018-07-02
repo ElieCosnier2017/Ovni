@@ -9,14 +9,11 @@ import java.util.List;
 
 public class TablePersonnelModel extends AbstractTableModel {
     private final List<Personnel> personnel = new ArrayList<>();
-
+    private final PersonnelManager personnelManager = PersonnelManager.getInstance();
     private final String[] entetes = {"Nom", "Fonction", "Mot de passe"};
 
     public TablePersonnelModel() throws BLLException {
         super();
-
-        PersonnelManager personnelManager;
-        personnelManager = PersonnelManager.getInstance();
         List<Personnel> personnelList = personnelManager.selectAllPers();
         for(Personnel pers : personnelList){
             pers.setMdp("********");
@@ -49,15 +46,21 @@ public class TablePersonnelModel extends AbstractTableModel {
         }
     }
 
-    public void addAmi(Personnel ami) {
-        personnel.add(ami);
+    public void addPersonnel(Personnel pers) {
+        personnel.add(pers);
 
         fireTableRowsInserted(personnel.size() - 1, personnel.size() - 1);
     }
 
-    public void removeAmi(int rowIndex) {
-        personnel.remove(rowIndex);
+    public void removePersonnel(int rowIndex) throws BLLException {
+        String name;
+        String role;
+        name = getValueAt(rowIndex,0).toString();
+        role = getValueAt(rowIndex, 1).toString();
+        Personnel pers = personnelManager.selectOneByNameAndRole(name,role);
+        personnel.remove(pers);
+        personnelManager.deletePers(pers);
 
-        fireTableRowsDeleted(rowIndex, rowIndex);
+
     }
 }

@@ -8,13 +8,18 @@ public class Personnel {
     private String role;
     private boolean archive;
 
-    public Personnel(){
-
-    }
 
     public Personnel(int id, String nom, String role, boolean archive) {
         this.id = id;
         this.nom = nom;
+        this.role = role;
+        this.archive = archive;
+    }
+
+    public Personnel(Integer id, String nom, String mdp, String role, boolean archive) {
+        this.id = id;
+        this.nom = nom;
+        this.mdp = mdp;
         this.role = role;
         this.archive = archive;
     }

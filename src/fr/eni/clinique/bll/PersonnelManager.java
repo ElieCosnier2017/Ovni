@@ -64,6 +64,8 @@ public class PersonnelManager {
                 if(!futureRdv){
                     personnelDAO.delete(p1);
                 }
+            }else {
+                personnelDAO.delete(p1);
             }
         }catch (DALException e){
             throw new BLLException("Echec suppression pers - ",e);
@@ -88,6 +90,20 @@ public class PersonnelManager {
         } else {
             try {
                 personnel = personnelDAO.selectOneByNameAndMotPasse(name, mdp);
+            } catch (DALException e) {
+                throw new BLLException("Echec recuperation pers - ",e);
+            }
+        }
+        return personnel;
+    }
+
+    public Personnel selectOneByNameAndRole(String name, String role) throws BLLException {
+        Personnel personnel = null;
+        if(name.equals(null)){
+            throw new BLLException("Veuillez spécifier un nom svp.");
+        } else {
+            try {
+                personnel = personnelDAO.selectOneByNameAndRole(name, role);
             } catch (DALException e) {
                 throw new BLLException("Echec recuperation pers - ",e);
             }

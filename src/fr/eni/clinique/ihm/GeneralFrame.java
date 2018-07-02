@@ -22,6 +22,7 @@ public class GeneralFrame extends JFrame implements ActionListener{
 	private AgendaFrame agenda;
 	private JPanel containerLogin;
 	private JTable table;
+	private TablePersonnelModel tablePersonnelModel = new TablePersonnelModel();
 
 	public GeneralFrame(Personnel personnel) throws BLLException {
 
@@ -127,6 +128,9 @@ public class GeneralFrame extends JFrame implements ActionListener{
         panel.add(btnRinitialiser);
 
         JButton btnSupprimer = new JButton("Supprimer");
+        btnSupprimer.setActionCommand("deletePersonnel");
+        btnSupprimer.addActionListener(this);
+
         btnSupprimer.setIcon(new ImageIcon(this.getClass().getResource("/fr/eni/clinique/Ressources/del.jpg")));
         btnSupprimer.setBounds(462, 11, 120, 120);
         panel.add(btnSupprimer);
@@ -386,8 +390,13 @@ public class GeneralFrame extends JFrame implements ActionListener{
 			getAgenda().setVisible(true);
 //			System.exit(0);
 			break;
+		case "deletePersonnel":
+			removePersonnel();
+            table.updateUI();
 
-		default:
+            break;
+
+        default:
 			System.out.println("Probleme e=" + e);
 		}
 	}
@@ -411,4 +420,22 @@ public class GeneralFrame extends JFrame implements ActionListener{
 		}
 		return agenda;
 	}
+
+	private void removePersonnel() {
+        int selection = table.getSelectedRow();
+
+        System.out.println(selection);
+        try {
+            if(selection >= 0) {
+                tablePersonnelModel.removePersonnel(selection);
+                tablePersonnelModel = new TablePersonnelModel();
+                table.setModel(tablePersonnelModel);
+                table.repaint();
+                desktopPane.repaint();
+            }
+
+        } catch (BLLException e) {
+            e.printStackTrace();
+        }
+    }
 }
