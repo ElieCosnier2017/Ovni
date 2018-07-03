@@ -45,6 +45,13 @@ public class Client {
     }
 
 
+    public Client(String nomClient, String prenomClient, String codePostal, String ville) {
+        this.nomClient = nomClient;
+        this.prenomClient = prenomClient;
+        this.codePostal = codePostal;
+        this.ville = ville;
+    }
+
     public Integer getCodeClient() {
         return codeClient;
     }

@@ -1,18 +1,24 @@
 package fr.eni.clinique.ihm;
 
 import fr.eni.clinique.bll.BLLException;
+import fr.eni.clinique.bll.ClientManager;
 import fr.eni.clinique.bll.PersonnelManager;
-import fr.eni.clinique.bo.Personnel;
+import fr.eni.clinique.bo.Client;
 
 import javax.swing.*;
+import javax.swing.table.TableModel;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
+import java.util.List;
 
 public class RechercheFrame extends JInternalFrame implements ActionListener {
     private JTextField nom;
     private JTextField motPasse;
     private JComboBox comboBox;
+    private JTextField recherche;
+    private JTable table;
 
     public RechercheFrame() throws BLLException {
         //Ecran avec un titre, redimensionable, fermable, agrandissable, iconifiable
@@ -29,17 +35,19 @@ public class RechercheFrame extends JInternalFrame implements ActionListener {
         getContentPane().add(panel);
         panel.setLayout(null);
 
-        JTextField textField = new JTextField();
-        textField.setBounds(46, 11, 454, 52);
-        panel.add(textField);
-        textField.setColumns(10);
+        recherche = new JTextField();
+        recherche.setBounds(46, 11, 454, 52);
+        panel.add(recherche);
+        recherche.setColumns(10);
 
         JButton btnRecherche = new JButton("Rechercher");
+        btnRecherche.setActionCommand("recherche");
+        btnRecherche.addActionListener(this);
         btnRecherche.setIcon(new ImageIcon(this.getClass().getResource("/fr/eni/clinique/Ressources/search.png")));
         btnRecherche.setBounds(530, 11, 120, 48);
         panel.add(btnRecherche);
 
-        JTable table = new JTable(new TableClientModel());
+        table = new JTable(new TableClientModel());
         table.setShowGrid(false);
         table.setBounds(43, 200, 1081, 400);
 
@@ -55,16 +63,33 @@ public class RechercheFrame extends JInternalFrame implements ActionListener {
     @Override
     public void actionPerformed(ActionEvent e) {
         switch (e.getActionCommand()) {
-            case "valider":
-                System.out.println("yoValider");
-                break;
-            case "annuler":
-                System.out.println("yoAnnuler");
-                this.dispose();
+            case "recherche":
+                rechercheCli();
                 break;
             default:
                 System.out.println("Probleme e=" + e);
         }
+    }
+
+    private void rechercheCli(){
+        String name = recherche.getText();
+        System.out.println(name);
+        ClientManager clientManager = ClientManager.getInstance();
+        List<Client> clientList = new ArrayList<>();
+        try {
+            clientList = clientManager.findClientsByName(name);
+        } catch (BLLException e) {
+            e.printStackTrace();
+        }
+
+        try {
+            System.out.println(clientList.size());
+            TableClientModel tableClientModel = new TableClientModel(clientList);
+            table.setModel(tableClientModel);
+        } catch (BLLException e) {
+            e.printStackTrace();
+        }
+
     }
 
 

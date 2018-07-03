@@ -10,15 +10,23 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class TableClientModel extends AbstractTableModel {
-    private final List<Client> client = new ArrayList<>();
+    private List<Client> client = new ArrayList<>();
     private final ClientManager clientManager = ClientManager.getInstance();
     private final String[] entetes = {"Nom", "Prénom", "Code Postal", "Mot de passe"};
 
     public TableClientModel() throws BLLException {
         super();
+        List<Client> clientList = clientManager.getAllClients();
+        for(Client cli : clientList){
+            System.out.println(cli.toString());
+            client.add(cli);
+        }
+    }
 
-        List<Client> personnelList = clientManager.getAllClients();
-        for(Client cli : personnelList){
+    public TableClientModel(List<Client> clientList) throws BLLException {
+        super();
+        for(Client cli : clientList){
+            System.out.println(cli.toString());
             client.add(cli);
         }
     }

@@ -18,6 +18,7 @@ public class ClientDaoJdbcImpl implements ClientDAO {
     private static final String sqlSelectAll = "SELECT * FROM Clients WHERE Archive=0 ORDER BY NomClient";
     private static final String sqlSelectOne = "SELECT CodeClient,NomClient,PrenomClient,Adresse1,Adresse2, CodePostal, Ville, NumTel, Assurance, Email, Remarque, Archive FROM Clients Where CodeClient=?";
     private static final String sqlSelectOneByName = "SELECT CodeClient,NomClient,PrenomClient,Adresse1,Adresse2, CodePostal, Ville, NumTel, Assurance, Email, Remarque, Archive FROM Clients Where NomClient=?";
+    private static final String sqlSelectAllByName = "SELECT NomClient, PrenomClient, CodePostal, Ville FROM Clients WHERE Archive=0 AND NomClient like ? ORDER BY NomClient";
 
 
     @Override
@@ -247,5 +248,47 @@ public class ClientDaoJdbcImpl implements ClientDAO {
             }
         }
         return client;
+    }
+
+    @Override
+    public List<Client> findByName(String name) throws DALException {
+        Connection cnx = null;
+        ResultSet rs = null;
+        PreparedStatement rqt = null;
+        Client client = null;
+        List<Client> clientList = new ArrayList<>();
+        try {
+            cnx = JdbcTools.getConnection();
+            rqt = cnx.prepareStatement(sqlSelectAllByName);
+            if(name.trim().isEmpty()){
+                rqt.setString(1, name);
+
+            }else
+                rqt.setString(1, name + '%');
+            rs = rqt.executeQuery();
+
+            while (rs.next()){
+                client = new Client(
+                        rs.getString("NomClient"),
+                        rs.getString("PrenomClient"),
+                        rs.getString("CodePostal"),
+                        rs.getString("Ville"));
+                clientList.add(client);
+            }
+        }catch (SQLException e){
+            throw new DALException("Erreur récupération Client lors de la connection", e);
+        } finally {
+            try {
+                if (rqt != null) {
+                    rqt.close();
+                }
+                if (cnx != null) {
+                    cnx.close();
+                }
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }
+        return clientList;
     }
 }
