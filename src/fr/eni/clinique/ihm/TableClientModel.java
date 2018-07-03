@@ -53,7 +53,7 @@ public class TableClientModel extends AbstractTableModel {
     public void addAmi(Client ami) {
         client.add(ami);
 
-        fireTableRowsInserted(client.size() - 1, clients.size() - 1);
+        fireTableRowsInserted(client.size() - 1, client.size() - 1);
     }
 
     public void removeAmi(int rowIndex) {
