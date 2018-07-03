@@ -10,20 +10,21 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class TableClientModel extends AbstractTableModel {
-    private final List<Client> clients = new ArrayList<>();
+    private final List<Client> client = new ArrayList<>();
     private final ClientManager clientManager = ClientManager.getInstance();
-    private final String[] entetes = {"  ", "Fonction", "Mot de passe"};
+    private final String[] entetes = {"Nom", "Prénom", "Code Postal", "Mot de passe"};
 
     public TableClientModel() throws BLLException {
         super();
-        List<Client> clientList = clientManager.getAllClients();
-        for(Client cli : clientList){
-            clients.add(cli);
+
+        List<Client> personnelList = clientManager.getAllClients();
+        for(Client cli : personnelList){
+            client.add(cli);
         }
     }
 
     public int getRowCount() {
-        return clients.size();
+        return client.size();
     }
 
     public int getColumnCount() {
@@ -36,25 +37,27 @@ public class TableClientModel extends AbstractTableModel {
 
     public Object getValueAt(int rowIndex, int columnIndex) {
         switch (columnIndex) {
-//            case 0:
-//                return clients.get(rowIndex).g();
-//            case 1:
-//                return clients.get(rowIndex).getRole();
-//            case 2:
-//                return clients.get(rowIndex).getMdp();
+            case 0:
+                return client.get(rowIndex).getNomClient();
+            case 1:
+                return client.get(rowIndex).getPrenomClient();
+            case 2:
+                return client.get(rowIndex).getCodePostal();
+            case 3:
+                return client.get(rowIndex).getVille();
             default:
                 return null; //Ne devrait jamais arriver
         }
     }
 
     public void addAmi(Client ami) {
-        clients.add(ami);
+        client.add(ami);
 
-        fireTableRowsInserted(clients.size() - 1, clients.size() - 1);
+        fireTableRowsInserted(client.size() - 1, clients.size() - 1);
     }
 
     public void removeAmi(int rowIndex) {
-        clients.remove(rowIndex);
+        client.remove(rowIndex);
 
         fireTableRowsDeleted(rowIndex, rowIndex);
     }
