@@ -19,7 +19,6 @@ public class AddPersonnelFrame extends JInternalFrame implements ActionListener 
         //Ecran avec un titre, redimensionable, fermable, agrandissable, iconifiable
         super("Ajouter un personnel", false, true, true,false);
 
-
         this.setDefaultCloseOperation(HIDE_ON_CLOSE);
         setBounds(100, 100,400, 300);
         getContentPane().setLayout(null);
@@ -74,11 +73,12 @@ public class AddPersonnelFrame extends JInternalFrame implements ActionListener 
     public void actionPerformed(ActionEvent e) {
         switch (e.getActionCommand()) {
             case "valider":
-                System.out.println("yoValider");
+                System.out.println("Valider");
                 ajouterPersonnel();
+                this.dispose();
                 break;
             case "annuler":
-                System.out.println("yoAnnuler");
+                System.out.println("Annuler");
                 this.dispose();
                 break;
             default:
@@ -91,8 +91,11 @@ public class AddPersonnelFrame extends JInternalFrame implements ActionListener 
         String motDePasse = motPasse.getText();
         String role = comboBox.getSelectedItem().toString();
         Personnel personnel = new Personnel(name,motDePasse,role);
+
         try {
-            personnelManager.insertPers(personnel);
+            PersonnelManager.getInstance().insertPers(personnel);
+            TablePersonnelModel tablePersonnelModel = new TablePersonnelModel();
+            tablePersonnelModel.fireTableDataChanged();
         } catch (BLLException e) {
             e.printStackTrace();
         }

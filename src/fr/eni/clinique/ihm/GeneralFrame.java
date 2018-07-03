@@ -41,7 +41,6 @@ public class GeneralFrame extends JFrame implements ActionListener{
 		setJMenuBar(getMenuBarre());
 
 		//Frame interne exemple
-		desktopPane.add(setPersonnel());
 		desktopPane.add(resetPersonnel());
 		desktopPane.add(getAgenda());
 		String role = personnel.getRole();
@@ -120,20 +119,20 @@ public class GeneralFrame extends JFrame implements ActionListener{
         desktopPane.add(panel);
         panel.setLayout(null);
 
-        JButton btnNewButton = new JButton("Ajouter");
-		btnNewButton.setActionCommand("addpersonnel");
-		btnNewButton.addActionListener(this);
-        btnNewButton.setIcon(new ImageIcon(this.getClass().getResource("/fr/eni/clinique/Ressources/add.jpg")));
-        btnNewButton.setBounds(114, 11, 120, 120);
-        panel.add(btnNewButton);
+        JButton btnAjouter = new JButton("Ajouter");
+		btnAjouter.setActionCommand("addpersonnel");
+		btnAjouter.addActionListener(this);
+        btnAjouter.setIcon(new ImageIcon(this.getClass().getResource("/fr/eni/clinique/Ressources/add.jpg")));
+        btnAjouter.setBounds(114, 11, 120, 120);
+        panel.add(btnAjouter);
 
-        JButton btnRinitialiser = new JButton("R\u00E9initialiser");
-		btnRinitialiser.setActionCommand("resetpersonnel");
-		btnRinitialiser.addActionListener(this);
-        btnRinitialiser.setSelectedIcon(new ImageIcon(this.getClass().getResource("/fr/eni/clinique/Ressources/edit.png")));
-        btnRinitialiser.setIcon(new ImageIcon(this.getClass().getResource("/fr/eni/clinique/Ressources/edit.png")));
-        btnRinitialiser.setBounds(800, 11, 120, 120);
-        panel.add(btnRinitialiser);
+        JButton btnReinitialiser = new JButton("R\u00E9initialiser");
+		btnReinitialiser.setActionCommand("resetpersonnel");
+		btnReinitialiser.addActionListener(this);
+        btnReinitialiser.setSelectedIcon(new ImageIcon(this.getClass().getResource("/fr/eni/clinique/Ressources/edit.png")));
+        btnReinitialiser.setIcon(new ImageIcon(this.getClass().getResource("/fr/eni/clinique/Ressources/edit.png")));
+        btnReinitialiser.setBounds(800, 11, 120, 120);
+        panel.add(btnReinitialiser);
 
         JButton btnSupprimer = new JButton("Supprimer");
         btnSupprimer.setActionCommand("deletePersonnel");
@@ -197,7 +196,7 @@ public class GeneralFrame extends JFrame implements ActionListener{
 	}
 
 
-	public void panelClient() {
+	public void panelClient() throws BLLException {
 		this.setTitle("Gestion des Clients - Ani' Forme");
 
 		JPanel panel = new JPanel();
@@ -371,16 +370,15 @@ public class GeneralFrame extends JFrame implements ActionListener{
 			break;
 
 		case "addpersonnel":
-			setPersonnel().setVisible(true);
-			break;
-
+            desktopPane.add(setPersonnel());
+            personnel.setVisible(true);
+            break;
 		case "resetpersonnel":
 			resetPersonnel().setVisible(true);
 			break;
 		case "deletePersonnel":
 			removePersonnel();
             table.updateUI();
-
             break;
 
         default:
@@ -410,7 +408,7 @@ public class GeneralFrame extends JFrame implements ActionListener{
 
 	public AddPersonnelFrame setPersonnel() {
 		if(personnel == null) {
-			personnel = new AddPersonnelFrame();
+            personnel = new AddPersonnelFrame();
 		}
 		return personnel;
 	}
@@ -438,5 +436,10 @@ public class GeneralFrame extends JFrame implements ActionListener{
         } catch (BLLException e) {
             e.printStackTrace();
         }
+    }
+
+    public void updateListPerosnnel() throws BLLException {
+        tablePersonnelModel = new TablePersonnelModel();
+        table.setModel(tablePersonnelModel);
     }
 }

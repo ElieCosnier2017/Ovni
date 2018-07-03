@@ -48,8 +48,10 @@ public class TablePersonnelModel extends AbstractTableModel {
 
     public void addPersonnel(Personnel pers) {
         personnel.add(pers);
-
         fireTableRowsInserted(personnel.size() - 1, personnel.size() - 1);
+        fireTableDataChanged();
+
+
     }
 
     public void removePersonnel(int rowIndex) throws BLLException {
@@ -60,7 +62,5 @@ public class TablePersonnelModel extends AbstractTableModel {
         Personnel pers = personnelManager.selectOneByNameAndRole(name,role);
         personnel.remove(pers);
         personnelManager.deletePers(pers);
-
-
     }
 }
