@@ -24,6 +24,8 @@ public class GeneralFrame extends JFrame implements ActionListener{
 	private JTable table;
 	private AddPersonnelFrame personnel;
 	private ResetPersonnelFrame mdppersonnel;
+	private RechercheFrame searchclient;
+	private AddClientFrame addclient;
 	private TablePersonnelModel tablePersonnelModel = new TablePersonnelModel();
 
 	public GeneralFrame(Personnel personnel) throws BLLException {
@@ -42,6 +44,8 @@ public class GeneralFrame extends JFrame implements ActionListener{
 
 		//Frame interne exemple
 		desktopPane.add(setPersonnel());
+		desktopPane.add(searchClient());
+		desktopPane.add(addClient());
 		desktopPane.add(resetPersonnel());
 		desktopPane.add(getAgenda());
 		String role = personnel.getRole();
@@ -60,19 +64,6 @@ public class GeneralFrame extends JFrame implements ActionListener{
 
 		
 	}
-
-//	// Lancement de l'application
-////	public static void main(String[] args) {
-////		SwingUtilities.invokeLater(new Runnable() {
-////
-//////			@Override
-//////			public void run() {
-//////				GeneralFrame ecran = new GeneralFrame();
-//////				ecran.setVisible(true);
-//////			}
-////		});
-////
-////	}
 
 	public void panelAgenda() {
 		this.setTitle("Agenda - Ani' Forme");
@@ -207,27 +198,33 @@ public class GeneralFrame extends JFrame implements ActionListener{
 		desktopPane.add(panel);
 		panel.setLayout(null);
 
-		JButton btnNewButton = new JButton("Ajouter");
-		btnNewButton.setIcon(new ImageIcon(this.getClass().getResource("/fr/eni/clinique/Ressources/add.jpg")));
-		btnNewButton.setBounds(425, 11, 120, 120);
-		panel.add(btnNewButton);
+		JButton btnAjouter = new JButton("Ajouter");
+		btnAjouter.setActionCommand("addclient");
+		btnAjouter.addActionListener(this);
+		btnAjouter.setIcon(new ImageIcon(this.getClass().getResource("/fr/eni/clinique/Ressources/add.jpg")));
+		btnAjouter.setBounds(425, 11, 120, 120);
+		panel.add(btnAjouter);
 
-		JButton btnRinitialiser = new JButton("Valider");
-		btnRinitialiser.setSelectedIcon(null);
-		btnRinitialiser.setIcon(new ImageIcon(this.getClass().getResource("/fr/eni/clinique/Ressources/edit.png")));
-		btnRinitialiser.setBounds(800, 11, 120, 120);
-		panel.add(btnRinitialiser);
+		JButton btnValider = new JButton("Valider");
+		btnValider.setSelectedIcon(null);
+		btnValider.setIcon(new ImageIcon(this.getClass().getResource("/fr/eni/clinique/Ressources/validerfat.png")));
+		btnValider.setBounds(800, 11, 120, 120);
+		panel.add(btnValider);
 
 		JButton btnSupprimer = new JButton("Supprimer");
 		btnSupprimer.setIcon(new ImageIcon(this.getClass().getResource("/fr/eni/clinique/Ressources/del.jpg")));
 		btnSupprimer.setBounds(569, 11, 120, 120);
 		panel.add(btnSupprimer);
 
-		JButton btnAnnuler = new JButton("Annuler");
-		btnAnnuler.setBounds(934, 11, 120, 120);
-		panel.add(btnAnnuler);
+//		JButton btnAnnuler = new JButton("Annuler");
+////		btnAnnuler.setIcon(new ImageIcon(this.getClass().getResource("/fr/eni/clinique/Ressources/annuler.jpg")));
+//		btnAnnuler.setBounds(934, 11, 120, 120);
+//		panel.add(btnAnnuler);
 
 		JButton btnRechercher = new JButton("Rechercher");
+		btnRechercher.setActionCommand("searchclient");
+		btnRechercher.addActionListener(this);
+		btnRechercher.setIcon(new ImageIcon(this.getClass().getResource("/fr/eni/clinique/Ressources/searchfat.png")));
 		btnRechercher.setBounds(25, 11, 120, 120);
 		panel.add(btnRechercher);
 
@@ -235,7 +232,7 @@ public class GeneralFrame extends JFrame implements ActionListener{
 		panel2.setBounds(43, 200, 1081, 400);
 		panel2.setBorder(BorderFactory.createLineBorder(Color.black, 1));
 
-		table = new JTable(new TableClientModel());
+		table = new JTable();
 		table.setShowGrid(false);
 		table.setBounds(43, 200, 1081, 400);
 
@@ -377,11 +374,23 @@ public class GeneralFrame extends JFrame implements ActionListener{
 		case "resetpersonnel":
 			resetPersonnel().setVisible(true);
 			break;
+
 		case "deletePersonnel":
 			removePersonnel();
             table.updateUI();
-
             break;
+
+		case "searchclient":
+			try {
+				searchClient().setVisible(true);
+			} catch (BLLException e1) {
+				e1.printStackTrace();
+			}
+			break;
+
+			case "addclient":
+				addClient().setVisible(true);
+			break;
 
         default:
 			System.out.println("Probleme e=" + e);
@@ -422,6 +431,19 @@ public class GeneralFrame extends JFrame implements ActionListener{
 		return mdppersonnel;
 	}
 
+	public RechercheFrame searchClient() throws BLLException {
+		if(searchclient == null) {
+			searchclient = new RechercheFrame();
+		}
+		return searchclient;
+	}
+
+	public AddClientFrame addClient() {
+		if(addclient == null) {
+			addclient = new AddClientFrame();
+		}
+		return addclient;
+	}
 	private void removePersonnel() {
         int selection = table.getSelectedRow();
 

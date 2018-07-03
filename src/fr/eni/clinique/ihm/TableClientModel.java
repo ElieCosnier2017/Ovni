@@ -1,5 +1,8 @@
 package fr.eni.clinique.ihm;
 
+import fr.eni.clinique.bll.BLLException;
+import fr.eni.clinique.bll.ClientManager;
+import fr.eni.clinique.bo.Client;
 import fr.eni.clinique.bo.Personnel;
 
 import javax.swing.table.AbstractTableModel;
@@ -7,27 +10,21 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class TableClientModel extends AbstractTableModel {
-    private final List<Personnel> personnel = new ArrayList<>();
+    private final List<Client> client = new ArrayList<>();
+    private final ClientManager clientManager = ClientManager.getInstance();
+    private final String[] entetes = {"Nom", "Prénom", "Code Postal", "Mot de passe"};
 
-    private final String[] entetes = {"Nom", "Fonction", "Mot de passe"};
-
-    public TableClientModel() {
+    public TableClientModel() throws BLLException {
         super();
 
-        personnel.add(new Personnel("Johnathan", "Sykes", "hello"));
-        personnel.add(new Personnel("Johnathan", "Sykes", "hello"));
-        personnel.add(new Personnel("Johnathan", "Sykes", "hello"));
-        personnel.add(new Personnel("Johnathan", "Sykes", "hello"));
-//            amis.add(new Ami("Nicolas", "Van de Kampf", Color.black, true, Sport.FOOTBALL));
-//            amis.add(new Ami("Damien", "Cuthbert", Color.cyan, true, Sport.RIEN));
-//            amis.add(new Ami("Corinne", "Valance", Color.blue, false, Sport.NATATION));
-//            amis.add(new Ami("Emilie", "Schrödinger", Color.magenta, false, Sport.FOOTBALL));
-//            amis.add(new Ami("Delphine", "Duke", Color.yellow, false, Sport.TENNIS));
-//            amis.add(new Ami("Eric", "Trump", Color.pink, true, Sport.FOOTBALL));
+        List<Client> personnelList = clientManager.getAllClients();
+        for(Client cli : personnelList){
+            client.add(cli);
+        }
     }
 
     public int getRowCount() {
-        return personnel.size();
+        return client.size();
     }
 
     public int getColumnCount() {
@@ -41,25 +38,18 @@ public class TableClientModel extends AbstractTableModel {
     public Object getValueAt(int rowIndex, int columnIndex) {
         switch (columnIndex) {
             case 0:
-                return personnel.get(rowIndex).getNom();
+                return client.get(rowIndex).getNomClient();
             case 1:
-                return personnel.get(rowIndex).getRole();
+                return client.get(rowIndex).getPrenomClient();
             case 2:
-                return personnel.get(rowIndex).getMdp();
+                return client.get(rowIndex).getCodePostal();
+            case 3:
+                return client.get(rowIndex).getVille();
             default:
                 return null; //Ne devrait jamais arriver
         }
     }
 
-    public void addAmi(Personnel ami) {
-        personnel.add(ami);
 
-        fireTableRowsInserted(personnel.size() - 1, personnel.size() - 1);
-    }
 
-    public void removeAmi(int rowIndex) {
-        personnel.remove(rowIndex);
-
-        fireTableRowsDeleted(rowIndex, rowIndex);
-    }
 }
