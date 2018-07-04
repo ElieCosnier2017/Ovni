@@ -1,5 +1,6 @@
 package fr.eni.clinique.ihm;
 
+import fr.eni.clinique.bll.AnimalManager;
 import fr.eni.clinique.bll.BLLException;
 import fr.eni.clinique.bll.ClientManager;
 import fr.eni.clinique.bo.Animal;
@@ -12,18 +13,19 @@ import java.util.List;
 
 public class TableAnimalModel extends AbstractTableModel {
     private List<Animal> animal = new ArrayList<>();
-    private final ClientManager clientManager = ClientManager.getInstance();
+    private final AnimalManager animalManager = AnimalManager.getInstance();
     private final String[] entetes = {"Numéro","Nom", "Sexe", "Couleur", "Race", "Espèce", "Tatouage"};
 
-    public TableAnimalModel() throws BLLException {
+    public TableAnimalModel(Client client) throws BLLException {
         super();
+        if(client != null){
+            List<Animal> animauxList = animalManager.selectAllByClient(client.getCodeClient());
+            for(Animal ani : animauxList){
+                animal.add(ani);
+            }
+        }
+        //animal.add(new Animal(15,"String nomAnimal", "Sexe ", "String couleur", "String race", "String espece", "String tatouage"));
 
-        animal.add(new Animal(15,"String nomAnimal", "Sexe ", "String couleur", "String race", "String espece", "String tatouage"));
-//        List<Animal> animauxList = animalM.getAllClients();
-//        for(Animal ani : animauxList){
-//            System.out.println(ani.toString());
-//            animal.add(ani);
-//        }
     }
 
     public int getRowCount() {

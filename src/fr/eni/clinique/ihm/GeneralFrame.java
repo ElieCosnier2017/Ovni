@@ -10,8 +10,10 @@ import javax.swing.border.TitledBorder;
 
 import com.toedter.calendar.JDateChooser;
 import fr.eni.clinique.bll.BLLException;
+import fr.eni.clinique.bll.ClientManager;
 import fr.eni.clinique.bll.PersonnelManager;
 import fr.eni.clinique.bll.SingletonGeneral;
+import fr.eni.clinique.bo.Client;
 import fr.eni.clinique.bo.Personnel;
 
 
@@ -60,7 +62,7 @@ public class GeneralFrame extends JFrame implements ActionListener{
 			desktopPane.add(addClient());
 			desktopPane.add(addAnimal());
 			desktopPane.add(editAnimal());
-			this.panelClient();
+			this.panelClient(null);
 		} else if (role.equals("vet")) {
 			System.out.println("Veterinaire");
 			this.panelAgenda();
@@ -189,8 +191,8 @@ public class GeneralFrame extends JFrame implements ActionListener{
 		desktopPane.add(table);
 	}
 
-	public void panelClient() throws BLLException {
-		this.setTitle("Gestion des Clients - Ani' Forme");
+	public void panelClient(Client client) throws BLLException {
+	    this.setTitle("Gestion des Clients - Ani' Forme");
 
 		JPanel panel = new JPanel();
 		panel.setBounds(43, 11, 1081, 142);
@@ -233,7 +235,7 @@ public class GeneralFrame extends JFrame implements ActionListener{
 		panel2.setBounds(43, 200, 1081, 400);
 		panel2.setBorder(BorderFactory.createLineBorder(Color.black, 1));
 
-		table = new JTable(new TableAnimalModel());
+		table = new JTable(new TableAnimalModel(client));
 		table.setShowGrid(false);
 		table.setBounds(43, 200, 1081, 400);
 
@@ -328,6 +330,15 @@ public class GeneralFrame extends JFrame implements ActionListener{
 		btnEditAnimal.setBounds(1025, 395, 52, 54);
 		desktopPane.add(btnEditAnimal);
 
+		if(client != null){
+		    textField.setText(String.valueOf(client.getCodeClient()));
+		    textField_1.setText(client.getNomClient());
+		    textField_2.setText(client.getPrenomClient());
+		    textField_3.setText(client.getAdresse1());
+		    textField_4.setText(client.getAdresse2());
+		    textField_5.setText(client.getCodePostal());
+		    textField_6.setText(client.getVille());
+        }
 
 	}
 
@@ -397,7 +408,10 @@ public class GeneralFrame extends JFrame implements ActionListener{
             break;
 
 		case "searchclient":
-			try {
+            SingletonGeneral.getInstance().setName(gf);
+            Client client = new Client("Cosnier","Elie","11 rue de la banane","","25000","Rennes","02456987","oui","elflflfl","",false);
+
+            try {
 				searchClient().setVisible(true);
 			} catch (BLLException e1) {
 				e1.printStackTrace();
@@ -534,5 +548,25 @@ public class GeneralFrame extends JFrame implements ActionListener{
     public void updateListPerosnnel() throws BLLException {
         tablePersonnelModel = new TablePersonnelModel();
         table.setModel(tablePersonnelModel);
+    }
+
+    public void fillTextFieldClient(String name, String prenom){
+	    desktopPane.setVisible(false);
+	    desktopPane = new JDesktopPane();
+	    setContentPane(desktopPane);
+
+        ClientManager clientManager = ClientManager.getInstance();
+        try {
+            Client client = clientManager.findClientByName(name);
+            this.panelClient(client);
+            desktopPane.add(searchClient());
+            desktopPane.add(addClient());
+            desktopPane.add(addAnimal());
+            desktopPane.add(editAnimal());
+        } catch (BLLException e) {
+            e.printStackTrace();
+        }
+
+
     }
 }

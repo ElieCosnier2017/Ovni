@@ -58,6 +58,16 @@ public class TableClientModel extends AbstractTableModel {
         }
     }
 
+    public List<String> clientValuesAt(int index){
+        String name = getValueAt(index, 0).toString();
+        String firstname = getValueAt(index, 1).toString();
+
+        List<String> attributList = new ArrayList<>();
+        attributList.add(name);
+        attributList.add(firstname);
+        return attributList;
+    }
+
     public void addAmi(Client ami) {
         client.add(ami);
 

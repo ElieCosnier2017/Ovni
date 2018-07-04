@@ -6,7 +6,7 @@ public class Animal {
 
     private Integer codeAnimal;
     private String nomAnimal;
-    private Character sexe;
+    private String sexe;
     private String couleur;
     private String race;
     private String espece;
@@ -15,7 +15,7 @@ public class Animal {
     private String antecedents;
     private Boolean archive;
 
-    public Animal(String nomAnimal, Character sexe, String couleur, String race, String espece, Long codeClient, String tatouage, String antecedents, Boolean archive) {
+    public Animal(String nomAnimal, String sexe, String couleur, String race, String espece, Long codeClient, String tatouage, String antecedents, Boolean archive) {
         this.nomAnimal = nomAnimal;
         this.sexe = sexe;
         this.couleur = couleur;
@@ -28,6 +28,19 @@ public class Animal {
     }
 
     public Animal(Integer codeAnimal, String nomAnimal, String couleur, String race, String espece, String tatouage, String antecedents) {
+        this.codeAnimal = codeAnimal;
+        this.nomAnimal = nomAnimal;
+        this.sexe = sexe;
+        this.couleur = couleur;
+        this.race = race;
+        this.espece = espece;
+        this.codeClient = codeClient;
+        this.tatouage = tatouage;
+        this.antecedents = antecedents;
+        this.archive = archive;
+    }
+
+    public Animal(Integer codeAnimal, String nomAnimal, String sexe, String couleur, String race, String espece, Long codeClient, String tatouage, String antecedents, Boolean archive) {
         this.codeAnimal = codeAnimal;
         this.nomAnimal = nomAnimal;
         this.sexe = sexe;
@@ -105,7 +118,7 @@ public class Animal {
         this.antecedents = antecedents;
     }
 
-    public Character getSexe() {
+    public String getSexe() {
         return sexe;
     }
 
@@ -118,7 +131,7 @@ public class Animal {
         this.archive = archive;
     }
 
-    public void setSexe(Character sexe) {
+    public void setSexe(String sexe) {
         this.sexe = sexe;
     }
 

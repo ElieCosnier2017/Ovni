@@ -6,6 +6,7 @@ import fr.eni.clinique.dao.DALException;
 import fr.eni.clinique.dao.JdbcTools;
 
 import java.sql.*;
+import java.util.ArrayList;
 import java.util.List;
 
 public class AnimalDaoJdbdImpl implements AnimalDAO {
@@ -13,11 +14,98 @@ public class AnimalDaoJdbdImpl implements AnimalDAO {
     private static final String sqlInsertAni = "INSERT INTO Animal(NomAnimal,Sexe,Couleur, Race, Espece, CodeClient, Tatouage, Antecedents, Archive) values(?,?,?,?,?,?,?,?,?)";
     private static final String sqlUpdateAni = "UPDATE Animal SET NomAnimal=?,Sexe=?,Couleur=?,Race=?, Espece=?, CodeClient=?, Tatouage=?, Antecedents=?, Archive=? WHERE CodeAnimal=?";
     private static final String sqlDeleteAni = "UPDATE Clients SET Archive=1 WHERE CodeAnimal=?";
+    private static final String sqlSelectAll = "SELECT * FROM Animaux WHERE Archive=0 ORDER BY NomAnimal";
+    private static final String sqlSelectAllByClient = "SELECT * FROM Animaux WHERE Archive=0 AND CodeClient=? ORDER BY NomAnimal";
+
 
 
     @Override
     public List<Animal> selectAll() throws DALException {
-        return null;
+        Connection cnx = null;
+        PreparedStatement rqt = null;
+        ResultSet rs = null;
+        List<Animal> animalList = new ArrayList<>();
+        try {
+            cnx = JdbcTools.getConnection();
+            rqt = cnx.prepareStatement(sqlSelectAll);
+            rs = rqt.executeQuery();
+            while (rs.next()){
+                Animal animal = new Animal(
+                        rs.getInt("CodeAnimal"),
+                        rs.getString("NomAnimal"),
+                        rs.getString("Sexe"),
+                        rs.getString("Couleur"),
+                        rs.getString("Race"),
+                        rs.getString("Espece"),
+                        rs.getLong("CodeClient"),
+                        rs.getString("Tatouage"),
+                        rs.getString("Antecedents"),
+                        rs.getBoolean("Archive"));
+
+                animalList.add(animal);
+            }
+
+        }catch (SQLException e){
+            throw new DALException("La récupération des clients a échoué.", e);
+        } finally {
+            try {
+                if (rqt != null){
+                    rqt.close();
+                }
+                if(cnx !=null){
+                    cnx.close();
+                }
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }
+        return animalList;
+
+    }
+
+    @Override
+    public List<Animal> selectAllByClient(int codeClient) throws DALException {
+        Connection cnx = null;
+        PreparedStatement rqt = null;
+        ResultSet rs = null;
+        List<Animal> animalList = new ArrayList<>();
+        try {
+            cnx = JdbcTools.getConnection();
+            rqt = cnx.prepareStatement(sqlSelectAllByClient);
+            rqt.setInt(1 ,codeClient );
+            rs = rqt.executeQuery();
+            while (rs.next()){
+                Animal animal = new Animal(
+                        rs.getInt("CodeAnimal"),
+                        rs.getString("NomAnimal"),
+                        rs.getString("Sexe"),
+                        rs.getString("Couleur"),
+                        rs.getString("Race"),
+                        rs.getString("Espece"),
+                        rs.getLong("CodeClient"),
+                        rs.getString("Tatouage"),
+                        rs.getString("Antecedents"),
+                        rs.getBoolean("Archive"));
+
+                animalList.add(animal);
+            }
+
+        }catch (SQLException e){
+            throw new DALException("La récupération des clients a échoué.", e);
+        } finally {
+            try {
+                if (rqt != null){
+                    rqt.close();
+                }
+                if(cnx !=null){
+                    cnx.close();
+                }
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }
+        return animalList;
+
     }
 
     @Override
