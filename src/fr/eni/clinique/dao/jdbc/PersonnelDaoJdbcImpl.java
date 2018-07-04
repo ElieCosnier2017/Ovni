@@ -16,6 +16,8 @@ public class PersonnelDaoJdbcImpl implements PersonnelDAO {
     private static final String sqlUpdateMotPasse = "UPDATE Personnels set MotPasse=? Where CodePers=?";
     private static final String sqlDeletePers = "UPDATE Personnels SET Archive=1 WHERE CodePers=?";
     private static final String sqlSelectAllPers = "Select CodePers, Nom, MotPasse, Role, Archive from Personnels WHERE Archive=0";
+    private static final String sqlSelectAllPersByName = "Select CodePers, Nom, MotPasse, Role, Archive from Personnels WHERE Archive=0 AND NomClient like ?+'%'";
+
     private static final String sqlSelectPersbyCodePers = "Select CodePers, Nom, Role, Archive from Personnels where CodePers=?";
     private static final String sqlSelectPersbyNameAndMdp = "Select CodePers, Nom, Role, Archive from Personnels where Nom=? And MotPasse=?";
     private static final String sqlSelectPersbyNameAndRole = "Select CodePers, Nom,MotPasse, Role, Archive from Personnels where Nom=? And Role=?";
@@ -134,7 +136,7 @@ public class PersonnelDaoJdbcImpl implements PersonnelDAO {
 
 
     @Override
-    public List<Personnel> selectAll() throws DALException{
+    public List<Personnel> selectAll() throws DALException {
         Connection cnx = null;
         ResultSet rs = null;
         PreparedStatement rqt = null;
@@ -144,7 +146,7 @@ public class PersonnelDaoJdbcImpl implements PersonnelDAO {
             rqt = cnx.prepareStatement(sqlSelectAllPers);
             rs = rqt.executeQuery();
 
-            while(rs.next()){
+            while (rs.next()) {
                 Personnel personnel = new Personnel(
                         rs.getInt("CodePers"),
                         rs.getString("Nom"),
@@ -153,7 +155,7 @@ public class PersonnelDaoJdbcImpl implements PersonnelDAO {
 
                 personnelList.add(personnel);
             }
-        }catch (SQLException e){
+        } catch (SQLException e) {
             throw new DALException("Erreur récupération liste du personnel", e);
         } finally {
             try {

@@ -70,4 +70,14 @@ public class ClientManager {
             throw new BLLException("Echec récupération tous les clients - ",e);
         }
     }
+
+    public List<Client> findClientsByName(String name) throws BLLException{
+        try {
+            List<Client> clientList = new ArrayList<>();
+            clientList = daoClient.findByName(name);
+            return clientList;
+        } catch (DALException e) {
+            throw new BLLException("Echec récupération tous les clients - ",e);
+        }
+    }
 }
