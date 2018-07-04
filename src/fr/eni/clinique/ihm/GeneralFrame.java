@@ -4,13 +4,13 @@ package fr.eni.clinique.ihm;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.time.Clock;
 
 import javax.swing.*;
 import javax.swing.border.TitledBorder;
 
 import com.toedter.calendar.JDateChooser;
 import fr.eni.clinique.bll.BLLException;
+import fr.eni.clinique.bll.SingletonGeneral;
 import fr.eni.clinique.bo.Personnel;
 
 
@@ -22,14 +22,16 @@ public class GeneralFrame extends JFrame implements ActionListener{
 	private JMenuBar menuBar;
 	private AgendaFrame agenda;
 	private JTable table;
-	private AddPersonnelFrame personnel;
+	private Personnel personnelConnect;
+	private AddPersonnelFrame ajoutpersonnel;
 	private ResetPersonnelFrame mdppersonnel;
 	private RechercheFrame searchclient;
 	private AddClientFrame addclient;
 	private TablePersonnelModel tablePersonnelModel = new TablePersonnelModel();
+	private GeneralFrame gf = this;
 
 	public GeneralFrame(Personnel personnel) throws BLLException {
-
+		personnelConnect = personnel;
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(0, 0, 1200, 720);
 
@@ -43,6 +45,7 @@ public class GeneralFrame extends JFrame implements ActionListener{
 		setJMenuBar(getMenuBarre());
 
 		//Frame interne exemple
+
 		desktopPane.add(setPersonnel());
 		desktopPane.add(searchClient());
 		desktopPane.add(addClient());
@@ -368,8 +371,9 @@ public class GeneralFrame extends JFrame implements ActionListener{
 			break;
 
 		case "addpersonnel":
-            desktopPane.add(setPersonnel());
-            personnel.setVisible(true);
+			SingletonGeneral.getInstance().setName(gf);
+            ajoutpersonnel.setVisible(true);
+            desktopPane.updateUI();
             break;
 		case "resetpersonnel":
 			resetPersonnel().setVisible(true);
@@ -417,11 +421,15 @@ public class GeneralFrame extends JFrame implements ActionListener{
 		return agenda;
 	}
 
+	public Personnel getpersonnel(){
+		return personnelConnect;
+	}
+
 	public AddPersonnelFrame setPersonnel() {
-		if(personnel == null) {
-            personnel = new AddPersonnelFrame();
+		if(ajoutpersonnel == null) {
+            ajoutpersonnel = new AddPersonnelFrame();
 		}
-		return personnel;
+		return ajoutpersonnel;
 	}
 
 	public ResetPersonnelFrame resetPersonnel() {

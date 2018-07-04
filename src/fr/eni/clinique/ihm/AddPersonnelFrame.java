@@ -2,6 +2,7 @@ package fr.eni.clinique.ihm;
 
 import fr.eni.clinique.bll.BLLException;
 import fr.eni.clinique.bll.PersonnelManager;
+import fr.eni.clinique.bll.SingletonGeneral;
 import fr.eni.clinique.bo.Personnel;
 
 import javax.swing.*;
@@ -84,6 +85,13 @@ public class AddPersonnelFrame extends JInternalFrame implements ActionListener 
             default:
                 System.out.println("Probleme e=" + e);
         }
+        try {
+            GeneralFrame ecran = new GeneralFrame(SingletonGeneral.getInstance().getPersonnelGeneral());
+            ecran.setVisible(true);
+        } catch (BLLException e1) {
+            e1.printStackTrace();
+        }
+        SingletonGeneral.getInstance().getName().dispose();
     }
 
     private void ajouterPersonnel() {
