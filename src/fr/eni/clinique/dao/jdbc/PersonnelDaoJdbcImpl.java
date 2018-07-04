@@ -219,6 +219,7 @@ public class PersonnelDaoJdbcImpl implements PersonnelDAO {
             rqt.setString(2, p1.getMdp());
             rqt.setString(3, p1.getRole());
             rqt.setBoolean(4, p1.isArchive());
+            rqt.setInt(5,p1.getId());
             rqt.executeUpdate();
 
         } catch (SQLException e) {

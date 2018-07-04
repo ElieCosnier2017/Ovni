@@ -63,4 +63,16 @@ public class TablePersonnelModel extends AbstractTableModel {
         personnel.remove(pers);
         personnelManager.deletePers(pers);
     }
+
+    public Personnel getPersonnelSelected(int selection) throws BLLException {
+        String name;
+        String role;
+        Personnel pers = null;
+        if(selection >= 0) {
+            name = getValueAt(selection, 0).toString();
+            role = getValueAt(selection, 1).toString();
+             pers = personnelManager.selectOneByNameAndRole(name, role);
+        }
+        return pers;
+    }
 }
