@@ -10,6 +10,7 @@ import javax.swing.border.TitledBorder;
 
 import com.toedter.calendar.JDateChooser;
 import fr.eni.clinique.bll.BLLException;
+import fr.eni.clinique.bll.PersonnelManager;
 import fr.eni.clinique.bll.SingletonGeneral;
 import fr.eni.clinique.bo.Personnel;
 
@@ -49,7 +50,6 @@ public class GeneralFrame extends JFrame implements ActionListener{
 		desktopPane.add(setPersonnel());
 		desktopPane.add(searchClient());
 		desktopPane.add(addClient());
-		desktopPane.add(resetPersonnel());
 		desktopPane.add(getAgenda());
 		String role = personnel.getRole();
 
@@ -376,7 +376,8 @@ public class GeneralFrame extends JFrame implements ActionListener{
             desktopPane.updateUI();
             break;
 		case "resetpersonnel":
-			resetPersonnel().setVisible(true);
+            desktopPane.add(resetPersonnel());
+            resetPersonnel().setVisible(true);
 			break;
 
 		case "deletePersonnel":
@@ -425,6 +426,21 @@ public class GeneralFrame extends JFrame implements ActionListener{
 		return personnelConnect;
 	}
 
+    public Personnel getPersonnelSelected(){
+        int selection = table.getSelectedRow();
+        Personnel personnel = null;
+        try {
+            TablePersonnelModel tablePersonnelModel = new TablePersonnelModel();
+             personnel = tablePersonnelModel.getPersonnelSelected(selection);
+             if(personnel == null){
+                 personnel = new Personnel();
+             }
+        } catch (BLLException e) {
+            e.printStackTrace();
+        }
+        return personnel;
+    }
+
 	public AddPersonnelFrame setPersonnel() {
 		if(ajoutpersonnel == null) {
             ajoutpersonnel = new AddPersonnelFrame();
@@ -433,9 +449,15 @@ public class GeneralFrame extends JFrame implements ActionListener{
 	}
 
 	public ResetPersonnelFrame resetPersonnel() {
-		if(mdppersonnel == null) {
-			mdppersonnel = new ResetPersonnelFrame();
-		}
+        Personnel personnel = null;
+        if(mdppersonnel == null){
+            personnel = new Personnel();
+            mdppersonnel = new ResetPersonnelFrame(personnel);
+        }else {
+            personnel = getPersonnelSelected();
+            mdppersonnel = new ResetPersonnelFrame(personnel);
+            mdppersonnel.setVisible(true);
+        }
 		return mdppersonnel;
 	}
 
