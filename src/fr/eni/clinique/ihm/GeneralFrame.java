@@ -34,6 +34,7 @@ public class GeneralFrame extends JFrame implements ActionListener{
 	private EditAnimalFrame editanimal;
 	private TablePersonnelModel tablePersonnelModel = new TablePersonnelModel();
 	private GeneralFrame gf = this;
+    private JTextField code;
 
 	public GeneralFrame(Personnel personnel) throws BLLException {
 		personnelConnect = personnel;
@@ -215,6 +216,8 @@ public class GeneralFrame extends JFrame implements ActionListener{
 		panel.add(btnValider);
 
 		JButton btnSupprimer = new JButton("Supprimer");
+        btnSupprimer.setActionCommand("delClient");
+        btnSupprimer.addActionListener(this);
 		btnSupprimer.setIcon(new ImageIcon(this.getClass().getResource("/fr/eni/clinique/Ressources/del.jpg")));
 		btnSupprimer.setBounds(569, 11, 120, 120);
 		panel.add(btnSupprimer);
@@ -254,10 +257,10 @@ public class GeneralFrame extends JFrame implements ActionListener{
 		lblCode.setBounds(74, 210, 89, 14);
 		desktopPane.add(lblCode);
 
-		JTextField textField = new JTextField();
-		textField.setBounds(191, 207, 203, 20);
-		desktopPane.add(textField);
-		textField.setColumns(10);
+		code = new JTextField();
+		code.setBounds(191, 207, 203, 20);
+		desktopPane.add(code);
+		code.setColumns(10);
 
 		JTextField textField_1 = new JTextField();
 		textField_1.setColumns(10);
@@ -331,7 +334,7 @@ public class GeneralFrame extends JFrame implements ActionListener{
 		desktopPane.add(btnEditAnimal);
 
 		if(client != null){
-		    textField.setText(String.valueOf(client.getCodeClient()));
+		    code.setText(String.valueOf(client.getCodeClient()));
 		    textField_1.setText(client.getNomClient());
 		    textField_2.setText(client.getPrenomClient());
 		    textField_3.setText(client.getAdresse1());
@@ -422,7 +425,10 @@ public class GeneralFrame extends JFrame implements ActionListener{
 			SingletonGeneral.getInstance().setName(gf);
 			addClient().setVisible(true);
 			break;
-
+        case "delClient":
+            int codeClient = Integer.parseInt(code.getText());
+            deleteClient(codeClient);
+            break;
 		case "addpet":
 			addAnimal().setVisible(true);
 			break;
@@ -440,7 +446,19 @@ public class GeneralFrame extends JFrame implements ActionListener{
 		}
 	}
 
-	public JDesktopPane getDesktopPane() {
+    private void deleteClient(int codeCli) {
+	    ClientManager clientManager = ClientManager.getInstance();
+        try {
+            clientManager.deleteClient(codeCli);
+            desktopPane.updateUI();
+            desktopPane.repaint();
+            desktopPane.revalidate();
+        } catch (BLLException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public JDesktopPane getDesktopPane() {
 		return desktopPane;
 	}
 
