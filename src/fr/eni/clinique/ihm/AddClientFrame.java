@@ -2,6 +2,7 @@ package fr.eni.clinique.ihm;
 
 import fr.eni.clinique.bll.BLLException;
 import fr.eni.clinique.bll.ClientManager;
+import fr.eni.clinique.bll.SingletonGeneral;
 import fr.eni.clinique.bo.Client;
 
 import javax.swing.*;
@@ -101,10 +102,18 @@ public class AddClientFrame extends JInternalFrame implements ActionListener {
 		switch (e.getActionCommand()) {
 			case "Valider":
 				ajouterClient();
+				this.dispose();
 				break;
 			default:
 				System.out.println("Probleme e=" + e);
 		}
+		try {
+			GeneralFrame ecran = new GeneralFrame(SingletonGeneral.getInstance().getPersonnelGeneral());
+			ecran.setVisible(true);
+		} catch (BLLException e1) {
+			e1.printStackTrace();
+		}
+		SingletonGeneral.getInstance().getName().dispose();
 	}
 
 	private void ajouterClient() {

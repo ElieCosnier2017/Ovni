@@ -47,18 +47,17 @@ public class GeneralFrame extends JFrame implements ActionListener{
 		// Barre de menus
 		setJMenuBar(getMenuBarre());
 
-		//Frame interne exemple
 
-		desktopPane.add(setPersonnel());
-		desktopPane.add(searchClient());
-		desktopPane.add(addClient());
 		desktopPane.add(getAgenda());
 		String role = personnel.getRole();
 
 		if (role.equals("adm")) {
+			desktopPane.add(setPersonnel());
 			this.panelPersonnel();
 		} else if (role.equals("sec")) {
 //			this.panelRdv();
+			desktopPane.add(searchClient());
+			desktopPane.add(addClient());
 			desktopPane.add(addAnimal());
 			desktopPane.add(editAnimal());
 			this.panelClient();
@@ -385,8 +384,7 @@ public class GeneralFrame extends JFrame implements ActionListener{
 
 		case "addpersonnel":
 			SingletonGeneral.getInstance().setName(gf);
-            ajoutpersonnel.setVisible(true);
-            desktopPane.updateUI();
+            setPersonnel().setVisible(true);
             break;
 		case "resetpersonnel":
             desktopPane.add(resetPersonnel());
@@ -407,6 +405,7 @@ public class GeneralFrame extends JFrame implements ActionListener{
 			break;
 
 		case "addclient":
+			SingletonGeneral.getInstance().setName(gf);
 			addClient().setVisible(true);
 			break;
 
