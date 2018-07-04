@@ -27,7 +27,7 @@ public class Animal {
         this.archive = archive;
     }
 
-    public Animal(Integer codeAnimal, String nomAnimal, Character sexe, String couleur, String race, String espece, Long codeClient, String tatouage, String antecedents, Boolean archive) {
+    public Animal(Integer codeAnimal, String nomAnimal, String couleur, String race, String espece, String tatouage, String antecedents) {
         this.codeAnimal = codeAnimal;
         this.nomAnimal = nomAnimal;
         this.sexe = sexe;

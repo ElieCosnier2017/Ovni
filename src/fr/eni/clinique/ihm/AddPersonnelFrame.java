@@ -39,7 +39,7 @@ public class AddPersonnelFrame extends JInternalFrame implements ActionListener 
         lblFonction.setBounds(57, 88, 71, 14);
         getContentPane().add(lblFonction);
 
-        motPasse = new JTextField();
+        motPasse = new JPasswordField();
         motPasse.setColumns(10);
         motPasse.setBounds(164, 129, 201, 20);
         getContentPane().add(motPasse);

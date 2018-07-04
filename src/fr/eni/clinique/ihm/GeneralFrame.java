@@ -27,6 +27,8 @@ public class GeneralFrame extends JFrame implements ActionListener{
 	private ResetPersonnelFrame mdppersonnel;
 	private RechercheFrame searchclient;
 	private AddClientFrame addclient;
+	private AddAnimalFrame addanimal;
+	private EditAnimalFrame editanimal;
 	private TablePersonnelModel tablePersonnelModel = new TablePersonnelModel();
 	private GeneralFrame gf = this;
 
@@ -54,18 +56,16 @@ public class GeneralFrame extends JFrame implements ActionListener{
 		String role = personnel.getRole();
 
 		if (role.equals("adm")) {
-			System.out.println("administrateur");
 			this.panelPersonnel();
 		} else if (role.equals("sec")) {
-			System.out.println("Secretaire");
 //			this.panelRdv();
+			desktopPane.add(addAnimal());
+			desktopPane.add(editAnimal());
 			this.panelClient();
 		} else if (role.equals("vet")) {
 			System.out.println("Veterinaire");
 			this.panelAgenda();
 		}
-
-		
 	}
 
 	public void panelAgenda() {
@@ -190,7 +190,6 @@ public class GeneralFrame extends JFrame implements ActionListener{
 		desktopPane.add(table);
 	}
 
-
 	public void panelClient() throws BLLException {
 		this.setTitle("Gestion des Clients - Ani' Forme");
 
@@ -235,7 +234,7 @@ public class GeneralFrame extends JFrame implements ActionListener{
 		panel2.setBounds(43, 200, 1081, 400);
 		panel2.setBorder(BorderFactory.createLineBorder(Color.black, 1));
 
-		table = new JTable();
+		table = new JTable(new TableAnimalModel());
 		table.setShowGrid(false);
 		table.setBounds(43, 200, 1081, 400);
 
@@ -244,6 +243,11 @@ public class GeneralFrame extends JFrame implements ActionListener{
 
 		scrollPane2.setBounds(485, 203, 639, 177);
 		desktopPane.add(scrollPane2);
+
+		JLabel lblListPersonnel = new JLabel("Liste des animaux du client");
+		lblListPersonnel.setFont(new Font("Calibri", Font.BOLD, 14));
+		lblListPersonnel.setBounds(485, 170, 200, 20);
+		desktopPane.add(lblListPersonnel);
 
 		JLabel lblCode = new JLabel("Code");
 		lblCode.setBounds(74, 210, 89, 14);
@@ -304,17 +308,26 @@ public class GeneralFrame extends JFrame implements ActionListener{
 		textField_6.setBounds(191, 395, 203, 20);
 		desktopPane.add(textField_6);
 
-		JButton btnNewButton_1 = new JButton("New button");
-		btnNewButton_1.setBounds(814, 395, 71, 64);
-		desktopPane.add(btnNewButton_1);
+		JButton btnAddAnimal = new JButton("Ajouter Animal");
+		btnAddAnimal.setActionCommand("addpet");
+		btnAddAnimal.addActionListener(this);
+		btnAddAnimal.setIcon(new ImageIcon(this.getClass().getResource("/fr/eni/clinique/Ressources/add.jpg")));
+		btnAddAnimal.setBounds(814, 395, 52, 54);
+		desktopPane.add(btnAddAnimal);
 
-		JButton button = new JButton("New button");
-		button.setBounds(921, 395, 71, 64);
-		desktopPane.add(button);
+		JButton btnDelAnimal = new JButton("Supprimer Animal");
+		btnDelAnimal.setActionCommand("delpet");
+		btnDelAnimal.addActionListener(this);
+		btnDelAnimal.setIcon(new ImageIcon(this.getClass().getResource("/fr/eni/clinique/Ressources/del.jpg")));
+		btnDelAnimal.setBounds(921, 395, 52, 54);
+		desktopPane.add(btnDelAnimal);
 
-		JButton button_1 = new JButton("New button");
-		button_1.setBounds(1025, 395, 71, 64);
-		desktopPane.add(button_1);
+		JButton btnEditAnimal = new JButton("Modifier Animal");
+		btnEditAnimal.setActionCommand("editpet");
+		btnEditAnimal.addActionListener(this);
+		btnDelAnimal.setIcon(new ImageIcon(this.getClass().getResource("/fr/eni/clinique/Ressources/edit.png")));
+		btnEditAnimal.setBounds(1025, 395, 52, 54);
+		desktopPane.add(btnEditAnimal);
 
 
 	}
@@ -392,8 +405,20 @@ public class GeneralFrame extends JFrame implements ActionListener{
 			}
 			break;
 
-			case "addclient":
-				addClient().setVisible(true);
+		case "addclient":
+			addClient().setVisible(true);
+			break;
+
+		case "addpet":
+			addAnimal().setVisible(true);
+			break;
+
+		case "delpet":
+			System.out.println("Delete pet");
+			break;
+
+		case "editpet":
+			editAnimal().setVisible(true);
 			break;
 
         default:
@@ -452,6 +477,21 @@ public class GeneralFrame extends JFrame implements ActionListener{
 		}
 		return addclient;
 	}
+
+	public AddAnimalFrame addAnimal() {
+		if(addanimal == null) {
+			addanimal = new AddAnimalFrame();
+		}
+		return addanimal;
+	}
+
+	public EditAnimalFrame editAnimal() {
+		if(editanimal == null) {
+			editanimal = new EditAnimalFrame();
+		}
+		return editanimal;
+	}
+
 	private void removePersonnel() {
         int selection = table.getSelectedRow();
 
