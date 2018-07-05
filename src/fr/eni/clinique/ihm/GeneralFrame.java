@@ -278,54 +278,54 @@ public class GeneralFrame extends JFrame implements ActionListener{
 		code.setBounds(191, 207, 203, 20);
 		desktopPane.add(code);
 
+		JLabel lblNom = new JLabel("Nom");
+		lblNom.setBounds(74, 257, 89, 14);
+		desktopPane.add(lblNom);
+
 		nom = new JTextField();
 		nom.setColumns(10);
 		nom.setBounds(191, 254, 203, 20);
 		desktopPane.add(nom);
 
-		JLabel lblNom = new JLabel("Nom");
-		lblNom.setBounds(74, 257, 89, 14);
-		desktopPane.add(lblNom);
-
 		JLabel lblPrnom = new JLabel("Pr\u00E9nom");
 		lblPrnom.setBounds(74, 302, 89, 14);
 		desktopPane.add(lblPrnom);
+
+		prenom = new JTextField();
+		prenom.setColumns(10);
+		prenom.setBounds(191, 299, 203, 20);
+		desktopPane.add(prenom);
 
 		JLabel lblAdresse = new JLabel("Adresse");
 		lblAdresse.setBounds(74, 351, 89, 14);
 		desktopPane.add(lblAdresse);
 
+		adresse = new JTextField();
+		adresse.setColumns(10);
+		adresse.setBounds(191, 348, 203, 20);
+		desktopPane.add(adresse);
+
+		adresse2 = new JTextField();
+		adresse2.setColumns(10);
+		adresse2.setBounds(191, 395, 203, 20);
+		desktopPane.add(adresse2);
+
 		JLabel lblCodePostal = new JLabel("Code Postal");
 		lblCodePostal.setBounds(74, 445, 89, 14);
 		desktopPane.add(lblCodePostal);
+
+		codePostal = new JTextField();
+		codePostal.setColumns(10);
+		codePostal.setBounds(191, 442, 203, 20);
+		desktopPane.add(codePostal);
 
 		JLabel lblVille = new JLabel("Ville");
 		lblVille.setBounds(74, 492, 89, 14);
 		desktopPane.add(lblVille);
 
-		prenom = new JTextField();
-		prenom.setColumns(10);
-		prenom.setBounds(191, 348, 203, 20);
-		desktopPane.add(prenom);
-
-		adresse = new JTextField();
-		adresse.setColumns(10);
-		adresse.setBounds(191, 299, 203, 20);
-		desktopPane.add(adresse);
-
-		adresse2 = new JTextField();
-		adresse2.setColumns(10);
-		adresse2.setBounds(191, 442, 203, 20);
-		desktopPane.add(adresse2);
-
-		codePostal = new JTextField();
-		codePostal.setColumns(10);
-		codePostal.setBounds(191, 489, 203, 20);
-		desktopPane.add(codePostal);
-
 		ville = new JTextField();
 		ville.setColumns(10);
-		ville.setBounds(191, 395, 203, 20);
+		ville.setBounds(191, 489, 203, 20);
 		desktopPane.add(ville);
 
 		JButton btnAddAnimal = new JButton("Ajouter Animal");
