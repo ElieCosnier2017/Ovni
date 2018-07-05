@@ -47,7 +47,7 @@ public class ResetPersonnelFrame extends JInternalFrame implements ActionListene
         getContentPane().add(btnNewButton);
 
         JButton btnAnnuler = new JButton("Annuler");
-        btnAnnuler.setActionCommand("searchclient");
+        btnAnnuler.setActionCommand("annuler");
         btnAnnuler.addActionListener(this);
         btnAnnuler.setBounds(231, 170, 89, 23);
         getContentPane().add(btnAnnuler);
@@ -70,6 +70,7 @@ public class ResetPersonnelFrame extends JInternalFrame implements ActionListene
                 break;
             case "annuler":
                 System.out.println("Annuler");
+                cancelOption();
                 this.dispose();
                 break;
             default:
@@ -93,9 +94,17 @@ public class ResetPersonnelFrame extends JInternalFrame implements ActionListene
                 e.printStackTrace();
             }
         }else{
-            SingletonGeneral.getInstance().getName().refresh();
+
         }
 
+    }
+
+    private void cancelOption(){
+        try {
+            SingletonGeneral.getInstance().getName().refresh();
+        } catch (BLLException e) {
+            e.printStackTrace();
+        }
     }
 
     public void updateFrame(Personnel personnel){

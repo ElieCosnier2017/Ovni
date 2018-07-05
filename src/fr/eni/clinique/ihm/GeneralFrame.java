@@ -409,6 +409,7 @@ public class GeneralFrame extends JFrame implements ActionListener{
             setPersonnel().setVisible(true);
             break;
 		case "resetpersonnel":
+            SingletonGeneral.getInstance().setName(gf);
             resetPersonnel().setVisible(true);
 			break;
 
