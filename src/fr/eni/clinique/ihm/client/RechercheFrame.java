@@ -74,10 +74,6 @@ public class RechercheFrame extends JInternalFrame implements ActionListener {
                     try {
                         TableClientModel tableClientModel = new TableClientModel();
                         List<String> attributs = tableClientModel.clientValuesAt(table.getSelectedRow());
-//                        Client client = new Client("Cosnier","Elie","11 rue de la banane","","25000","Rennes","02456987","oui","elflflfl","",false);
-//                        ecran.panelClient(client);
-//                        ecran.repaint();
-
                         ecran.fillTextFieldClient(attributs.get(0), attributs.get(1));
                     } catch (BLLException e) {
                         e.printStackTrace();

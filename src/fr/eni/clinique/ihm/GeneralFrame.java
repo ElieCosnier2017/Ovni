@@ -74,7 +74,7 @@ public class GeneralFrame extends JFrame implements ActionListener{
 			desktopPane.add(resetPersonnel());
 			this.panelPersonnel();
 		} else if (role.equals("sec")) {
-//			this.panelRdv();
+//			this.panelRdv();w
 			desktopPane.add(searchClient());
 			desktopPane.add(addClient());
             desktopPane.add(addAnimal());
@@ -84,6 +84,35 @@ public class GeneralFrame extends JFrame implements ActionListener{
 			System.out.println("Veterinaire");
 			this.panelAgenda();
 		}
+	}
+
+	public void createMenuBar() {
+		// Sous menu Déconnexion
+		JMenu menuFichier = new JMenu("Fichier");
+		menuBar.add(menuFichier);
+
+		JMenuItem mntmDconnexion = new JMenuItem("D\u00E9connexion");
+		mntmDconnexion.setActionCommand("deconnexion");
+		mntmDconnexion.addActionListener(this);
+		menuFichier.add(mntmDconnexion);
+
+		JMenuItem mntmFermer = new JMenuItem("Fermer");
+		mntmFermer.setActionCommand("fermer");
+		mntmFermer.addActionListener(this);
+		menuFichier.add(mntmFermer);
+
+		JMenu mnNewMenu = new JMenu("Gestion des rendez-vous");
+		menuBar.add(mnNewMenu);
+
+		JMenuItem mntmPriseDeRendez = new JMenuItem("Prise de rendez vous");
+		mntmPriseDeRendez.setActionCommand("setrdv");
+		mntmPriseDeRendez.addActionListener(this);
+		mnNewMenu.add(mntmPriseDeRendez);
+//
+//		JMenuItem mntmGestionDesClients = new JMenuItem("Gestion des clients");
+//		mntmGestionDesClients.setActionCommand("setclient");
+//		mntmGestionDesClients.addActionListener(this);
+//		mnNewMenu.add(mntmGestionDesClients);
 	}
 
 	public void panelAgenda() {
@@ -221,7 +250,7 @@ public class GeneralFrame extends JFrame implements ActionListener{
 		JButton btnAjouter = new JButton("Ajouter");
 		btnAjouter.setActionCommand("addclient");
 		btnAjouter.addActionListener(this);
-		btnAjouter.setIcon(new ImageIcon(this.getClass().getResource("/fr/eni/clinique/Ressources/add.jpg")));
+		btnAjouter.setIcon(new ImageIcon(this.getClass().getResource("/fr/eni/clinique/Ressources/addfat.png")));
 		btnAjouter.setBounds(425, 11, 120, 120);
 		panel.add(btnAjouter);
 
@@ -236,14 +265,9 @@ public class GeneralFrame extends JFrame implements ActionListener{
 		JButton btnSupprimer = new JButton("Supprimer");
         btnSupprimer.setActionCommand("delClient");
         btnSupprimer.addActionListener(this);
-		btnSupprimer.setIcon(new ImageIcon(this.getClass().getResource("/fr/eni/clinique/Ressources/del.jpg")));
+		btnSupprimer.setIcon(new ImageIcon(this.getClass().getResource("/fr/eni/clinique/Ressources/delfat.png")));
 		btnSupprimer.setBounds(569, 11, 120, 120);
 		panel.add(btnSupprimer);
-
-//		JButton btnAnnuler = new JButton("Annuler");
-////		btnAnnuler.setIcon(new ImageIcon(this.getClass().getResource("/fr/eni/clinique/Ressources/annuler.jpg")));
-//		btnAnnuler.setBounds(934, 11, 120, 120);
-//		panel.add(btnAnnuler);
 
 		JButton btnRechercher = new JButton("Rechercher");
 		btnRechercher.setActionCommand("searchclient");
@@ -332,22 +356,22 @@ public class GeneralFrame extends JFrame implements ActionListener{
 		JButton btnAddAnimal = new JButton("Ajouter Animal");
 		btnAddAnimal.setActionCommand("addpet");
 		btnAddAnimal.addActionListener(this);
-		btnAddAnimal.setIcon(new ImageIcon(this.getClass().getResource("/fr/eni/clinique/Ressources/add.jpg")));
-		btnAddAnimal.setBounds(814, 395, 52, 54);
+		btnAddAnimal.setIcon(new ImageIcon(this.getClass().getResource("/fr/eni/clinique/Ressources/add.png")));
+		btnAddAnimal.setBounds(880, 395, 45, 45);
 		desktopPane.add(btnAddAnimal);
 
 		JButton btnDelAnimal = new JButton("Supprimer Animal");
 		btnDelAnimal.setActionCommand("delpet");
 		btnDelAnimal.addActionListener(this);
-		btnDelAnimal.setIcon(new ImageIcon(this.getClass().getResource("/fr/eni/clinique/Ressources/del.jpg")));
-		btnDelAnimal.setBounds(921, 395, 52, 54);
+		btnDelAnimal.setIcon(new ImageIcon(this.getClass().getResource("/fr/eni/clinique/Ressources/del.png")));
+		btnDelAnimal.setBounds(1041, 395, 45, 45);
 		desktopPane.add(btnDelAnimal);
 
 		JButton btnEditAnimal = new JButton("Modifier Animal");
 		btnEditAnimal.setActionCommand("editpet");
 		btnEditAnimal.addActionListener(this);
 		btnDelAnimal.setIcon(new ImageIcon(this.getClass().getResource("/fr/eni/clinique/Ressources/edit.png")));
-		btnEditAnimal.setBounds(1025, 395, 52, 54);
+		btnEditAnimal.setBounds(955, 395, 45, 45);
 		desktopPane.add(btnEditAnimal);
 
 		if(client != null){
@@ -358,40 +382,8 @@ public class GeneralFrame extends JFrame implements ActionListener{
 		    adresse2.setText(client.getAdresse2());
 		    codePostal.setText(client.getCodePostal());
 		    ville.setText(client.getVille());
+		    searchClient().setVisible(false);
         }
-	}
-
-
-	public void createMenuBar() {
-
-		// Sous menu Déconnexion
-		JMenu menuFichier = new JMenu("Fichier");
-		menuBar.add(menuFichier);
-		
-		JMenuItem mntmDconnexion = new JMenuItem("D\u00E9connexion");
-		mntmDconnexion.setActionCommand("deconnexion");
-		mntmDconnexion.addActionListener(this);
-		menuFichier.add(mntmDconnexion);
-		
-		JMenuItem mntmFermer = new JMenuItem("Fermer");
-		mntmFermer.setActionCommand("fermer");
-		mntmFermer.addActionListener(this);
-		menuFichier.add(mntmFermer);
-		
-		JMenu mnNewMenu = new JMenu("Gestion des rendez-vous");
-		menuBar.add(mnNewMenu);
-		
-		JMenuItem mntmPriseDeRendez = new JMenuItem("Prise de rendez vous");
-		mntmPriseDeRendez.setActionCommand("setrdv");
-		mntmPriseDeRendez.addActionListener(this);
-		mnNewMenu.add(mntmPriseDeRendez);
-		
-		JMenuItem mntmGestionDesClients = new JMenuItem("Gestion des clients");
-		mntmGestionDesClients.setActionCommand("setclient");
-//		mntmGestionDesClients.addActionListener((ActionListener) this);
-		mnNewMenu.add(mntmGestionDesClients);
-	
-
 	}
 
 	@Override
@@ -425,24 +417,26 @@ public class GeneralFrame extends JFrame implements ActionListener{
             table.updateUI();
             break;
 
-			case "searchclient":
-				SingletonGeneral.getInstance().setName(gf);
-				try {
-					searchClient().setVisible(true);
-				} catch (BLLException e1) {
-					e1.printStackTrace();
-				}
-				break;
+		case "searchclient":
+			SingletonGeneral.getInstance().setName(gf);
+			try {
+				searchClient().setVisible(true);
+			} catch (BLLException e1) {
+				e1.printStackTrace();
+			}
+			break;
 
 		case "addclient":
 			SingletonGeneral.getInstance().setName(gf);
 			addClient().setVisible(true);
 			break;
         case "delClient":
-            int codeClient = Integer.parseInt(code.getText());
+			SingletonGeneral.getInstance().setName(gf);
+			int codeClient = Integer.parseInt(code.getText());
             deleteClient(codeClient);
             break;
 		case "updateClient":
+			SingletonGeneral.getInstance().setName(gf);
 			int codeCli = Integer.parseInt(code.getText());
 			updateClient(codeCli);
 			break;
@@ -462,28 +456,6 @@ public class GeneralFrame extends JFrame implements ActionListener{
 			System.out.println("Probleme e=" + e);
 		}
 	}
-
-	private void updateClient(int codeCli) {
-		ClientManager clientManager = ClientManager.getInstance();
-		try {
-			Client client = new Client(codeCli,nom.getText(),prenom.getText(),adresse.getText(),adresse2.getText(),codePostal.getText(),ville.getText(),null,null,null,null,false);
-			clientManager.updateClient(client);
-		} catch (BLLException e) {
-			e.printStackTrace();
-		}
-	}
-
-	private void deleteClient(int codeCli) {
-	    ClientManager clientManager = ClientManager.getInstance();
-        try {
-            clientManager.deleteClient(codeCli);
-            desktopPane.updateUI();
-            desktopPane.repaint();
-            desktopPane.revalidate();
-        } catch (BLLException e) {
-            e.printStackTrace();
-        }
-    }
 
     public JDesktopPane getDesktopPane() {
 		return desktopPane;
@@ -543,6 +515,25 @@ public class GeneralFrame extends JFrame implements ActionListener{
 		return mdppersonnel;
 	}
 
+	private void removePersonnel() {
+		int selection = table.getSelectedRow();
+
+		System.out.println(selection);
+		try {
+			if(selection >= 0) {
+				tablePersonnelModel.removePersonnel(selection);
+				tablePersonnelModel = new TablePersonnelModel();
+				table.setModel(tablePersonnelModel);
+				table.repaint();
+				desktopPane.repaint();
+			}
+
+		} catch (BLLException e) {
+			e.printStackTrace();
+		}
+	}
+
+
 	public RechercheFrame searchClient() throws BLLException {
 		if(searchclient == null) {
 			searchclient = new RechercheFrame();
@@ -556,7 +547,26 @@ public class GeneralFrame extends JFrame implements ActionListener{
 		}
 		return addclient;
 	}
+	private void updateClient(int codeCli) {
+		ClientManager clientManager = ClientManager.getInstance();
+		try {
+			Client client = new Client(codeCli,nom.getText(),prenom.getText(),adresse.getText(),adresse2.getText(),codePostal.getText(),ville.getText(),null,null,null,null,false);
+			clientManager.updateClient(client);
+			refresh();
+		} catch (BLLException e) {
+			e.printStackTrace();
+		}
+	}
 
+	private void deleteClient(int codeCli) {
+		ClientManager clientManager = ClientManager.getInstance();
+		try {
+			clientManager.deleteClient(codeCli);
+			refresh();
+		} catch (BLLException e) {
+			e.printStackTrace();
+		}
+	}
 	public AddAnimalFrame addAnimal() {
 		if(addanimal == null)
 		    addanimal = new AddAnimalFrame("null");
@@ -574,24 +584,6 @@ public class GeneralFrame extends JFrame implements ActionListener{
 		}
 		return editanimal;
 	}
-
-	private void removePersonnel() {
-        int selection = table.getSelectedRow();
-
-        System.out.println(selection);
-        try {
-            if(selection >= 0) {
-                tablePersonnelModel.removePersonnel(selection);
-                tablePersonnelModel = new TablePersonnelModel();
-                table.setModel(tablePersonnelModel);
-                table.repaint();
-                desktopPane.repaint();
-            }
-
-        } catch (BLLException e) {
-            e.printStackTrace();
-        }
-    }
 
     public void updateListPerosnnel() throws BLLException {
         tablePersonnelModel = new TablePersonnelModel();
@@ -614,7 +606,11 @@ public class GeneralFrame extends JFrame implements ActionListener{
         } catch (BLLException e) {
             e.printStackTrace();
         }
-
-
     }
+
+    public void refresh() throws BLLException {
+		GeneralFrame ecran = new GeneralFrame(SingletonGeneral.getInstance().getPersonnelGeneral());
+		ecran.setVisible(true);
+		SingletonGeneral.getInstance().getName().dispose();
+	}
 }
