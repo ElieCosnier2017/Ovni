@@ -292,4 +292,41 @@ public class ClientDaoJdbcImpl implements ClientDAO {
         }
         return clientList;
     }
+
+    @Override
+    public Client findByCodeClient(Integer codeClient) throws DALException {
+        Connection cnx = null;
+        ResultSet rs = null;
+        PreparedStatement rqt = null;
+        Client client = null;
+        try {
+            cnx = JdbcTools.getConnection();
+            rqt = cnx.prepareStatement(sqlSelectAllByName);
+            rqt.setInt(1, codeClient);
+
+            rs = rqt.executeQuery();
+
+            if (rs.next()){
+                client = new Client(
+                        rs.getString("NomClient"),
+                        rs.getString("PrenomClient"),
+                        rs.getString("CodePostal"),
+                        rs.getString("Ville"));
+            }
+        }catch (SQLException e){
+            throw new DALException("Erreur récupération Client lors de la connection", e);
+        } finally {
+            try {
+                if (rqt != null) {
+                    rqt.close();
+                }
+                if (cnx != null) {
+                    cnx.close();
+                }
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }
+        return client;
+    }
 }

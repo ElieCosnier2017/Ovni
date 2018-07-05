@@ -12,6 +12,8 @@ import java.awt.event.ActionListener;
 
 public class ResetPersonnelFrame extends JInternalFrame implements ActionListener {
     private JPasswordField passwordField;
+    private JLabel lblNom;
+    private JLabel lblNomClient;
     private Personnel personnelToUpdate;
     public ResetPersonnelFrame(Personnel personnel) {
 
@@ -23,15 +25,15 @@ public class ResetPersonnelFrame extends JInternalFrame implements ActionListene
         setBounds(100, 100,400, 250);
         getContentPane().setLayout(null);
 
-        JLabel lblNom = new JLabel("Nom");
+        lblNom = new JLabel("Nom");
         lblNom.setFont(new Font("Calibri", Font.BOLD, 14));
         lblNom.setBounds(37, 44, 46, 30);
         getContentPane().add(lblNom);
 
-        JLabel lblNom2 = new JLabel(""+ personnelToUpdate.getNom());
-        lblNom2.setFont(new Font("Calibri", Font.BOLD, 14));
-        lblNom2.setBounds(164, 49, 201, 20);
-        getContentPane().add(lblNom2);
+        lblNomClient = new JLabel(""+ personnelToUpdate.getNom());
+        lblNomClient.setFont(new Font("Calibri", Font.BOLD, 14));
+        lblNomClient.setBounds(164, 49, 201, 20);
+        getContentPane().add(lblNomClient);
 
         JLabel lblMotDePasse = new JLabel("Nouveau Mot de passe");
         lblMotDePasse.setFont(new Font("Calibri", Font.BOLD, 14));
@@ -45,7 +47,7 @@ public class ResetPersonnelFrame extends JInternalFrame implements ActionListene
         getContentPane().add(btnNewButton);
 
         JButton btnAnnuler = new JButton("Annuler");
-        btnAnnuler.setActionCommand("searchclient");
+        btnAnnuler.setActionCommand("annuler");
         btnAnnuler.addActionListener(this);
         btnAnnuler.setBounds(231, 170, 89, 23);
         getContentPane().add(btnAnnuler);
@@ -68,6 +70,7 @@ public class ResetPersonnelFrame extends JInternalFrame implements ActionListene
                 break;
             case "annuler":
                 System.out.println("Annuler");
+                cancelOption();
                 this.dispose();
                 break;
             default:
@@ -81,14 +84,32 @@ public class ResetPersonnelFrame extends JInternalFrame implements ActionListene
     }
 
     public void resetPasswordPersonnel(){
-        PersonnelManager personnelManager = PersonnelManager.getInstance();
-        personnelToUpdate.setMdp(String.valueOf(passwordField.getPassword()));
-        System.out.println(String.valueOf(passwordField.getPassword()));
+        if(personnelToUpdate.getId() != null){
+            PersonnelManager personnelManager = PersonnelManager.getInstance();
+            personnelToUpdate.setMdp(String.valueOf(passwordField.getPassword()));
+            System.out.println(String.valueOf(passwordField.getPassword()));
+            try {
+                personnelManager.updatePers(personnelToUpdate);
+            } catch (BLLException e) {
+                e.printStackTrace();
+            }
+        }else{
+
+        }
+
+    }
+
+    private void cancelOption(){
         try {
-            personnelManager.updatePers(personnelToUpdate);
+            SingletonGeneral.getInstance().getName().refresh();
         } catch (BLLException e) {
             e.printStackTrace();
         }
+    }
+
+    public void updateFrame(Personnel personnel){
+        personnelToUpdate = personnel;
+        lblNomClient.setText(personnel.getNom());
     }
 
 }

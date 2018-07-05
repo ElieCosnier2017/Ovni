@@ -80,4 +80,24 @@ public class ClientManager {
             throw new BLLException("Echec récupération tous les clients - ",e);
         }
     }
+
+    public Client selectOne(Integer codeClient) throws BLLException{
+        Client client = null;
+        try{
+            client = daoClient.selectOne(codeClient);
+        } catch (DALException e) {
+            e.printStackTrace();
+        }
+        return client;
+    }
+
+    public Client findClientById(Integer codeClient) throws BLLException {
+        try {
+            Client client = null;
+            client = daoClient.findByCodeClient(codeClient);
+            return client;
+        } catch (DALException e) {
+            throw new BLLException("Echec récupération tous les clients - ",e);
+        }
+    }
 }
