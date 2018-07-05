@@ -60,14 +60,8 @@ public class TableAnimalModel extends AbstractTableModel {
         }
     }
 
-    public void addAmi(Animal ami) {
-        animal.add(ami);
-
-        fireTableRowsInserted(animal.size() - 1, animal.size() - 1);
-    }
-
-    public void removeAmi(int rowIndex) {
-        animal .remove(rowIndex);
+    public void removeAnimal(int rowIndex) {
+        animal.remove(rowIndex);
 
         fireTableRowsDeleted(rowIndex, rowIndex);
     }

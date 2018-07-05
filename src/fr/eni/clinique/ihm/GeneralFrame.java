@@ -62,12 +62,13 @@ public class GeneralFrame extends JFrame implements ActionListener{
 		// Associer le JDesktopPane à la JFrame
 		setContentPane(desktopPane);
 
+		String role = personnel.getRole();
 		// Barre de menus
-		setJMenuBar(getMenuBarre());
+		setJMenuBar(getMenuBarre(role));
 
 
 		desktopPane.add(getAgenda());
-		String role = personnel.getRole();
+
 
 		if (role.equals("adm")) {
 			desktopPane.add(setPersonnel());
@@ -86,7 +87,7 @@ public class GeneralFrame extends JFrame implements ActionListener{
 		}
 	}
 
-	public void createMenuBar() {
+	public void createMenuBar(String role) {
 		// Sous menu Déconnexion
 		JMenu menuFichier = new JMenu("Fichier");
 		menuBar.add(menuFichier);
@@ -100,15 +101,15 @@ public class GeneralFrame extends JFrame implements ActionListener{
 		mntmFermer.setActionCommand("fermer");
 		mntmFermer.addActionListener(this);
 		menuFichier.add(mntmFermer);
+		if(role.equals("sec")) {
+			JMenu mnNewMenu = new JMenu("Gestion des rendez-vous");
+			menuBar.add(mnNewMenu);
 
-		JMenu mnNewMenu = new JMenu("Gestion des rendez-vous");
-		menuBar.add(mnNewMenu);
-
-		JMenuItem mntmPriseDeRendez = new JMenuItem("Prise de rendez vous");
-		mntmPriseDeRendez.setActionCommand("setrdv");
-		mntmPriseDeRendez.addActionListener(this);
-		mnNewMenu.add(mntmPriseDeRendez);
-//
+			JMenuItem mntmPriseDeRendez = new JMenuItem("Prise de rendez vous");
+			mntmPriseDeRendez.setActionCommand("setrdv");
+			mntmPriseDeRendez.addActionListener(this);
+			mnNewMenu.add(mntmPriseDeRendez);
+		}
 //		JMenuItem mntmGestionDesClients = new JMenuItem("Gestion des clients");
 //		mntmGestionDesClients.setActionCommand("setclient");
 //		mntmGestionDesClients.addActionListener(this);
@@ -164,7 +165,7 @@ public class GeneralFrame extends JFrame implements ActionListener{
         JButton btnAjouter = new JButton("Ajouter");
 		btnAjouter.setActionCommand("addpersonnel");
 		btnAjouter.addActionListener(this);
-        btnAjouter.setIcon(new ImageIcon(this.getClass().getResource("/fr/eni/clinique/Ressources/add.jpg")));
+        btnAjouter.setIcon(new ImageIcon(this.getClass().getResource("/fr/eni/clinique/Ressources/addfat.png")));
         btnAjouter.setBounds(114, 11, 120, 120);
         panel.add(btnAjouter);
 
@@ -258,7 +259,7 @@ public class GeneralFrame extends JFrame implements ActionListener{
 		btnValider.addActionListener(this);
 		btnValider.setSelectedIcon(null);
 		btnValider.setIcon(new ImageIcon(this.getClass().getResource("/fr/eni/clinique/Ressources/validerfat.png")));
-		btnValider.setBounds(800, 11, 120, 120);
+		btnValider.setBounds(930, 11, 120, 120);
 		panel.add(btnValider);
 
 		JButton btnSupprimer = new JButton("Supprimer");
@@ -461,11 +462,11 @@ public class GeneralFrame extends JFrame implements ActionListener{
 		return desktopPane;
 	}
 
-	public JMenuBar getMenuBarre() {
+	public JMenuBar getMenuBarre(String role) {
 		if (menuBar == null) {
 			menuBar = new JMenuBar();
 
-			createMenuBar();
+			createMenuBar(role);
 		}
 		return menuBar;
 	}
@@ -533,7 +534,6 @@ public class GeneralFrame extends JFrame implements ActionListener{
 		}
 	}
 
-
 	public RechercheFrame searchClient() throws BLLException {
 		if(searchclient == null) {
 			searchclient = new RechercheFrame();
@@ -547,6 +547,7 @@ public class GeneralFrame extends JFrame implements ActionListener{
 		}
 		return addclient;
 	}
+
 	private void updateClient(int codeCli) {
 		ClientManager clientManager = ClientManager.getInstance();
 		try {
@@ -567,6 +568,7 @@ public class GeneralFrame extends JFrame implements ActionListener{
 			e.printStackTrace();
 		}
 	}
+
 	public AddAnimalFrame addAnimal() {
 		if(addanimal == null)
 		    addanimal = new AddAnimalFrame("null");
@@ -584,8 +586,27 @@ public class GeneralFrame extends JFrame implements ActionListener{
 		}
 		return editanimal;
 	}
+//
+//	private void removeAnimal() {
+//		int selection = table.getSelectedRow();
+//
+//		System.out.println(selection);
+//		try {
+//			if(selection >= 0) {
+//				tableAnimalModel.removeAnimal(selection);
+//				tableAnimalModel = new TableAnimalModel(client);
+//				table.setModel(tableAnimalModel);
+//				table.repaint();
+//				desktopPane.repaint();
+//			}
+//
+//		} catch (BLLException e) {
+//			e.printStackTrace();
+//		}
+//	}
 
-    public void updateListPerosnnel() throws BLLException {
+
+	public void updateListPerosnnel() throws BLLException {
         tablePersonnelModel = new TablePersonnelModel();
         table.setModel(tablePersonnelModel);
     }
