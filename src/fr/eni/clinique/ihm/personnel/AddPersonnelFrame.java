@@ -87,12 +87,11 @@ public class AddPersonnelFrame extends JInternalFrame implements ActionListener 
                 System.out.println("Probleme e=" + e);
         }
         try {
-            GeneralFrame ecran = new GeneralFrame(SingletonGeneral.getInstance().getPersonnelGeneral());
-            ecran.setVisible(true);
+            SingletonGeneral.getInstance().getName().refresh();
+
         } catch (BLLException e1) {
             e1.printStackTrace();
         }
-        SingletonGeneral.getInstance().getName().dispose();
     }
 
     private void ajouterPersonnel() {
