@@ -11,9 +11,9 @@ import java.util.List;
 
 public class AnimalDaoJdbdImpl implements AnimalDAO {
 
-    private static final String sqlInsertAni = "INSERT INTO Animal(NomAnimal,Sexe,Couleur, Race, Espece, CodeClient, Tatouage, Antecedents, Archive) values(?,?,?,?,?,?,?,?,?)";
-    private static final String sqlUpdateAni = "UPDATE Animal SET NomAnimal=?,Sexe=?,Couleur=?,Race=?, Espece=?, CodeClient=?, Tatouage=?, Antecedents=?, Archive=? WHERE CodeAnimal=?";
-    private static final String sqlDeleteAni = "UPDATE Clients SET Archive=1 WHERE CodeAnimal=?";
+    private static final String sqlInsertAni = "INSERT INTO Animaux(NomAnimal,Sexe,Couleur, Race, Espece, CodeClient, Tatouage, Antecedents, Archive) values(?,?,?,?,?,?,?,?,?)";
+    private static final String sqlUpdateAni = "UPDATE Animaux SET NomAnimal=?,Sexe=?,Couleur=?,Race=?, Espece=?, CodeClient=?, Tatouage=?, Antecedents=?, Archive=? WHERE CodeAnimal=?";
+    private static final String sqlDeleteAni = "UPDATE Animaux SET Archive=1 WHERE CodeAnimal=?";
     private static final String sqlSelectAll = "SELECT * FROM Animaux WHERE Archive=0 ORDER BY NomAnimal";
     private static final String sqlSelectAllByClient = "SELECT * FROM Animaux WHERE Archive=0 AND CodeClient=? ORDER BY NomAnimal";
 

@@ -71,12 +71,13 @@ public class GeneralFrame extends JFrame implements ActionListener{
 
 		if (role.equals("adm")) {
 			desktopPane.add(setPersonnel());
+			desktopPane.add(resetPersonnel());
 			this.panelPersonnel();
 		} else if (role.equals("sec")) {
 //			this.panelRdv();
 			desktopPane.add(searchClient());
 			desktopPane.add(addClient());
-			desktopPane.add(addAnimal());
+            desktopPane.add(addAnimal());
 			desktopPane.add(editAnimal());
 			this.panelClient(null);
 		} else if (role.equals("vet")) {
@@ -416,7 +417,6 @@ public class GeneralFrame extends JFrame implements ActionListener{
             setPersonnel().setVisible(true);
             break;
 		case "resetpersonnel":
-            desktopPane.add(resetPersonnel());
             resetPersonnel().setVisible(true);
 			break;
 
@@ -538,8 +538,7 @@ public class GeneralFrame extends JFrame implements ActionListener{
             mdppersonnel = new ResetPersonnelFrame(personnel);
         }else {
             personnel = getPersonnelSelected();
-            mdppersonnel = new ResetPersonnelFrame(personnel);
-            mdppersonnel.setVisible(true);
+            mdppersonnel.updateFrame(personnel);
         }
 		return mdppersonnel;
 	}
@@ -559,9 +558,13 @@ public class GeneralFrame extends JFrame implements ActionListener{
 	}
 
 	public AddAnimalFrame addAnimal() {
-		if(addanimal == null) {
-			addanimal = new AddAnimalFrame();
-		}
+		if(addanimal == null)
+		    addanimal = new AddAnimalFrame("null");
+		else
+		    if(code.getText().equals(""))
+                addanimal.refreshFrame("null");
+		    else
+                addanimal.refreshFrame(code.getText() + " " + nom.getText() + " " + prenom.getText());
 		return addanimal;
 	}
 

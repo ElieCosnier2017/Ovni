@@ -12,5 +12,5 @@ public interface ClientDAO extends DAO<Client>{
     Client selectOne(Integer codeClient) throws DALException;
     Client selectOneByName(String nomClient) throws DALException;
     List<Client> findByName(String name) throws DALException;
-
+    Client findByCodeClient(Integer codeClient) throws DALException;
 }
