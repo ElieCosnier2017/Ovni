@@ -1,9 +1,10 @@
-package fr.eni.clinique.ihm;
+package fr.eni.clinique.ihm.client;
 
 import fr.eni.clinique.bll.BLLException;
 import fr.eni.clinique.bll.ClientManager;
 import fr.eni.clinique.bll.SingletonGeneral;
 import fr.eni.clinique.bo.Client;
+import fr.eni.clinique.ihm.GeneralFrame;
 
 import javax.swing.*;
 import java.awt.*;

@@ -1,4 +1,4 @@
-package fr.eni.clinique.ihm;
+package fr.eni.clinique.ihm.client;
 
 import fr.eni.clinique.bll.BLLException;
 import fr.eni.clinique.bll.ClientManager;
@@ -12,7 +12,7 @@ import java.util.List;
 public class TableClientModel extends AbstractTableModel {
     private List<Client> client = new ArrayList<>();
     private final ClientManager clientManager = ClientManager.getInstance();
-    private final String[] entetes = {"Nom", "Prénom", "Code Postal", "Mot de passe"};
+    private final String[] entetes = {"Nom", "Prénom", "Code Postal", "Ville"};
 
     public TableClientModel() throws BLLException {
         super();

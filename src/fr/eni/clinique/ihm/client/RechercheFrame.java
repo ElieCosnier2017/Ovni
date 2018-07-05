@@ -1,13 +1,13 @@
-package fr.eni.clinique.ihm;
+package fr.eni.clinique.ihm.client;
 
 import fr.eni.clinique.bll.BLLException;
 import fr.eni.clinique.bll.ClientManager;
-import fr.eni.clinique.bll.PersonnelManager;
 import fr.eni.clinique.bll.SingletonGeneral;
 import fr.eni.clinique.bo.Client;
+import fr.eni.clinique.ihm.GeneralFrame;
+import fr.eni.clinique.ihm.client.TableClientModel;
 
 import javax.swing.*;
-import javax.swing.table.TableModel;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;

@@ -34,4 +34,5 @@ public class SingletonGeneral {
         public Personnel getPersonnelGeneral() {
             return name.getpersonnel();
         }
+        
 }

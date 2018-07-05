@@ -1,4 +1,4 @@
-package fr.eni.clinique.dao.jdbc;
+package fr.eni.clinique.ihm.personnel;
 
 import fr.eni.clinique.bo.Client;
 import fr.eni.clinique.dao.ClientDAO;
@@ -260,11 +260,8 @@ public class ClientDaoJdbcImpl implements ClientDAO {
         try {
             cnx = JdbcTools.getConnection();
             rqt = cnx.prepareStatement(sqlSelectAllByName);
-            if(name.trim().isEmpty()){
-                rqt.setString(1, name);
+            rqt.setString(1, name + '%');
 
-            }else
-                rqt.setString(1, name + '%');
             rs = rqt.executeQuery();
 
             while (rs.next()){

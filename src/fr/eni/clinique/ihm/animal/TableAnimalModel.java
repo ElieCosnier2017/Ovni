@@ -1,4 +1,4 @@
-package fr.eni.clinique.ihm;
+package fr.eni.clinique.ihm.animal;
 
 import fr.eni.clinique.bll.AnimalManager;
 import fr.eni.clinique.bll.BLLException;
@@ -24,8 +24,6 @@ public class TableAnimalModel extends AbstractTableModel {
                 animal.add(ani);
             }
         }
-        //animal.add(new Animal(15,"String nomAnimal", "Sexe ", "String couleur", "String race", "String espece", "String tatouage"));
-
     }
 
     public int getRowCount() {

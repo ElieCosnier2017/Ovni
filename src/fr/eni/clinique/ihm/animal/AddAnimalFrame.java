@@ -1,4 +1,4 @@
-package fr.eni.clinique.ihm;
+package fr.eni.clinique.ihm.animal;
 
 import fr.eni.clinique.bll.BLLException;
 import fr.eni.clinique.bll.ClientManager;
@@ -11,15 +11,15 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-public class EditAnimalFrame extends JInternalFrame implements ActionListener {
+public class AddAnimalFrame extends JInternalFrame implements ActionListener {
 	private JTextField nom;
 	private JTextField adresse;
 	private JTextField adresse2;
 
 
 
-	public EditAnimalFrame() {
-		super("Modifier un animal", false, true, true,false);
+	public AddAnimalFrame() {
+		super("Ajouter un animal", false, true, true,false);
 
 
 		this.setDefaultCloseOperation(HIDE_ON_CLOSE);
