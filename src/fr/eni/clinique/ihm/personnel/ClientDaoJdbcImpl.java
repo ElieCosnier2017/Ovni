@@ -90,17 +90,21 @@ public class ClientDaoJdbcImpl implements ClientDAO {
     }
 
     @Override
-    public void delete(Client c1) throws DALException {
+    public void delete(Client data) throws DALException {
+
+    }
+
+    @Override
+    public void delete(Integer codeClient) throws DALException {
         Connection cnx = null;
         PreparedStatement rqt = null;
         try {
             cnx = JdbcTools.getConnection();
             rqt = cnx.prepareStatement(sqlDeleteCli);
-            System.out.println("CODECLIENT ---------> : " + c1.getCodeClient());
-            rqt.setInt(1, c1.getCodeClient());
+            rqt.setInt(1, codeClient);
             rqt.execute();
         }catch (SQLException e){
-            throw new DALException("La suppression de : " + c1.getNomClient() + " " + c1.getPrenomClient() + " a échoué.", e);
+            throw new DALException("La suppression de : " + codeClient + " a échoué.", e);
         } finally {
             try {
                 if (rqt != null){

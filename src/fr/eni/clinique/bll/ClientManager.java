@@ -44,9 +44,9 @@ public class ClientManager {
         }
     }
 
-    public void deleteClient(Client c1) throws BLLException{
+    public void deleteClient(Integer codeClient) throws BLLException{
         try{
-            daoClient.delete(c1);
+            daoClient.delete(codeClient);
         }catch (DALException e){
             throw new BLLException("Echec supression client - ",e);
         }
