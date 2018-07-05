@@ -179,7 +179,7 @@ public class GeneralFrame extends JFrame implements ActionListener{
         btnSupprimer.setActionCommand("deletePersonnel");
         btnSupprimer.addActionListener(this);
 
-        btnSupprimer.setIcon(new ImageIcon(this.getClass().getResource("/fr/eni/clinique/Ressources/del.jpg")));
+        btnSupprimer.setIcon(new ImageIcon(this.getClass().getResource("/fr/eni/clinique/Ressources/delfat.png")));
         btnSupprimer.setBounds(462, 11, 120, 120);
         panel.add(btnSupprimer);
 
