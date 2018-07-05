@@ -34,7 +34,14 @@ public class GeneralFrame extends JFrame implements ActionListener{
 	private EditAnimalFrame editanimal;
 	private TablePersonnelModel tablePersonnelModel = new TablePersonnelModel();
 	private GeneralFrame gf = this;
-    private JTextField code;
+    private JLabel code;
+	private JTextField nom;
+	private JTextField prenom;
+	private JTextField adresse;
+	private JTextField adresse2;
+	private JTextField codePostal;
+	private JTextField ville;
+
 
 	public GeneralFrame(Personnel personnel) throws BLLException {
 		personnelConnect = personnel;
@@ -210,6 +217,8 @@ public class GeneralFrame extends JFrame implements ActionListener{
 		panel.add(btnAjouter);
 
 		JButton btnValider = new JButton("Valider");
+		btnValider.setActionCommand("updateClient");
+		btnValider.addActionListener(this);
 		btnValider.setSelectedIcon(null);
 		btnValider.setIcon(new ImageIcon(this.getClass().getResource("/fr/eni/clinique/Ressources/validerfat.png")));
 		btnValider.setBounds(800, 11, 120, 120);
@@ -257,15 +266,14 @@ public class GeneralFrame extends JFrame implements ActionListener{
 		lblCode.setBounds(74, 210, 89, 14);
 		desktopPane.add(lblCode);
 
-		code = new JTextField();
+		code = new JLabel();
 		code.setBounds(191, 207, 203, 20);
 		desktopPane.add(code);
-		code.setColumns(10);
 
-		JTextField textField_1 = new JTextField();
-		textField_1.setColumns(10);
-		textField_1.setBounds(191, 254, 203, 20);
-		desktopPane.add(textField_1);
+		nom = new JTextField();
+		nom.setColumns(10);
+		nom.setBounds(191, 254, 203, 20);
+		desktopPane.add(nom);
 
 		JLabel lblNom = new JLabel("Nom");
 		lblNom.setBounds(74, 257, 89, 14);
@@ -287,30 +295,30 @@ public class GeneralFrame extends JFrame implements ActionListener{
 		lblVille.setBounds(74, 492, 89, 14);
 		desktopPane.add(lblVille);
 
-		JTextField textField_2 = new JTextField();
-		textField_2.setColumns(10);
-		textField_2.setBounds(191, 348, 203, 20);
-		desktopPane.add(textField_2);
+		prenom = new JTextField();
+		prenom.setColumns(10);
+		prenom.setBounds(191, 348, 203, 20);
+		desktopPane.add(prenom);
 
-		JTextField textField_3 = new JTextField();
-		textField_3.setColumns(10);
-		textField_3.setBounds(191, 299, 203, 20);
-		desktopPane.add(textField_3);
+		adresse = new JTextField();
+		adresse.setColumns(10);
+		adresse.setBounds(191, 299, 203, 20);
+		desktopPane.add(adresse);
 
-		JTextField textField_4 = new JTextField();
-		textField_4.setColumns(10);
-		textField_4.setBounds(191, 442, 203, 20);
-		desktopPane.add(textField_4);
+		adresse2 = new JTextField();
+		adresse2.setColumns(10);
+		adresse2.setBounds(191, 442, 203, 20);
+		desktopPane.add(adresse2);
 
-		JTextField textField_5 = new JTextField();
-		textField_5.setColumns(10);
-		textField_5.setBounds(191, 489, 203, 20);
-		desktopPane.add(textField_5);
+		codePostal = new JTextField();
+		codePostal.setColumns(10);
+		codePostal.setBounds(191, 489, 203, 20);
+		desktopPane.add(codePostal);
 
-		JTextField textField_6 = new JTextField();
-		textField_6.setColumns(10);
-		textField_6.setBounds(191, 395, 203, 20);
-		desktopPane.add(textField_6);
+		ville = new JTextField();
+		ville.setColumns(10);
+		ville.setBounds(191, 395, 203, 20);
+		desktopPane.add(ville);
 
 		JButton btnAddAnimal = new JButton("Ajouter Animal");
 		btnAddAnimal.setActionCommand("addpet");
@@ -335,14 +343,13 @@ public class GeneralFrame extends JFrame implements ActionListener{
 
 		if(client != null){
 		    code.setText(String.valueOf(client.getCodeClient()));
-		    textField_1.setText(client.getNomClient());
-		    textField_2.setText(client.getPrenomClient());
-		    textField_3.setText(client.getAdresse1());
-		    textField_4.setText(client.getAdresse2());
-		    textField_5.setText(client.getCodePostal());
-		    textField_6.setText(client.getVille());
+		    nom.setText(client.getNomClient());
+		    prenom.setText(client.getPrenomClient());
+		    adresse.setText(client.getAdresse1());
+		    adresse2.setText(client.getAdresse2());
+		    codePostal.setText(client.getCodePostal());
+		    ville.setText(client.getVille());
         }
-
 	}
 
 
@@ -429,6 +436,10 @@ public class GeneralFrame extends JFrame implements ActionListener{
             int codeClient = Integer.parseInt(code.getText());
             deleteClient(codeClient);
             break;
+		case "updateClient":
+			int codeCli = Integer.parseInt(code.getText());
+			updateClient(codeCli);
+			break;
 		case "addpet":
 			addAnimal().setVisible(true);
 			break;
@@ -446,7 +457,17 @@ public class GeneralFrame extends JFrame implements ActionListener{
 		}
 	}
 
-    private void deleteClient(int codeCli) {
+	private void updateClient(int codeCli) {
+		ClientManager clientManager = ClientManager.getInstance();
+		try {
+			Client client = new Client(codeCli,nom.getText(),prenom.getText(),adresse.getText(),adresse2.getText(),codePostal.getText(),ville.getText(),null,null,null,null,false);
+			clientManager.updateClient(client);
+		} catch (BLLException e) {
+			e.printStackTrace();
+		}
+	}
+
+	private void deleteClient(int codeCli) {
 	    ClientManager clientManager = ClientManager.getInstance();
         try {
             clientManager.deleteClient(codeCli);
