@@ -170,8 +170,7 @@ public class GeneralFrame extends JFrame implements ActionListener{
         JButton btnReinitialiser = new JButton("R\u00E9initialiser");
 		btnReinitialiser.setActionCommand("resetpersonnel");
 		btnReinitialiser.addActionListener(this);
-        btnReinitialiser.setSelectedIcon(new ImageIcon(this.getClass().getResource("/fr/eni/clinique/Ressources/edit.png")));
-        btnReinitialiser.setIcon(new ImageIcon(this.getClass().getResource("/fr/eni/clinique/Ressources/edit.png")));
+        btnReinitialiser.setIcon(new ImageIcon(this.getClass().getResource("/fr/eni/clinique/Ressources/editfat.png")));
         btnReinitialiser.setBounds(800, 11, 120, 120);
         panel.add(btnReinitialiser);
 
@@ -369,8 +368,8 @@ public class GeneralFrame extends JFrame implements ActionListener{
 		JButton btnEditAnimal = new JButton("Modifier Animal");
 		btnEditAnimal.setActionCommand("editpet");
 		btnEditAnimal.addActionListener(this);
-		btnDelAnimal.setIcon(new ImageIcon(this.getClass().getResource("/fr/eni/clinique/Ressources/edit.png")));
-		btnEditAnimal.setBounds(955, 395, 45, 45);
+		btnEditAnimal.setIcon(new ImageIcon(this.getClass().getResource("/fr/eni/clinique/Ressources/edit.png")));
+		btnEditAnimal.setBounds(960, 395, 45, 45);
 		desktopPane.add(btnEditAnimal);
 
 		if(client != null){

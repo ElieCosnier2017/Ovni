@@ -1,4 +1,4 @@
-package fr.eni.clinique.ihm.personnel;
+package fr.eni.clinique.dao.jdbc;
 
 import fr.eni.clinique.bo.Client;
 import fr.eni.clinique.dao.ClientDAO;
