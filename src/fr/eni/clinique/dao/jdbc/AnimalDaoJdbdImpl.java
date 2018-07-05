@@ -12,9 +12,10 @@ import java.util.List;
 public class AnimalDaoJdbdImpl implements AnimalDAO {
 
     private static final String sqlInsertAni = "INSERT INTO Animaux(NomAnimal,Sexe,Couleur, Race, Espece, CodeClient, Tatouage, Antecedents, Archive) values(?,?,?,?,?,?,?,?,?)";
-    private static final String sqlUpdateAni = "UPDATE Animaux SET NomAnimal=?,Sexe=?,Couleur=?,Race=?, Espece=?, CodeClient=?, Tatouage=?, Antecedents=?, Archive=? WHERE CodeAnimal=?";
+    private static final String sqlUpdateAni = "UPDATE Animaux SET NomAnimal=?,Sexe=?,Couleur=?,Race=?, Espece=?, CodeClient=?, Tatouage=?,  Archive=? WHERE CodeAnimal=?";
     private static final String sqlDeleteAni = "UPDATE Animaux SET Archive=1 WHERE CodeAnimal=?";
     private static final String sqlSelectAll = "SELECT * FROM Animaux WHERE Archive=0 ORDER BY NomAnimal";
+    private static final String sqlSelectOne = "SELECT * FROM Animaux WHERE Archive=0 And CodeAnimal=?";
     private static final String sqlSelectAllByClient = "SELECT * FROM Animaux WHERE Archive=0 AND CodeClient=? ORDER BY NomAnimal";
 
 
@@ -109,6 +110,39 @@ public class AnimalDaoJdbdImpl implements AnimalDAO {
     }
 
     @Override
+    public Animal selectOne(int codeAnimal) throws DALException {
+        Connection cnx = null;
+        PreparedStatement rqt = null;
+        ResultSet rs = null;
+        Animal animal = null;
+        System.out.println(codeAnimal);
+        try {
+            cnx = JdbcTools.getConnection();
+            rqt = cnx.prepareStatement(sqlSelectOne);
+            rqt.setInt(1, codeAnimal);
+
+            rs =  rqt.executeQuery();
+            if(rs.next())
+            {
+                 animal = new Animal(
+                        rs.getInt("CodeAnimal"),
+                        rs.getString("NomAnimal"),
+                        rs.getString("Sexe"),
+                        rs.getString("Couleur"),
+                        rs.getString("Race"),
+                        rs.getString("Espece"),
+                        rs.getLong("CodeClient"),
+                        rs.getString("Tatouage"),
+                        rs.getString("Antecedents"),
+                        rs.getBoolean("Archive"));
+            }
+        } catch (SQLException e){
+            throw new DALException("get animal failed", e);
+        }
+        return animal;
+    }
+
+    @Override
     public void insert(Animal a1) throws DALException {
         //insert client
         Connection cnx = null;
@@ -143,6 +177,7 @@ public class AnimalDaoJdbdImpl implements AnimalDAO {
         //insert client
         Connection cnx = null;
         PreparedStatement rqt = null;
+        System.out.println(a1);
         try {
             cnx = JdbcTools.getConnection();
             rqt = cnx.prepareStatement(sqlUpdateAni);
@@ -153,9 +188,10 @@ public class AnimalDaoJdbdImpl implements AnimalDAO {
             rqt.setString(5, a1.getEspece());
             rqt.setLong(6, a1.getCodeClient());
             rqt.setString(7, a1.getTatouage());
-            rqt.setString(8, a1.getAntecedents());
-            rqt.setBoolean(9, a1.getArchive());
-            rqt.execute();
+            rqt.setBoolean(8, a1.getArchive());
+            rqt.setInt(9,a1.getCodeAnimal());
+
+            rqt.executeUpdate();
         } catch (SQLException e) {
             throw new DALException("update animal failed", e);        }
     }

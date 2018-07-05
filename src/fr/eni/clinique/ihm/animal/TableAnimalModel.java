@@ -26,6 +26,7 @@ public class TableAnimalModel extends AbstractTableModel {
         }
     }
 
+
     public int getRowCount() {
         return animal.size();
     }
@@ -58,6 +59,19 @@ public class TableAnimalModel extends AbstractTableModel {
             default:
                 return null; //Ne devrait jamais arriver
         }
+    }
+
+
+    public Animal getAnimalSelect(int selection) {
+        Animal animal = null;
+        try {
+            AnimalManager animalManager = AnimalManager.getInstance();
+            Integer codeAnimal = (Integer) getValueAt(selection,0);
+            animal = animalManager.selectOne(codeAnimal);
+        } catch (BLLException e) {
+            e.printStackTrace();
+        }
+        return animal;
     }
 
     public void addAmi(Animal ami) {

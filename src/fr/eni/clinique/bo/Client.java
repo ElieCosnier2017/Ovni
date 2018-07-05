@@ -15,6 +15,9 @@ public class Client {
     private String remarque;
     private boolean archive;
 
+    public Client() {
+    }
+
     public Client(String nomClient, String prenomClient, String adresse1, String adresse2, String codePostal, String ville, String numTel, String assurance, String email, String remarque, boolean archive) {
         this.nomClient = nomClient;
         this.prenomClient = prenomClient;

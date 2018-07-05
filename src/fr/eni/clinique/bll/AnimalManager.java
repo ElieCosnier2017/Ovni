@@ -76,6 +76,16 @@ public class AnimalManager {
         return  animalList;
     }
 
+    public Animal selectOne(int codeAnimal) throws BLLException{
+        Animal animal = null;
+        try{
+            animal = animalDAO.selectOne(codeAnimal);
+        }catch (DALException e){
+            throw new BLLException("Echec recuperation animal - ",e);
+
+        }
+        return animal;
+    }
 
 
 }

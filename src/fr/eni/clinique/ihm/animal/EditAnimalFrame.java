@@ -1,7 +1,10 @@
 package fr.eni.clinique.ihm.animal;
 
+import fr.eni.clinique.bll.AnimalManager;
 import fr.eni.clinique.bll.BLLException;
 import fr.eni.clinique.bll.ClientManager;
+import fr.eni.clinique.bll.SingletonGeneral;
+import fr.eni.clinique.bo.Animal;
 import fr.eni.clinique.bo.Client;
 
 import javax.swing.*;
@@ -15,7 +18,12 @@ public class EditAnimalFrame extends JInternalFrame implements ActionListener {
 	private JTextField nom;
 	private JTextField adresse;
 	private JTextField adresse2;
-
+	private JComboBox sexe;
+	private JTextField couleur;
+	private JComboBox espece;
+	private JComboBox race;
+	private JTextField tatouage;
+	private Animal animalToUpdate;
 
 
 	public EditAnimalFrame() {
@@ -33,14 +41,16 @@ public class EditAnimalFrame extends JInternalFrame implements ActionListener {
 		panel.setLayout(null);
 
 		JButton btnValider = new JButton("Valider");
-		btnValider.setActionCommand("Valider");
+		btnValider.setActionCommand("valider");
 		btnValider.addActionListener(this);
 		btnValider.setIcon(new ImageIcon(this.getClass().getResource("/fr/eni/clinique/Ressources/valider.png")));
 		btnValider.setBounds(322, 11, 54, 53);
 		panel.add(btnValider);
 
 		JButton btnSupprimer = new JButton("Annuler");
-		btnSupprimer.setIcon(new ImageIcon(this.getClass().getResource("/fr/eni/clinique/Ressources/annuler.png")));
+        btnSupprimer.setActionCommand("Annuler");
+        btnSupprimer.addActionListener(this);
+        btnSupprimer.setIcon(new ImageIcon(this.getClass().getResource("/fr/eni/clinique/Ressources/annuler.png")));
 		btnSupprimer.setBounds(391, 11, 54, 53);
 		panel.add(btnSupprimer);
 
@@ -77,15 +87,15 @@ public class EditAnimalFrame extends JInternalFrame implements ActionListener {
 		lblAdresse.setBounds(32, 213, 68, 14);
 		getContentPane().add(lblAdresse);
 
-		adresse = new JTextField();
-		adresse.setColumns(10);
-		adresse.setBounds(113, 210, 203, 20);
-		getContentPane().add(adresse);
+		couleur = new JTextField();
+		couleur.setColumns(10);
+		couleur.setBounds(113, 210, 203, 20);
+		getContentPane().add(couleur);
 
-		adresse2 = new JTextField();
-		adresse2.setColumns(10);
-		adresse2.setBounds(113, 306, 203, 20);
-		getContentPane().add(adresse2);
+		tatouage = new JTextField();
+		tatouage.setColumns(10);
+		tatouage.setBounds(113, 306, 203, 20);
+		getContentPane().add(tatouage);
 
 		JLabel lblCodePostal = new JLabel("Esp\u00E8ce");
 		lblCodePostal.setBounds(32, 257, 89, 14);
@@ -95,21 +105,42 @@ public class EditAnimalFrame extends JInternalFrame implements ActionListener {
 		lblVille.setBounds(269, 257, 59, 14);
 		getContentPane().add(lblVille);
 
-		JComboBox comboBox = new JComboBox();
-		comboBox.setBounds(350, 163, 105, 20);
-		getContentPane().add(comboBox);
+		sexe = new JComboBox();
+		sexe.setBounds(350, 163, 105, 20);
+		sexe.addItem("M");
+		sexe.addItem("F");
+		sexe.addItem("H");
+		getContentPane().add(sexe);
 
 		JLabel lblTatouage = new JLabel("Tatouage");
 		lblTatouage.setBounds(32, 309, 89, 14);
 		getContentPane().add(lblTatouage);
 
-		JComboBox comboBox_1 = new JComboBox();
-		comboBox_1.setBounds(113, 257, 130, 22);
-		getContentPane().add(comboBox_1);
+		espece = new JComboBox();
+		espece.setBounds(113, 257, 130, 22);
+		espece.addItem("Chat");
+		espece.addItem("Cheval");
+		espece.addItem("Chien");
+		espece.addItem("Crocodile");
+		espece.addItem("Vache");
+		getContentPane().add(espece);
 
-		JComboBox comboBox_2 = new JComboBox();
-		comboBox_2.setBounds(325, 254, 130, 22);
-		getContentPane().add(comboBox_2);
+		race = new JComboBox();
+		race.setBounds(325, 254, 130, 22);
+		race.addItem("chat gentil");
+		race.addItem("chat méchant");
+		race.addItem("cheval gentil");
+		race.addItem("cheval méchant");
+		race.addItem("chien con-con");
+		race.addItem("chien malin");
+		race.addItem("chien méchant");
+		race.addItem("chien pervers");
+		race.addItem("crocodile gentil");
+		race.addItem("crocodile méchant");
+		race.addItem("vache gentilel");
+		race.addItem("vache gentile");
+		race.addItem("chat gentil");
+		getContentPane().add(race);
 
 
 	}
@@ -117,26 +148,44 @@ public class EditAnimalFrame extends JInternalFrame implements ActionListener {
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		switch (e.getActionCommand()) {
-			case "Valider":
-				ajouterClient();
+			case "valider":
+				updateAnimal(animalToUpdate);
 				break;
-			default:
+            case "annuler":
+                try {
+                    SingletonGeneral.getInstance().getName().refresh();
+                } catch (BLLException e1) {
+                    e1.printStackTrace();
+                }
+            default:
 				System.out.println("Probleme e=" + e);
 		}
 	}
 
-	private void ajouterClient() {
-//    	String name = nom.getText();
-//    	String adress = adresse.getText();
-//    	String adress2 = adresse2.getText();
-//
-//    	System.out.println("yo");
-//
-//    	ClientManager clientManager = ClientManager.getInstance();
-//		try {
-//		} catch (BLLException e) {
-//			e.printStackTrace();
-//		}
+    public void refreshFrame(Animal animal) {
+	    System.out.println(animal);
+        nom.setText(animal.getNomAnimal());
+        sexe.setSelectedItem(animal.getSexe());
+        couleur.setText(animal.getCouleur());
+        race.setSelectedItem(animal.getRace());
+        espece.setSelectedItem(animal.getEspece());
+        tatouage.setText(animal.getTatouage());
+        animalToUpdate = animal;
+    }
 
+	public void updateAnimal(Animal animal) {
+		AnimalManager animalManager = AnimalManager.getInstance();
+		animal.setNomAnimal(nom.getText());
+		animal.setSexe(sexe.getSelectedItem().toString());
+		animal.setCouleur(couleur.getText());
+		animal.setRace(race.getSelectedItem().toString());
+		animal.setEspece(espece.getSelectedItem().toString());
+		animal.setTatouage(tatouage.getText());
+
+		try {
+			animalManager.updateAnimal(animal);
+		} catch (BLLException e) {
+			e.printStackTrace();
+		}
 	}
 }

@@ -9,10 +9,8 @@ import javax.swing.*;
 import javax.swing.border.TitledBorder;
 
 import com.toedter.calendar.JDateChooser;
-import fr.eni.clinique.bll.BLLException;
-import fr.eni.clinique.bll.ClientManager;
-import fr.eni.clinique.bll.PersonnelManager;
-import fr.eni.clinique.bll.SingletonGeneral;
+import fr.eni.clinique.bll.*;
+import fr.eni.clinique.bo.Animal;
 import fr.eni.clinique.bo.Client;
 import fr.eni.clinique.bo.Personnel;
 import fr.eni.clinique.ihm.animal.AddAnimalFrame;
@@ -179,7 +177,7 @@ public class GeneralFrame extends JFrame implements ActionListener{
         btnSupprimer.setActionCommand("deletePersonnel");
         btnSupprimer.addActionListener(this);
 
-        btnSupprimer.setIcon(new ImageIcon(this.getClass().getResource("/fr/eni/clinique/Ressources/del.jpg")));
+        btnSupprimer.setIcon(new ImageIcon(this.getClass().getResource("/fr/eni/clinique/Ressources/del.png")));
         btnSupprimer.setBounds(462, 11, 120, 120);
         panel.add(btnSupprimer);
 
@@ -449,7 +447,8 @@ public class GeneralFrame extends JFrame implements ActionListener{
 			break;
 
 		case "editpet":
-			editAnimal().setVisible(true);
+            SingletonGeneral.getInstance().setName(gf);
+            editAnimal().setVisible(true);
 			break;
 
         default:
@@ -570,11 +569,12 @@ public class GeneralFrame extends JFrame implements ActionListener{
 	public AddAnimalFrame addAnimal() {
 		if(addanimal == null)
 		    addanimal = new AddAnimalFrame("null");
-		else
-		    if(code.getText().equals(""))
+		else {
+            if (code.getText().equals(""))
                 addanimal.refreshFrame("null");
-		    else
+            else
                 addanimal.refreshFrame(code.getText() + " " + nom.getText() + " " + prenom.getText());
+        }
 		return addanimal;
 	}
 
@@ -582,6 +582,14 @@ public class GeneralFrame extends JFrame implements ActionListener{
 		if(editanimal == null) {
 			editanimal = new EditAnimalFrame();
 		}
+        else {
+		    int selection = table.getSelectedRow();
+            if(selection >= 0) {
+                TableAnimalModel tableAnimalModel = (TableAnimalModel) table.getModel();
+                Animal animal = tableAnimalModel.getAnimalSelect(selection);
+                editanimal.refreshFrame(animal);
+            }
+        }
 		return editanimal;
 	}
 
