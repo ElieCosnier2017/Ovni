@@ -93,8 +93,6 @@ public class ResetPersonnelFrame extends JInternalFrame implements ActionListene
             } catch (BLLException e) {
                 e.printStackTrace();
             }
-        }else{
-
         }
 
     }
@@ -107,6 +105,10 @@ public class ResetPersonnelFrame extends JInternalFrame implements ActionListene
         }
     }
 
+    /**
+     * mise a jour de la fenetre avec nouvelles donnes
+     * @param personnel personnel
+     */
     public void updateFrame(Personnel personnel){
         personnelToUpdate = personnel;
         lblNomClient.setText(personnel.getNom());

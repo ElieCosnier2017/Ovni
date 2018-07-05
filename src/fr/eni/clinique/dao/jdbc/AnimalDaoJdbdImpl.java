@@ -177,7 +177,6 @@ public class AnimalDaoJdbdImpl implements AnimalDAO {
         //insert client
         Connection cnx = null;
         PreparedStatement rqt = null;
-        System.out.println(a1);
         try {
             cnx = JdbcTools.getConnection();
             rqt = cnx.prepareStatement(sqlUpdateAni);

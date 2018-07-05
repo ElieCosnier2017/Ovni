@@ -2,10 +2,8 @@ package fr.eni.clinique.ihm.animal;
 
 import fr.eni.clinique.bll.AnimalManager;
 import fr.eni.clinique.bll.BLLException;
-import fr.eni.clinique.bll.ClientManager;
 import fr.eni.clinique.bll.SingletonGeneral;
 import fr.eni.clinique.bo.Animal;
-import fr.eni.clinique.bo.Client;
 
 import javax.swing.*;
 import javax.swing.border.TitledBorder;
@@ -16,8 +14,6 @@ import java.awt.event.ActionListener;
 
 public class EditAnimalFrame extends JInternalFrame implements ActionListener {
 	private JTextField nom;
-	private JTextField adresse;
-	private JTextField adresse2;
 	private JComboBox sexe;
 	private JTextField couleur;
 	private JComboBox espece;
@@ -162,6 +158,10 @@ public class EditAnimalFrame extends JInternalFrame implements ActionListener {
 		}
 	}
 
+	/**
+	 * permet de rafraichir la fenetre avec de nouvelles donnees
+	 * @param animal Animal
+	 */
     public void refreshFrame(Animal animal) {
 	    System.out.println(animal);
         nom.setText(animal.getNomAnimal());

@@ -1,7 +1,6 @@
 package fr.eni.clinique.dao;
 
 import fr.eni.clinique.bo.Animal;
-import fr.eni.clinique.bo.Client;
 
 import java.util.List;
 

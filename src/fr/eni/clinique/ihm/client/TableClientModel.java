@@ -3,7 +3,6 @@ package fr.eni.clinique.ihm.client;
 import fr.eni.clinique.bll.BLLException;
 import fr.eni.clinique.bll.ClientManager;
 import fr.eni.clinique.bo.Client;
-import fr.eni.clinique.bo.Personnel;
 
 import javax.swing.table.AbstractTableModel;
 import java.util.ArrayList;
@@ -66,17 +65,5 @@ public class TableClientModel extends AbstractTableModel {
         attributList.add(name);
         attributList.add(firstname);
         return attributList;
-    }
-
-    public void addAmi(Client ami) {
-        client.add(ami);
-
-        fireTableRowsInserted(client.size() - 1, client.size() - 1);
-    }
-
-    public void removeAmi(int rowIndex) {
-        client.remove(rowIndex);
-
-        fireTableRowsDeleted(rowIndex, rowIndex);
     }
 }

@@ -1,9 +1,7 @@
 package fr.eni.clinique.bll;
 
 import fr.eni.clinique.bo.Animal;
-import fr.eni.clinique.bo.Client;
 import fr.eni.clinique.dao.AnimalDAO;
-import fr.eni.clinique.dao.ClientDAO;
 import fr.eni.clinique.dao.DALException;
 import fr.eni.clinique.dao.DAOfactory;
 

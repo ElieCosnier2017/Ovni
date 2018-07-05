@@ -4,7 +4,6 @@ import fr.eni.clinique.bo.Personnel;
 import fr.eni.clinique.dao.ConnexionDAO;
 import fr.eni.clinique.dao.DALException;
 import fr.eni.clinique.dao.DAOfactory;
-import sun.print.PeekGraphics;
 
 public class LoginMger {
 

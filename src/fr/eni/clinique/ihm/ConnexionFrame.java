@@ -7,7 +7,6 @@ import fr.eni.clinique.bo.Personnel;
 
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
-import javax.swing.border.TitledBorder;
 import java.awt.*;
 
 public class ConnexionFrame extends JFrame {
@@ -20,8 +19,6 @@ public class ConnexionFrame extends JFrame {
 	private JPanel contentPane;
 	private JTextField user;
 	private JPasswordField password;
-    private JPanel containerBtn;
-    private JTextField textField;
     private JButton valider;
 
     public ConnexionFrame(){

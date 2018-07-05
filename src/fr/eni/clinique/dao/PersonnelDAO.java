@@ -1,6 +1,5 @@
 package fr.eni.clinique.dao;
 
-import fr.eni.clinique.bo.Client;
 import fr.eni.clinique.bo.Personnel;
 
 import java.util.List;

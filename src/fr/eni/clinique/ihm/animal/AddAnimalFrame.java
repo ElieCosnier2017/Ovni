@@ -2,9 +2,7 @@ package fr.eni.clinique.ihm.animal;
 
 import fr.eni.clinique.bll.AnimalManager;
 import fr.eni.clinique.bll.BLLException;
-import fr.eni.clinique.bll.ClientManager;
 import fr.eni.clinique.bo.Animal;
-import fr.eni.clinique.bo.Client;
 
 import javax.swing.*;
 import javax.swing.border.TitledBorder;
@@ -177,6 +175,10 @@ public class AddAnimalFrame extends JInternalFrame implements ActionListener {
 
 	}
 
+	/**
+	 * permet de rafraichir la fenetre avec les nouvelles données
+	 * @param infosClient String
+	 */
 	public void refreshFrame(String infosClient){
         String[] listinfoClient = infosClient.split(" ");
         System.out.println("CODE = " + listinfoClient[0]);

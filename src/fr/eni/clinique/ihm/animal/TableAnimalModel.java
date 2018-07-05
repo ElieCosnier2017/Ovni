@@ -61,7 +61,11 @@ public class TableAnimalModel extends AbstractTableModel {
         }
     }
 
-
+    /**
+     * Retourne l'animal correspondant au code animal
+     * @param selection Integer
+     * @return
+     */
     public Animal getAnimalSelect(int selection) {
         Animal animal = null;
         try {

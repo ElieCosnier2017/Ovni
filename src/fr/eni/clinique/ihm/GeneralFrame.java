@@ -613,12 +613,6 @@ public class GeneralFrame extends JFrame implements ActionListener{
 //		}
 //	}
 
-
-	public void updateListPerosnnel() throws BLLException {
-        tablePersonnelModel = new TablePersonnelModel();
-        table.setModel(tablePersonnelModel);
-    }
-
     public void fillTextFieldClient(String name, String prenom){
 	    desktopPane.setVisible(false);
 	    desktopPane = new JDesktopPane();

@@ -3,7 +3,7 @@ package fr.eni.clinique.bll;
 import fr.eni.clinique.bo.Client;
 import fr.eni.clinique.bo.Personnel;
 
-public class Application {
+public class AppliTestBll {
 
     public static void main(String[] args){
 

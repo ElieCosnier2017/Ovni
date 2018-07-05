@@ -1,6 +1,5 @@
 package fr.eni.clinique.bll;
 
-import fr.eni.clinique.bo.Client;
 import fr.eni.clinique.bo.Personnel;
 import fr.eni.clinique.bo.Rdv;
 import fr.eni.clinique.dao.DALException;

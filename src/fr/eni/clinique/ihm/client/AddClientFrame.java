@@ -12,14 +12,13 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 public class AddClientFrame extends JInternalFrame implements ActionListener {
-    private JTextField nom;
+
+	private JTextField nom;
 	private JTextField prenom;
 	private JTextField adresse;
 	private JTextField adresse2;
 	private JTextField codepostal;
 	private JTextField ville;
-
-
 
 	public AddClientFrame() {
 		super("Ajouter un client", false, true, true,false);
@@ -125,7 +124,6 @@ public class AddClientFrame extends JInternalFrame implements ActionListener {
     	String postalcode = codepostal.getText();
     	String city = ville.getText();
 
-    	System.out.println("yo");
 		Client client = new Client(name,firstname,adress,adress2,postalcode,city,null,null,null,null,false);
 
     	ClientManager clientManager = ClientManager.getInstance();

@@ -6,7 +6,7 @@ public class Personnel {
     private String nom;
     private String mdp;
     private String role;
-    private boolean archive;
+    private Boolean archive;
 
     public Personnel(){
 

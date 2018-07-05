@@ -5,7 +5,6 @@ import fr.eni.clinique.bll.ClientManager;
 import fr.eni.clinique.bll.SingletonGeneral;
 import fr.eni.clinique.bo.Client;
 import fr.eni.clinique.ihm.GeneralFrame;
-import fr.eni.clinique.ihm.client.TableClientModel;
 
 import javax.swing.*;
 import java.awt.*;
@@ -17,9 +16,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class RechercheFrame extends JInternalFrame implements ActionListener {
-    private JTextField nom;
-    private JTextField motPasse;
-    private JComboBox comboBox;
     private JTextField recherche;
     private JTable table;
 
@@ -57,6 +53,7 @@ public class RechercheFrame extends JInternalFrame implements ActionListener {
         JScrollPane scrollPane2 = new JScrollPane(table);
         scrollPane2.setAutoscrolls(true);
 
+        //recuperation du client selectionne dans la table suite à un clique sur sa ligne
         table.addMouseListener(new MouseAdapter() {
             public void mousePressed(MouseEvent mouseEvent) {
                 GeneralFrame ecran = null;
@@ -69,7 +66,6 @@ public class RechercheFrame extends JInternalFrame implements ActionListener {
                 SingletonGeneral.getInstance().getName().dispose();
                 JTable table =(JTable) mouseEvent.getSource();
                 Point point = mouseEvent.getPoint();
-                int row = table.rowAtPoint(point);
                 if (mouseEvent.getClickCount() == 1 && table.getSelectedRow() != -1) {
                     try {
                         TableClientModel tableClientModel = new TableClientModel();

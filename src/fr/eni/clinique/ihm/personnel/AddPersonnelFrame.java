@@ -4,7 +4,6 @@ import fr.eni.clinique.bll.BLLException;
 import fr.eni.clinique.bll.PersonnelManager;
 import fr.eni.clinique.bll.SingletonGeneral;
 import fr.eni.clinique.bo.Personnel;
-import fr.eni.clinique.ihm.GeneralFrame;
 
 import javax.swing.*;
 import java.awt.*;

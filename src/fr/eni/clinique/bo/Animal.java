@@ -2,8 +2,6 @@ package fr.eni.clinique.bo;
 
 public class Animal {
 
-    private static final char[] SEXE = {'M', 'F', 'H'};
-
     private Integer codeAnimal;
     private String nomAnimal;
     private String sexe;
@@ -14,6 +12,10 @@ public class Animal {
     private String tatouage;
     private String antecedents;
     private Boolean archive;
+
+    public Animal() {
+
+    }
 
     public Animal(String nomAnimal, String sexe, String couleur, String race, String espece, Long codeClient, String tatouage, String antecedents, Boolean archive) {
         this.nomAnimal = nomAnimal;
