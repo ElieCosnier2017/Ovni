@@ -195,8 +195,33 @@ public class AnimalDaoJdbdImpl implements AnimalDAO {
             throw new DALException("update animal failed", e);        }
     }
 
-        @Override
-    public void delete(Animal a1) throws DALException {
+    @Override
+    public void delete(Animal data) throws DALException {
 
+    }
+
+    @Override
+    public void delete(Integer aniCode) throws DALException {
+        Connection cnx = null;
+        PreparedStatement rqt = null;
+        try {
+            cnx = JdbcTools.getConnection();
+            rqt = cnx.prepareStatement(sqlDeleteAni);
+            rqt.setInt(1, aniCode);
+            rqt.execute();
+        }catch (SQLException e){
+            throw new DALException("La suppression de : " + aniCode + " a échoué.", e);
+        } finally {
+            try {
+                if (rqt != null){
+                    rqt.close();
+                }
+                if(cnx !=null){
+                    cnx.close();
+                }
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }
     }
 }

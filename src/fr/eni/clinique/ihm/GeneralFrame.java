@@ -80,7 +80,6 @@ public class GeneralFrame extends JFrame implements ActionListener{
 			desktopPane.add(editAnimal());
 			this.panelClient(null);
 		} else if (role.equals("vet")) {
-			System.out.println("Veterinaire");
 			this.panelAgenda();
 		}
 	}
@@ -388,7 +387,6 @@ public class GeneralFrame extends JFrame implements ActionListener{
 	public void actionPerformed(ActionEvent e) {
 		switch (e.getActionCommand()) {
 		case "deconnexion":
-			System.out.println("Deconnexion");
 			this.dispose();
 	      	ConnexionFrame cnx = new ConnexionFrame();
 			cnx.setVisible(true);    
@@ -398,7 +396,6 @@ public class GeneralFrame extends JFrame implements ActionListener{
 			break;
 
 		case "setrdv":
-			System.out.println("setrdv");
 			getAgenda().setVisible(true);
 			break;
 
@@ -444,7 +441,8 @@ public class GeneralFrame extends JFrame implements ActionListener{
 			break;
 
 		case "delpet":
-			System.out.println("Delete pet");
+			SingletonGeneral.getInstance().setName(gf);
+			//removeAnimal();
 			break;
 
 		case "editpet":
@@ -594,22 +592,17 @@ public class GeneralFrame extends JFrame implements ActionListener{
         }
 		return editanimal;
 	}
-//
+
 //	private void removeAnimal() {
 //		int selection = table.getSelectedRow();
-//
-//		System.out.println(selection);
-//		try {
-//			if(selection >= 0) {
+//		if(selection >= 0) {
+//			try {
+//				TableAnimalModel tableAnimalModel = (TableAnimalModel) table.getModel();
 //				tableAnimalModel.removeAnimal(selection);
-//				tableAnimalModel = new TableAnimalModel(client);
-//				table.setModel(tableAnimalModel);
-//				table.repaint();
-//				desktopPane.repaint();
+//				refresh();
+//			} catch (BLLException e) {
+//				e.printStackTrace();
 //			}
-//
-//		} catch (BLLException e) {
-//			e.printStackTrace();
 //		}
 //	}
 

@@ -57,7 +57,6 @@ public class PersonnelManager {
                     Date date = new Date();
                     if(rendezVous.getDateRdv().after(date)){
                         futureRdv = true;
-                        System.out.println("Impossible de supprimer ce veterinaire il lui reste des rdv");
                     }
                 }
                 if(!futureRdv){

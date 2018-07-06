@@ -17,7 +17,6 @@ public class TableClientModel extends AbstractTableModel {
         super();
         List<Client> clientList = clientManager.getAllClients();
         for(Client cli : clientList){
-            System.out.println(cli.toString());
             client.add(cli);
         }
     }
@@ -25,7 +24,6 @@ public class TableClientModel extends AbstractTableModel {
     public TableClientModel(List<Client> clientList) throws BLLException {
         super();
         for(Client cli : clientList){
-            System.out.println(cli.toString());
             client.add(cli);
         }
     }

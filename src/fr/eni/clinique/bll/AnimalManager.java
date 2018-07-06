@@ -44,9 +44,9 @@ public class AnimalManager {
         }
     }
 
-    public void deleteAnimal(Animal ani) throws BLLException{
+    public void deleteAnimal(Integer aniCode) throws BLLException{
         try{
-            animalDAO.delete(ani);
+            animalDAO.delete(aniCode);
         }catch (DALException e){
             throw new BLLException("Echec supression animal - ",e);
         }

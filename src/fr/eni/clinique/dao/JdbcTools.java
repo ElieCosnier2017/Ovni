@@ -12,11 +12,11 @@ public class JdbcTools {
 
     //bloc d'initialisation statique
     static {
-        try {
-            Class.forName(Settings.getProperty("driverdb"));
-        } catch (ClassNotFoundException e) {
-            e.printStackTrace();
-        }
+//        try {
+//            Class.forName(Settings.getProperty("driverdb"));
+//        } catch (ClassNotFoundException e) {
+//            e.printStackTrace();
+//        }
 
         urldb = Settings.getProperty("urldb");
         userdb = Settings.getProperty("userdb");

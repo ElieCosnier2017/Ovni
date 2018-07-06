@@ -85,9 +85,6 @@ public class ConnexionFrame extends JFrame {
             try {
                 LoginMger mger = LoginMger.getInstance();
                 PersonnelManager personnelManager = PersonnelManager.getInstance();
-                System.out.println(getUsernameField().getText());
-                System.out.println(getPasswordField().getText());
-
                 Boolean cnxValid = mger.verifyUser(getUsernameField().getText(), getPasswordField().getText());
                 if(!cnxValid){
                     JLabel lblconnexion = new JLabel("Erreur lors de l'authentification");

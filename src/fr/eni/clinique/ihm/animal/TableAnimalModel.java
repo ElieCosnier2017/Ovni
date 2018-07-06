@@ -80,7 +80,13 @@ public class TableAnimalModel extends AbstractTableModel {
 
     public void removeAnimal(int rowIndex) {
         animal.remove(rowIndex);
-
+        Integer codeAnimal = (Integer) getValueAt(rowIndex,0);
+        AnimalManager animalManager = AnimalManager.getInstance();
+        try {
+            animalManager.deleteAnimal(codeAnimal);
+        } catch (BLLException e) {
+            e.printStackTrace();
+        }
         fireTableRowsDeleted(rowIndex, rowIndex);
     }
 }

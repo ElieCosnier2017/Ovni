@@ -10,5 +10,5 @@ public interface AnimalDAO extends  DAO<Animal>{
     Animal selectOne(int codeAnimal) throws DALException;
     void insert(Animal a1) throws DALException;
     void update(Animal a1) throws DALException;
-    void delete(Animal a1) throws DALException;
+    void delete(Integer aniCode) throws DALException;
 }
